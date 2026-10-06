@@ -1,0 +1,2510 @@
+{
+  "schema_version": "0.1",
+  "file": "systems",
+  "updated": "2026-10-06",
+  "display": {
+    "show_rstar": false,
+    "show_risk_vector": false,
+    "tagline": "The archive lives; the living forecast dies.",
+    "certainty_sentence": "The failure is usually not that a decision changes. It is that we lose the evidence to know which decision is right.",
+    "timeline_start_year": 2024,
+    "timeline_end_year": 2031
+  },
+  "levels": [
+    {
+      "level": 0,
+      "name": "Operating",
+      "meaning": "Baseline capability",
+      "color_token": "ok"
+    },
+    {
+      "level": 1,
+      "name": "Diminished",
+      "meaning": "Resilience lost; wider safety margins",
+      "color_token": "ok-dim"
+    },
+    {
+      "level": 2,
+      "name": "Losing skill",
+      "meaning": "Forecasts or products lose skill or currency",
+      "color_token": "warn"
+    },
+    {
+      "level": 3,
+      "name": "Status uncertain",
+      "meaning": "Decision capability seriously degraded; status unknown",
+      "color_token": "bad"
+    },
+    {
+      "level": 4,
+      "name": "Lost",
+      "meaning": "Collapsed, or an observation that can never be made",
+      "color_token": "lost"
+    }
+  ],
+  "systems": [
+    {
+      "id": "coastal-erosion",
+      "name": "Coastal and beach erosion",
+      "category": "coastal",
+      "layout": "chain",
+      "status": "complete",
+      "central_question": "Will the next storm reach the dune, cross it, or flood what's behind it, and how fast is the shoreline moving?",
+      "headline": "The chain behind a storm-erosion forecast for a barrier island",
+      "frame": "The United States built a federated coastal observing system across USACE, USGS, and NOAA. Its resilience comes from redundancy in observation; its vulnerability sits at a handful of human and computational convergence points that turn observations into decisions.",
+      "branches": [
+        {
+          "id": "storm-forecast",
+          "name": "Storm erosion forecast",
+          "headline": true,
+          "path": [
+            "ncmp-jalbtcx",
+            "beach-morphology",
+            "twl-cc",
+            "awips-coastal",
+            "coastal-flood-warning",
+            "coastal-communities"
+          ]
+        },
+        {
+          "id": "shoreline-rates",
+          "name": "Long-term shoreline change",
+          "path": [
+            "ncmp-jalbtcx",
+            "dsas",
+            "shoreline-planning",
+            "coastal-communities"
+          ]
+        },
+        {
+          "id": "archive",
+          "name": "Preservation and delivery",
+          "path": [
+            "ncmp-jalbtcx",
+            "ncei-coastal-lidar",
+            "digital-coast",
+            "shoreline-planning"
+          ]
+        }
+      ],
+      "shared_with": [
+        "coastal-flooding-sea-level",
+        "habs"
+      ],
+      "scenarios": [
+        {
+          "id": "airplane",
+          "name": "Pull the plug on the airplane",
+          "cut_node": "ncmp-jalbtcx",
+          "start_clock_months": 36,
+          "lesson": "Level 4 arrives not because the old archive disappeared, but because a physical state of the coastline passed through time without being measured.",
+          "what_broke_first": "Nothing anyone noticed. The maps still worked and the forecasts still ran. The first loss was a survey window that closed.",
+          "timeline": [
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 0.25
+              },
+              "level": 0,
+              "affects": "ncmp-jalbtcx",
+              "basis": "inferred_from_operational_cadence",
+              "note": "Existing products unaffected"
+            },
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 1
+              },
+              "level": 0,
+              "affects": "ncmp-jalbtcx",
+              "basis": "inferred_from_operational_cadence",
+              "level_high": 1,
+              "note": "Scheduled planning stops"
+            },
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 6
+              },
+              "level": 1,
+              "affects": "ncmp-jalbtcx",
+              "basis": "inferred_from_operational_cadence",
+              "level_high": 2,
+              "note": "Scheduled and rapid-response surveys missed"
+            },
+            {
+              "trigger": {
+                "type": "event",
+                "event": "next major hurricane landfall on an unsurveyed coast",
+                "expected_per_year": 1.5
+              },
+              "level": 3,
+              "affects": "beach-morphology",
+              "basis": "inferred",
+              "note": "No federal pre/post dataset for the reshaped island"
+            },
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 12
+              },
+              "level": 2,
+              "affects": "beach-morphology",
+              "basis": "inferred_from_operational_cadence",
+              "note": "Growing spatial holes"
+            },
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 36
+              },
+              "level": 2,
+              "affects": "dsas",
+              "basis": "inferred_from_operational_cadence",
+              "level_high": 3,
+              "note": "Portions aging beyond intended observation"
+            },
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 60
+              },
+              "level": 3,
+              "affects": "ncmp-jalbtcx",
+              "basis": "documented",
+              "level_high": 4,
+              "note": "Nominal five-year national refresh broken; missed epochs irrecoverable",
+              "state_label": "Profile never taken"
+            }
+          ],
+          "record_bar": {
+            "start_year": 2004,
+            "recoverable": "no",
+            "gap_label": "Coastline never flown",
+            "note": "You cannot fly the coastline as it existed five years earlier."
+          }
+        },
+        {
+          "id": "scientists",
+          "name": "Pull the plug on the scientists",
+          "cut_node": "cmhrp",
+          "start_clock_months": 12,
+          "lesson": "Existing lidar survives, DSAS survives as software, the papers survive. The human layer between observations and coastal intelligence erodes, and the FY27 budget already describes what that looks like.",
+          "what_broke_first": "Rapid storm response on two of three coastlines, and 27 positions.",
+          "timeline": [
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 0.25
+              },
+              "level": 1,
+              "affects": "usgs-coastal-surveys",
+              "basis": "documented",
+              "level_high": 2,
+              "note": "Event-dependent: a storm opportunity can be lost immediately"
+            },
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 1
+              },
+              "level": 2,
+              "affects": "usgs-coastal-surveys",
+              "basis": "documented",
+              "note": "Field response capacity reduced; FY27 Greenbook: one of three coastlines"
+            },
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 6
+              },
+              "level": 2,
+              "affects": "twl-cc",
+              "basis": "inferred",
+              "level_high": 3,
+              "note": "Validation datasets and projects missed"
+            },
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 12
+              },
+              "level": 3,
+              "affects": "cmhrp",
+              "basis": "inferred",
+              "note": "Expertise and project continuity deteriorate"
+            },
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 36
+              },
+              "level": 3,
+              "affects": "beach-morphology",
+              "basis": "inferred",
+              "level_high": 4,
+              "note": "Substantial observational gaps"
+            },
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 60
+              },
+              "level": 4,
+              "affects": "usgs-coastal-surveys",
+              "basis": "inferred",
+              "note": "Longitudinal record contains permanent holes"
+            }
+          ],
+          "record_bar": {
+            "start_year": 1996,
+            "recoverable": "partial",
+            "gap_label": "Storm responses never made"
+          }
+        },
+        {
+          "id": "forecast",
+          "name": "Pull the plug on the forecast",
+          "cut_node": "twl-cc",
+          "start_clock_months": 1,
+          "lesson": "The observations still exist, NOAA still predicts waves and surge, USGS still has the morphology. The integrated answer, whether the water reaches the dune toe, crest, or inundates behind it, disappears. Data are not the same thing as information infrastructure.",
+          "what_broke_first": "The six-day window expired.",
+          "timeline": [
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 0.25
+              },
+              "level": 4,
+              "affects": "twl-cc",
+              "basis": "inferred_from_operational_cadence",
+              "note": "Six-day forecast disappears after existing horizon expires"
+            },
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 0.25
+              },
+              "level": 3,
+              "affects": "awips-coastal",
+              "basis": "inferred_from_operational_cadence",
+              "level_high": 4,
+              "note": "NWS forecasters lose integrated guidance"
+            },
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 1
+              },
+              "level": 4,
+              "affects": "awips-coastal",
+              "basis": "inferred_from_operational_cadence"
+            },
+            {
+              "trigger": {
+                "type": "event",
+                "event": "next landfalling storm",
+                "expected_per_year": 1.5
+              },
+              "level": 3,
+              "affects": "coastal-flood-warning",
+              "basis": "inferred",
+              "note": "Warning issued without erosion and overwash guidance"
+            }
+          ],
+          "record_bar": {
+            "start_year": 2017,
+            "recoverable": "yes",
+            "gap_label": "Forecasts not issued",
+            "note": "The forecast can be restarted; the storms it would have covered are in the past."
+          }
+        }
+      ],
+      "exposure": [
+        {
+          "label": "Documented federal reduction, FY26 to FY27 request",
+          "basis": "USGS CMHRP $38.511M to $25.245M, 27 FTE",
+          "causal_link": "direct",
+          "source_ids": [
+            "doi-fy27-greenbook"
+          ],
+          "value_usd": {
+            "low": 13266000,
+            "high": 13266000,
+            "confidence": "requested",
+            "fiscal_year": "FY27"
+          }
+        },
+        {
+          "label": "Digital Coast return",
+          "basis": "NOAA estimates return above 400%; 75% of users say projects not possible without it",
+          "causal_link": "context",
+          "source_ids": [
+            "digital-coast-about"
+          ],
+          "value_text": "More than 400% return (NOAA estimate)"
+        },
+        {
+          "label": "NFIP and coastal mortgage exposure keyed to flood maps",
+          "basis": "About $1.4T in NFIP coverage (KCF brief, unverified)",
+          "causal_link": "context",
+          "source_ids": [
+            "kcf-brief-0929"
+          ],
+          "value_usd": {
+            "low": 1400000000000,
+            "high": 1400000000000,
+            "confidence": "estimate"
+          }
+        }
+      ],
+      "leverage": {
+        "mode": "ratio",
+        "text": "The FY27 request documents a $13.3M annual hole, and the budget itself says partner support will determine which coastlines keep mapping and rapid response.",
+        "ratio_note": "The ratio compares the documented CMHRP reduction against the Digital Coast return estimate; it does not claim CMHRP alone produces that return."
+      },
+      "bridge": {
+        "summary": "$2M to $7M per year for two to three years keeps rapid storm response and mapping on the coastline the FY27 request would drop, through a university or state partner USGS already works with; step down when the CMHRP line is restored.",
+        "amount_annual_usd": {
+          "low": 2000000,
+          "high": 7000000,
+          "confidence": "estimate"
+        },
+        "duration_months": 36,
+        "vehicle": "USGS cooperative agreement partner (state geological survey or university)",
+        "keeps": [
+          "rapid post-storm surveys on a second coastline",
+          "DSAS shoreline updates",
+          "TWL-CC morphology refresh"
+        ],
+        "step_down_trigger": "CMHRP appropriation at or above FY26 level",
+        "cannot_do": "Replace NCMP flights at scale or run federal operational forecasts.",
+        "confidence": "estimate"
+      },
+      "rstar": {
+        "D": 0.7,
+        "P": 0.6,
+        "RRS": 0.4,
+        "DIRS": 0.7,
+        "note": "Provisional; SC to calibrate."
+      },
+      "risk_vector": [
+        "appropriation",
+        "attrition"
+      ],
+      "dated_events": [
+        {
+          "date": "2023",
+          "label": "NCMP $14.85M",
+          "status": "enacted",
+          "kind": "funding",
+          "source_ids": [
+            "usace-fy26"
+          ],
+          "node": "ncmp-jalbtcx"
+        },
+        {
+          "date": "2026",
+          "label": "NCMP $4.0M",
+          "status": "enacted",
+          "kind": "funding",
+          "source_ids": [
+            "usace-fy26"
+          ],
+          "node": "ncmp-jalbtcx"
+        },
+        {
+          "date": "2027",
+          "label": "FY27: CMHRP to $25.245M; one of three coastlines keeps rapid response",
+          "status": "proposed",
+          "kind": "funding",
+          "source_ids": [
+            "doi-fy27-greenbook"
+          ],
+          "node": "cmhrp"
+        }
+      ],
+      "research_track": "coastal-erosion research track, Oct 5 2026 (sourced version Oct 6)",
+      "open_items": [
+        "Verify the $1.4T NFIP figure against FEMA before public use.",
+        "Confirm which coastline USGS would retain for rapid response."
+      ],
+      "sources": [
+        {
+          "id": "doi-fy27-greenbook",
+          "cite": "DOI/USGS FY2027 Greenbook",
+          "url": "https://www.doi.gov/sites/default/files/documents/2026-04/fy2027greenbookusgs.pdf"
+        },
+        {
+          "id": "usace-fy26",
+          "cite": "USACE FY26 Civil Works Budget Justification",
+          "url": "https://www.usace.army.mil/Portals/2/docs/civilworks/budget/Vol%201-07%20FY26%20Remaining%20Items.pdf"
+        },
+        {
+          "id": "digital-coast-about",
+          "cite": "NOAA Digital Coast About",
+          "url": "https://coast.noaa.gov/digitalcoast/about/"
+        },
+        {
+          "id": "kcf-brief-0929",
+          "cite": "KCF philanthropy brief, Sep 29 2026"
+        }
+      ]
+    },
+    {
+      "id": "coastal-flooding-sea-level",
+      "name": "Coastal flooding and sea level",
+      "category": "coastal",
+      "layout": "radial",
+      "status": "complete",
+      "central_question": "Where is the water now, how often are we flooding, and how fast is the baseline changing?",
+      "headline": "One tide gauge, three clocks",
+      "frame": "Pull one tide gauge and you start three failure clocks at once. The flood-information clock starts immediately. The flood-climatology clock takes months to years. The climate-record clock takes years to show damage, but the missing observations are irrecoverable from day one.",
+      "branches": [
+        {
+          "id": "operational",
+          "name": "Where is the water now?",
+          "headline": true,
+          "path": [
+            "nwlon",
+            "estofs-stofs",
+            "coastal-flood-warning",
+            "coastal-communities"
+          ]
+        },
+        {
+          "id": "htf",
+          "name": "How often are we flooding?",
+          "path": [
+            "nwlon",
+            "htf-outlook",
+            "coastal-planning",
+            "coastal-communities"
+          ]
+        },
+        {
+          "id": "rsl",
+          "name": "How fast is the baseline changing?",
+          "path": [
+            "nwlon",
+            "cors",
+            "vdatum",
+            "sea-level-trends",
+            "coastal-planning"
+          ]
+        },
+        {
+          "id": "regional",
+          "name": "Regional observing (IOOS)",
+          "path": [
+            "ioos-ra",
+            "ioos-dmac",
+            "coastal-flood-warning"
+          ]
+        }
+      ],
+      "shared_with": [
+        "coastal-erosion",
+        "habs"
+      ],
+      "scenarios": [
+        {
+          "id": "one-gauge",
+          "name": "Pull one long-running tide gauge",
+          "cut_node": "nwlon",
+          "start_clock_months": 6,
+          "lesson": "You can restart the gauge. You cannot remeasure yesterday's sea.",
+          "what_broke_first": "The local water level stopped being confirmed. The long-term trend box stayed green.",
+          "timeline": [
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 0.25
+              },
+              "level": 2,
+              "affects": "coastal-flood-warning",
+              "basis": "inferred_from_operational_cadence",
+              "note": "Local water level not confirmed; nearby gauges and models may substitute"
+            },
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 0.25
+              },
+              "level": 0,
+              "affects": "sea-level-trends",
+              "basis": "documented",
+              "note": "Long-term trend essentially unchanged; precision depends on record length (NOAA FAQ)"
+            },
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 1
+              },
+              "level": 2,
+              "affects": "coastal-flood-warning",
+              "basis": "inferred_from_operational_cadence",
+              "level_high": 3,
+              "note": "Multiple tide cycles and possibly flood events pass unobserved"
+            },
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 6
+              },
+              "level": 3,
+              "affects": "htf-outlook",
+              "basis": "inferred_from_operational_cadence",
+              "note": "Seasonal record incomplete"
+            },
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 12
+              },
+              "level": 3,
+              "affects": "htf-outlook",
+              "basis": "inferred_from_operational_cadence",
+              "note": "Annual flood record incomplete; HTF count has a missing year"
+            },
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 36
+              },
+              "level": 2,
+              "affects": "sea-level-trends",
+              "basis": "inferred",
+              "note": "Recent local trend less well constrained"
+            },
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 36
+              },
+              "level": 3,
+              "affects": "coastal-flood-warning",
+              "basis": "inferred",
+              "level_high": 4,
+              "note": "Local baseline degrading"
+            },
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 60
+              },
+              "level": 4,
+              "affects": "nwlon",
+              "basis": "documented",
+              "note": "Continuous record broken: five years of local ocean history cannot be reconstructed"
+            }
+          ],
+          "record_bar": {
+            "start_year": 1928,
+            "recoverable": "no",
+            "gap_label": "Never observed",
+            "note": "Illustrative station; replace with a real NWLON station once the 210-to-185 list or a ranked candidate is chosen."
+          },
+          "hypothetical_counts": [
+            {
+              "label": "high tides passed without a local observation",
+              "per_year": 705
+            },
+            {
+              "label": "storm events passed without a local observation",
+              "per_year": 4
+            }
+          ]
+        },
+        {
+          "id": "ioos-regional",
+          "name": "Pull IOOS Regional Observations",
+          "cut_node": "ioos-ra",
+          "start_clock_months": 18,
+          "lesson": "The portal still works. There is progressively less living ocean underneath it.",
+          "what_broke_first": "Nothing, for months. Existing awards kept paying. Then maintenance contracts shrank.",
+          "timeline": [
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 0.25
+              },
+              "level": 0,
+              "affects": "ioos-ra",
+              "basis": "documented",
+              "note": "Observations still operating on existing awards"
+            },
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 1
+              },
+              "level": 0,
+              "affects": "ioos-ra",
+              "basis": "documented",
+              "level_high": 1,
+              "note": "Operating on existing funds"
+            },
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 6
+              },
+              "level": 1,
+              "affects": "ioos-ra",
+              "basis": "documented",
+              "level_high": 2,
+              "note": "Maintenance and staffing contracting; NOAA FY25 CJ describes this pathway"
+            },
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 12
+              },
+              "level": 2,
+              "affects": "ioos-ra",
+              "basis": "documented",
+              "note": "Regional coverage developing holes; time series stop updating"
+            },
+            {
+              "trigger": {
+                "type": "funding_cliff",
+                "instrument_index": 4
+              },
+              "level": 3,
+              "affects": "ioos-ra",
+              "basis": "documented",
+              "note": "FY26 cooperative agreements end 2031-08-31; earlier if annual appropriation lapses"
+            },
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 36
+              },
+              "level": 3,
+              "affects": "ioos-ra",
+              "basis": "documented",
+              "note": "Regional observing network fragmented"
+            },
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 36
+              },
+              "level": 2,
+              "affects": "ioos-dmac",
+              "basis": "inferred",
+              "note": "Portal serving aging data"
+            },
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 60
+              },
+              "level": 3,
+              "affects": "ioos-ra",
+              "basis": "documented",
+              "level_high": 4,
+              "note": "Sustained regional system lost"
+            }
+          ],
+          "record_bar": {
+            "start_year": 2009,
+            "recoverable": "partial",
+            "gap_label": "Regional time series stopped"
+          }
+        },
+        {
+          "id": "operational-model",
+          "name": "Pull the operational surge model",
+          "cut_node": "estofs-stofs",
+          "start_clock_months": 0.5,
+          "lesson": "The sensors can all be working while the integrated answer disappears.",
+          "timeline": [
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 0.25
+              },
+              "level": 4,
+              "affects": "estofs-stofs",
+              "basis": "inferred_from_operational_cadence",
+              "note": "No current STOFS guidance after the last run ages"
+            },
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 0.25
+              },
+              "level": 3,
+              "affects": "coastal-flood-warning",
+              "basis": "inferred_from_operational_cadence",
+              "note": "Forecasters fall back to coarser guidance"
+            }
+          ],
+          "record_bar": {
+            "start_year": 2012,
+            "recoverable": "yes",
+            "gap_label": "Guidance not issued"
+          }
+        },
+        {
+          "id": "continuity-only",
+          "name": "Pull only the sea-level continuity function",
+          "cut_node": "sea-level-trends",
+          "start_clock_months": 36,
+          "lesson": "This one should almost frustrate the visitor: nothing visible happens for years, and the hole is still permanent.",
+          "timeline": [
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 1
+              },
+              "level": 0,
+              "affects": "sea-level-trends",
+              "basis": "documented",
+              "note": "Long-term trend essentially unchanged"
+            },
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 6
+              },
+              "level": 0,
+              "affects": "sea-level-trends",
+              "basis": "inferred",
+              "level_high": 1,
+              "note": "Recent record incomplete"
+            },
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 12
+              },
+              "level": 1,
+              "affects": "sea-level-trends",
+              "basis": "inferred",
+              "note": "Annual update missing data"
+            },
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 36
+              },
+              "level": 2,
+              "affects": "sea-level-trends",
+              "basis": "inferred",
+              "note": "Recent local trend less well constrained"
+            },
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 60
+              },
+              "level": 2,
+              "affects": "sea-level-trends",
+              "basis": "inferred",
+              "level_high": 3,
+              "note": "Multi-year gap in climate record"
+            },
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 240
+              },
+              "level": 4,
+              "affects": "sea-level-trends",
+              "basis": "inferred",
+              "note": "Legacy continuity lost"
+            }
+          ],
+          "record_bar": {
+            "start_year": 1928,
+            "recoverable": "no",
+            "gap_label": "Never observed"
+          }
+        }
+      ],
+      "exposure": [
+        {
+          "label": "IOOS Regional Observations, FY26 enacted, proposed for termination",
+          "basis": "$47.5M to $0 in the FY27 request",
+          "causal_link": "direct",
+          "source_ids": [
+            "noaa-fy27-cj"
+          ],
+          "value_usd": {
+            "low": 47500000,
+            "high": 47500000,
+            "confidence": "enacted",
+            "fiscal_year": "FY26"
+          }
+        },
+        {
+          "label": "PORTS avoided losses",
+          "basis": "NOAA: 33% reduction in maritime accidents and 59% reduction in groundings since inception (candidate for avoided_loss after audit)",
+          "causal_link": "direct",
+          "source_ids": [
+            "noaa-fy27-cj"
+          ],
+          "value_text": "33% fewer accidents, 59% fewer groundings (NOAA)"
+        },
+        {
+          "label": "Storm surge deaths",
+          "basis": "P-Surge and inundation maps credited with zero U.S. surge deaths in 2017 (KCF brief, unverified)",
+          "causal_link": "shared_chain",
+          "source_ids": [
+            "kcf-brief-0929"
+          ],
+          "value_text": "Zero U.S. surge deaths in the 2017 hurricane season"
+        },
+        {
+          "label": "Record high-tide flooding",
+          "basis": "2026 to 27 outlook: national median 7 to 12 high-tide flood days",
+          "causal_link": "context",
+          "source_ids": [
+            "htf-outlook"
+          ],
+          "value_text": "7 to 12 high-tide flood days, a record"
+        }
+      ],
+      "leverage": {
+        "mode": "scale",
+        "text": "A regional observing line measured in tens of millions sits under warnings, navigation, and a century-long sea level record; no single ratio captures that, so none is shown."
+      },
+      "bridge": {
+        "summary": "Immediate continuity reserve for the Regional Associations most exposed to the FY27 cliff, sized per RA from their cooperative agreement, through the RA itself (a university or nonprofit); step down if Congress restores the line. Separately, low six figures per year for an independent public monitor of NWLON station uptime and maintenance status.",
+        "amount_annual_usd": {
+          "low": 1000000,
+          "high": 5000000,
+          "confidence": "estimate"
+        },
+        "duration_months": 24,
+        "vehicle": "IOOS Regional Associations directly",
+        "keeps": [
+          "buoy and HF radar maintenance",
+          "regional technicians",
+          "regional time series"
+        ],
+        "step_down_trigger": "Regional Observations appropriation enacted at FY26 level or above",
+        "cannot_do": "Operate NWLON, issue NWS warnings, or run STOFS; Antideficiency Act bars paying federal staff.",
+        "confidence": "estimate"
+      },
+      "rstar": {
+        "D": 0.8,
+        "P": 0.6,
+        "RRS": 0.3,
+        "DIRS": 0.8,
+        "note": "Provisional."
+      },
+      "risk_vector": [
+        "appropriation",
+        "grant_lapse",
+        "asset_age"
+      ],
+      "dated_events": [
+        {
+          "date": "2027",
+          "label": "FY27: NWLON 210 to 185 stations; full maintenance at 110",
+          "status": "proposed",
+          "kind": "asset",
+          "source_ids": [
+            "noaa-fy27-cj"
+          ],
+          "node": "nwlon"
+        },
+        {
+          "date": "2027",
+          "label": "FY27: terminate IOOS Regional Observations",
+          "status": "proposed",
+          "kind": "funding",
+          "source_ids": [
+            "noaa-fy27-cj"
+          ],
+          "node": "ioos-ra"
+        },
+        {
+          "date": "2027",
+          "label": "FY27: remove 7 NDBC buoys; end VOS",
+          "status": "proposed",
+          "kind": "asset",
+          "source_ids": [
+            "noaa-fy27-cj"
+          ],
+          "node": "ndbc"
+        },
+        {
+          "date": "2026-08-17",
+          "label": "STOFS-3D-Pacific operational",
+          "status": "operational",
+          "kind": "upgrade",
+          "source_ids": [
+            "stofs-pac"
+          ],
+          "node": "estofs-stofs"
+        }
+      ],
+      "research_track": "coastal flooding and sea level research track, Oct 6 2026",
+      "open_items": [
+        "Identify the 25 NWLON stations in the 210-to-185 plan, or rank candidates by record length and exposure for the headline gauge.",
+        "Audit the PORTS economic study before using avoided_loss.",
+        "Collect IRA and BIL award end dates per Regional Association."
+      ],
+      "sources": [
+        {
+          "id": "noaa-fy27-cj",
+          "cite": "NOAA FY2027 Congressional Justification",
+          "url": "https://www.noaa.gov/sites/default/files/2026-04/FY2027-NOAA-CJ-Submission.pdf"
+        },
+        {
+          "id": "htf-outlook",
+          "cite": "NOAA High Tide Flooding Outlook",
+          "url": "https://www.tidesandcurrents.noaa.gov/high-tide-flooding/annual-outlook.html"
+        },
+        {
+          "id": "stofs-pac",
+          "cite": "STOFS-3D-Pacific",
+          "url": "https://polar.ncep.noaa.gov/estofs/pac.htm"
+        },
+        {
+          "id": "kcf-brief-0929",
+          "cite": "KCF philanthropy brief, Sep 29 2026"
+        }
+      ]
+    },
+    {
+      "id": "habs",
+      "name": "Harmful algal blooms",
+      "category": "habs",
+      "layout": "radial",
+      "status": "complete",
+      "central_question": "Is this water, or this seafood, dangerous right now?",
+      "headline": "We can still see the bloom from space. Can we tell whether it can poison someone?",
+      "frame": "There is no single U.S. HAB observing system to unplug. NOAA provides satellites, models, and research money; the decisive observations and toxin measurements are made regionally by states, universities, tribes, labs, and volunteers. The inexpensive regional link is what makes the expensive federal forecast actionable.",
+      "branches": [
+        {
+          "id": "pnw",
+          "name": "Pacific Northwest: domoic acid and Dungeness crab",
+          "headline": true,
+          "path": [
+            "hab-field-sampling",
+            "toxin-lab",
+            "pnw-hab-bulletin",
+            "shellfish-harvest-decision",
+            "hab-communities"
+          ]
+        },
+        {
+          "id": "lake-erie",
+          "name": "Lake Erie: drinking water",
+          "path": [
+            "ifcb-esp",
+            "lake-erie-hab-forecast",
+            "drinking-water-decision",
+            "hab-communities"
+          ]
+        },
+        {
+          "id": "gulf",
+          "name": "Gulf Coast: respiratory exposure",
+          "path": [
+            "hab-field-sampling",
+            "gulf-respiratory-forecast",
+            "beach-health-decision",
+            "hab-communities"
+          ]
+        },
+        {
+          "id": "gulf-of-maine",
+          "name": "Gulf of Maine: the winter survey",
+          "path": [
+            "gom-cyst-survey",
+            "gom-forecast",
+            "shellfish-harvest-decision"
+          ]
+        },
+        {
+          "id": "alaska",
+          "name": "Alaska: subsistence food safety",
+          "path": [
+            "hab-field-sampling",
+            "ahab",
+            "shellfish-harvest-decision",
+            "hab-communities"
+          ]
+        },
+        {
+          "id": "shared",
+          "name": "Shared federal layer",
+          "path": [
+            "ocean-color-satellite",
+            "nccos-satellite-processing",
+            "nccos-competitive-habs",
+            "ncei-habofs-archive"
+          ]
+        }
+      ],
+      "shared_with": [
+        "coastal-flooding-sea-level",
+        "plankton-fisheries"
+      ],
+      "scenarios": [
+        {
+          "id": "pnw-sampling",
+          "name": "Pull the plug on the toxin sampling",
+          "cut_node": "hab-field-sampling",
+          "start_clock_months": 4,
+          "lesson": "A closure is evidence the warning system worked. The failure state is not that the fishery closes; it is that nobody can tell whether it should be open.",
+          "what_broke_first": "Certainty. The ocean was still there and the satellite still saw the bloom. Without fresh cells and toxin measurements, managers could no longer tell with confidence whether seafood was safe to harvest.",
+          "timeline": [
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 0.25
+              },
+              "level": 2,
+              "affects": "hab-field-sampling",
+              "basis": "inferred_from_operational_cadence",
+              "level_high": 3,
+              "note": "Depends on region; the Gulf forecast is immediate"
+            },
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 0.25
+              },
+              "level": 1,
+              "affects": "shellfish-harvest-decision",
+              "basis": "inferred",
+              "note": "Increased sampling ordered from remaining capacity"
+            },
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 1
+              },
+              "level": 3,
+              "affects": "toxin-lab",
+              "basis": "inferred",
+              "note": "Bloom toxicity and species status uncertain"
+            },
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 1
+              },
+              "level": 2,
+              "affects": "shellfish-harvest-decision",
+              "basis": "inferred",
+              "note": "Precautionary closure"
+            },
+            {
+              "trigger": {
+                "type": "event",
+                "event": "next Pseudo-nitzschia event",
+                "expected_per_year": 0.7
+              },
+              "level": 3,
+              "affects": "shellfish-harvest-decision",
+              "basis": "analog",
+              "note": "2015: $97.5M lost crab revenue when the system worked; without sampling, the decision is blind"
+            },
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 6
+              },
+              "level": 4,
+              "affects": "toxin-lab",
+              "basis": "inferred",
+              "note": "Operational decision chain effectively broken"
+            },
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 6
+              },
+              "level": 3,
+              "affects": "shellfish-harvest-decision",
+              "basis": "inferred",
+              "note": "Status uncertain"
+            },
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 12
+              },
+              "level": 4,
+              "affects": "shellfish-harvest-decision",
+              "basis": "inferred",
+              "note": "Safe status cannot be determined"
+            },
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 36
+              },
+              "level": 4,
+              "affects": "hab-field-sampling",
+              "basis": "inferred",
+              "note": "Long biological record contains permanent gaps"
+            }
+          ],
+          "record_bar": {
+            "start_year": 1991,
+            "recoverable": "no",
+            "gap_label": "Season's samples never taken"
+          }
+        },
+        {
+          "id": "gulf-cell-counts",
+          "name": "Pull the cell counts behind the respiratory forecast",
+          "cut_node": "hab-field-sampling",
+          "start_clock_months": 0.1,
+          "lesson": "A three-hour forecast with 30-hour reach starts aging the day its observations stop.",
+          "timeline": [
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 0.1
+              },
+              "level": 3,
+              "affects": "gulf-respiratory-forecast",
+              "basis": "documented",
+              "level_high": 4,
+              "note": "Forecast refreshes every 3 hours from cell counts; input is stale within days"
+            },
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 0.25
+              },
+              "level": 4,
+              "affects": "gulf-respiratory-forecast",
+              "basis": "inferred_from_operational_cadence"
+            },
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 0.25
+              },
+              "level": 3,
+              "affects": "beach-health-decision",
+              "basis": "inferred",
+              "note": "Blanket advisories replace location-specific guidance"
+            }
+          ],
+          "record_bar": {
+            "start_year": 2004,
+            "recoverable": "yes",
+            "gap_label": "Forecasts not issued"
+          }
+        },
+        {
+          "id": "winter-cyst",
+          "name": "Cancel the winter cyst survey",
+          "cut_node": "gom-cyst-survey",
+          "start_clock_months": 5,
+          "lesson": "Nothing happens for months. Then spring arrives and the seasonal forecast has no initial condition.",
+          "timeline": [
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 0.25
+              },
+              "level": 0,
+              "affects": "gom-forecast",
+              "basis": "documented",
+              "note": "Immediately: nothing"
+            },
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 1
+              },
+              "level": 0,
+              "affects": "gom-forecast",
+              "basis": "documented",
+              "level_high": 1
+            },
+            {
+              "trigger": {
+                "type": "calendar",
+                "month_from": 5,
+                "month_to": 9,
+                "label": "bloom season"
+              },
+              "level": 4,
+              "affects": "gom-forecast",
+              "basis": "documented",
+              "note": "Seasonal forecast cannot be initialized; weekly forecasts do not issue"
+            },
+            {
+              "trigger": {
+                "type": "calendar",
+                "month_from": 5,
+                "month_to": 9,
+                "label": "bloom season"
+              },
+              "level": 3,
+              "affects": "shellfish-harvest-decision",
+              "basis": "inferred",
+              "note": "State managers lose the seasonal risk outlook"
+            }
+          ],
+          "record_bar": {
+            "start_year": 2005,
+            "recoverable": "no",
+            "gap_label": "Cyst map never made"
+          }
+        },
+        {
+          "id": "nccos-line",
+          "name": "Zero the NCCOS research line",
+          "cut_node": "nccos-competitive-habs",
+          "start_clock_months": 30,
+          "lesson": "The system does not go dark tomorrow. Existing grants continue. Then one project expires, then another; a technician leaves; an instrument isn't serviced; a regional observation disappears; a forecast loses its input.",
+          "timeline": [
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 0.25
+              },
+              "level": 0,
+              "affects": "nccos-competitive-habs",
+              "basis": "documented",
+              "note": "Existing awards continue"
+            },
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 6
+              },
+              "level": 1,
+              "affects": "nccos-competitive-habs",
+              "basis": "documented",
+              "note": "No new awards; pipeline interrupted"
+            },
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 12
+              },
+              "level": 1,
+              "affects": "nccos-competitive-habs",
+              "basis": "documented",
+              "level_high": 2,
+              "note": "First expirations"
+            },
+            {
+              "trigger": {
+                "type": "funding_cliff",
+                "instrument_index": 1
+              },
+              "level": 3,
+              "affects": "nccos-competitive-habs",
+              "basis": "documented",
+              "note": "September 2026 cohort runs to about 2029"
+            },
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 36
+              },
+              "level": 3,
+              "affects": "ifcb-esp",
+              "basis": "inferred",
+              "note": "Portfolio and network holes accumulate"
+            },
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 60
+              },
+              "level": 4,
+              "affects": "nccos-competitive-habs",
+              "basis": "inferred",
+              "level_high": 4,
+              "note": "R&D-to-operations pipeline substantially lost"
+            }
+          ],
+          "record_bar": {
+            "start_year": 1997,
+            "recoverable": "partial",
+            "gap_label": "Research cohorts never funded"
+          }
+        }
+      ],
+      "exposure": [
+        {
+          "label": "2015 West Coast Pseudo-nitzschia event",
+          "basis": "Lost commercial Dungeness crab landing revenue (NOAA Fisheries)",
+          "causal_link": "shared_chain",
+          "source_ids": [
+            "noaa-habs-hurts"
+          ],
+          "value_usd": {
+            "low": 97500000,
+            "high": 97500000,
+            "confidence": "estimate"
+          }
+        },
+        {
+          "label": "2015 event, Washington coastal tourism",
+          "basis": "About $40M lost tourism spending (NOAA Fisheries)",
+          "causal_link": "shared_chain",
+          "source_ids": [
+            "noaa-habs-hurts"
+          ],
+          "value_usd": {
+            "low": 40000000,
+            "high": 40000000,
+            "confidence": "estimate"
+          }
+        },
+        {
+          "label": "2017 to 2019 Florida red tide",
+          "basis": "About $2.7B losses to tourism-related businesses (NOAA-funded study)",
+          "causal_link": "context",
+          "source_ids": [
+            "nccos-27b"
+          ],
+          "value_usd": {
+            "low": 2700000000,
+            "high": 2700000000,
+            "confidence": "estimate"
+          }
+        },
+        {
+          "label": "Toledo, August 2014",
+          "basis": "About 500,000 people told not to drink tap water for three days",
+          "causal_link": "shared_chain",
+          "source_ids": [
+            "noaa-habs-hurts"
+          ],
+          "value_text": "500,000 people, three days without tap water"
+        },
+        {
+          "label": "Great Lakes drinking water",
+          "basis": "More than 19 million Americans depend on it",
+          "causal_link": "context",
+          "source_ids": [
+            "nhabon-fy24"
+          ],
+          "value_text": "19 million people"
+        },
+        {
+          "label": "Federal fishery disaster appropriations after the 2015 event",
+          "basis": "$25.8M for California Dungeness and rock crab; $3.86M for the Quileute Tribe",
+          "causal_link": "shared_chain",
+          "source_ids": [
+            "noaa-disasters"
+          ],
+          "value_usd": {
+            "low": 29660000,
+            "high": 29660000,
+            "confidence": "enacted"
+          }
+        }
+      ],
+      "leverage": {
+        "mode": "scale",
+        "text": "A national HAB observing network funded at $3.5M a year (NHABON FY24) supports early-warning capabilities for events whose documented consequences run to hundreds of millions or billions. That is a scale comparison, not a return on investment: NHABON did not prevent the Florida loss."
+      },
+      "bridge": {
+        "summary": "Through NANOOS and the University of Washington ESP program, fund sustained PNW toxin sampling, lab capacity, and the bulletin for 24 months at a level to be costed from the $1.2M IOOS OTT award and current NANOOS budgets; step down when NHABON and NCCOS lines are restored. Separately, a bridge for Alaska community toxin testing through AOOS.",
+        "amount_annual_usd": {
+          "low": null,
+          "high": null,
+          "confidence": "embedded_unresolved"
+        },
+        "duration_months": 24,
+        "vehicle": "NANOOS (University of Washington) and AOOS",
+        "keeps": [
+          "offshore and beach toxin sampling",
+          "ESP mooring operations",
+          "lab technicians",
+          "the bulletin"
+        ],
+        "step_down_trigger": "NHABON and NCCOS competitive lines restored",
+        "cannot_do": "Replace NOAA satellite processing or national model development.",
+        "confidence": "concept"
+      },
+      "rstar": {
+        "D": 0.7,
+        "P": 0.7,
+        "RRS": 0.3,
+        "DIRS": 0.6,
+        "note": "Provisional."
+      },
+      "risk_vector": [
+        "grant_lapse",
+        "attrition",
+        "appropriation"
+      ],
+      "dated_events": [
+        {
+          "date": "2014-08",
+          "label": "Toledo do-not-drink order, about 500,000 people",
+          "status": "realized",
+          "kind": "event",
+          "source_ids": [
+            "noaa-habs-hurts"
+          ]
+        },
+        {
+          "date": "2015",
+          "label": "West Coast Pseudo-nitzschia event; $97.5M crab revenue lost",
+          "status": "realized",
+          "kind": "event",
+          "source_ids": [
+            "noaa-habs-hurts"
+          ]
+        },
+        {
+          "date": "2026-09",
+          "label": "NCCOS awards $13.4M; cohort runs to about 2029",
+          "status": "realized",
+          "kind": "funding",
+          "source_ids": [
+            "nccos-134"
+          ],
+          "node": "nccos-competitive-habs"
+        },
+        {
+          "date": "2027",
+          "label": "FY27 request zeroes NCCOS competitive HAB line and IOOS Regional Observations",
+          "status": "proposed",
+          "kind": "funding",
+          "source_ids": [
+            "kcf-brief-0929"
+          ]
+        }
+      ],
+      "research_track": "HAB research track, Oct 6 2026, plus the refinement response",
+      "open_items": [
+        "PNW observing and lab cost: only the $1.2M UW ESP award is hard; cost the bridge with NANOOS.",
+        "Current NHABON appropriation after FY24.",
+        "Verify the mockup's cost line is replaced; the old $1M to $2M had no source."
+      ],
+      "sources": [
+        {
+          "id": "noaa-habs-hurts",
+          "cite": "NOAA Fisheries, Hitting us where it hurts: the untold story of HABs",
+          "url": "https://www.fisheries.noaa.gov/west-coast/science-data/hitting-us-where-it-hurts-untold-story-harmful-algal-blooms"
+        },
+        {
+          "id": "nccos-27b",
+          "cite": "NCCOS: 2018 red tide total impact $2.7B",
+          "url": "https://coastalscience.noaa.gov/news/total-economic-impact-of-2018-red-tide-now-estimated-at-2-7b/"
+        },
+        {
+          "id": "nhabon-fy24",
+          "cite": "NHABON FY24 awards",
+          "url": "https://cdn.ioos.noaa.gov/attachments/2025/NHABON%20Funding%20Awards%20FY24.pdf"
+        },
+        {
+          "id": "noaa-disasters",
+          "cite": "NOAA Fisheries fishery disaster determinations",
+          "url": "https://www.fisheries.noaa.gov/national/funding-financial-services/fishery-resource-disaster-determinations"
+        },
+        {
+          "id": "nccos-134",
+          "cite": "NCCOS $13.4M awarded, Sep 2026",
+          "url": "https://coastalscience.noaa.gov/news/13-4-million-awarded-for-harmful-algal-bloom-and-hypoxia-research/"
+        },
+        {
+          "id": "kcf-brief-0929",
+          "cite": "KCF philanthropy brief, Sep 29 2026"
+        }
+      ]
+    },
+    {
+      "id": "weather-balloons",
+      "name": "Weather balloons (NWS upper-air network and IGRA)",
+      "category": "severe-weather",
+      "layout": "chain",
+      "status": "complete",
+      "central_question": "Will there be tornadoes this afternoon, and will the record show what the atmosphere looked like this morning?",
+      "headline": "One balloon, two irreversibilities",
+      "frame": "The same 7 a.m. sounding that tells a forecaster whether this afternoon will spawn tornadoes becomes, by evening, a permanent line in a record that began in 1905. Miss the launch and you lose both, on different clocks.",
+      "branches": [
+        {
+          "id": "forecast",
+          "name": "Today's tornado watch",
+          "headline": true,
+          "path": [
+            "wfo-launch-staff",
+            "radiosonde-launch",
+            "gts-ncep-da",
+            "spc-watches",
+            "wfo-tornado-warnings",
+            "severe-weather-public"
+          ]
+        },
+        {
+          "id": "record",
+          "name": "The climate record",
+          "path": [
+            "radiosonde-launch",
+            "gts-ncep-da",
+            "igra"
+          ]
+        },
+        {
+          "id": "substitutes",
+          "name": "What NOAA buys instead",
+          "path": [
+            "gnss-ro",
+            "gts-ncep-da"
+          ]
+        }
+      ],
+      "scenarios": [
+        {
+          "id": "morning-launch",
+          "name": "Pull the plug on the 7 a.m. launch",
+          "cut_node": "wfo-launch-staff",
+          "start_clock_months": 14,
+          "already_happened": true,
+          "lesson": "The program line survived intact; the capability didn't. The balloon went up at noon instead of 7, and on April 13 the watch came 30 minutes before the first tornado.",
+          "what_broke_first": "Pre-dawn staffing. Nothing in the budget changed.",
+          "timeline": [
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 0.03
+              },
+              "level": 2,
+              "affects": "spc-watches",
+              "basis": "documented",
+              "note": "Same-day severe outlook loses its pre-convective profile"
+            },
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 0.25
+              },
+              "level": 2,
+              "affects": "radiosonde-launch",
+              "basis": "documented",
+              "level_high": 3,
+              "note": "Launches delayed to office hours"
+            },
+            {
+              "trigger": {
+                "type": "event",
+                "event": "next same-day severe outbreak on a morning with missing soundings",
+                "expected_per_year": 3
+              },
+              "level": 3,
+              "affects": "spc-watches",
+              "basis": "documented",
+              "note": "April 13, 2026: watch about 30 minutes before first touchdown"
+            },
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 1
+              },
+              "level": 3,
+              "affects": "spc-watches",
+              "basis": "analog",
+              "note": "ECMWF 2015: degradation local first, downstream within days"
+            },
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 0.03
+              },
+              "level": 4,
+              "affects": "igra",
+              "basis": "documented",
+              "note": "Each missed launch is a permanent hole in that station's record from the day it is missed",
+              "state_label": "Profile never taken"
+            },
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 12
+              },
+              "level": 3,
+              "affects": "wfo-tornado-warnings",
+              "basis": "inferred",
+              "note": "Warning lead time depends on watch context"
+            },
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 60
+              },
+              "level": 3,
+              "affects": "spc-watches",
+              "basis": "inferred"
+            }
+          ],
+          "record_bar": {
+            "start_year": 1948,
+            "recoverable": "no",
+            "gap_label": "25 of 30 mornings missed, spring 2026",
+            "note": "Kansas sites, from public upper-air records cited by Rep. Davids, May 2026."
+          }
+        },
+        {
+          "id": "network-17pct",
+          "name": "Pull 17% of the network",
+          "cut_node": "radiosonde-launch",
+          "start_clock_months": 6,
+          "lesson": "Redundancy at the global scale is not redundancy where the tornadoes are. Hemispheric skill scores barely move, which is what NOAA says; the Plains lose the profiles that matter for convection.",
+          "timeline": [
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 0.25
+              },
+              "level": 2,
+              "affects": "gts-ncep-da",
+              "basis": "analog",
+              "note": "ECMWF 2015 Russia case: errors grow over the region first"
+            },
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 1
+              },
+              "level": 2,
+              "affects": "gts-ncep-da",
+              "basis": "analog",
+              "level_high": 3,
+              "note": "Errors propagate downstream"
+            },
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 6
+              },
+              "level": 3,
+              "affects": "spc-watches",
+              "basis": "analog"
+            },
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 12
+              },
+              "level": 3,
+              "affects": "gts-ncep-da",
+              "basis": "analog",
+              "note": "Largest in winter when satellite data over land are used less"
+            },
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 60
+              },
+              "level": 4,
+              "affects": "igra",
+              "basis": "documented",
+              "note": "Observational time-series holes permanent"
+            }
+          ],
+          "record_bar": {
+            "start_year": 1948,
+            "recoverable": "no",
+            "gap_label": "Profiles never taken"
+          }
+        },
+        {
+          "id": "archive",
+          "name": "Pull the plug on the archive",
+          "cut_node": "igra",
+          "start_clock_months": 18,
+          "lesson": "Every forecast still runs and nobody notices for months. Then the 120-year temperature record stops updating, RATPAC stops, and European reanalyses lose their U.S. source.",
+          "timeline": [
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 0.25
+              },
+              "level": 0,
+              "affects": "igra",
+              "basis": "inferred",
+              "note": "Files persist"
+            },
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 1
+              },
+              "level": 1,
+              "affects": "igra",
+              "basis": "inferred"
+            },
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 1
+              },
+              "level": 2,
+              "affects": "igra",
+              "basis": "inferred_from_operational_cadence",
+              "note": "Daily updates stop"
+            },
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 6
+              },
+              "level": 3,
+              "affects": "igra",
+              "basis": "inferred",
+              "note": "Derived products (RATPAC) stop; RHARM loses its source"
+            },
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 60
+              },
+              "level": 4,
+              "affects": "igra",
+              "basis": "analog",
+              "note": "SEDAC pattern: preservation lapses once staff disperse"
+            }
+          ],
+          "record_bar": {
+            "start_year": 1905,
+            "recoverable": "partial",
+            "gap_label": "Curation stopped"
+          }
+        }
+      ],
+      "exposure": [
+        {
+          "label": "Severe convective storm insured losses, 2025",
+          "basis": "$51B insured, $68B total economic damage; third year above $50B (Triple-I)",
+          "causal_link": "shared_chain",
+          "source_ids": [
+            "triple-i-2025"
+          ],
+          "value_usd": {
+            "low": 51000000000,
+            "high": 51000000000,
+            "confidence": "estimate"
+          }
+        },
+        {
+          "label": "March 13 to 16, 2025 outbreak",
+          "basis": "118 tornadoes, 15 states, 43 fatalities, insured losses near $7.7B (Gallagher Re)",
+          "causal_link": "shared_chain",
+          "source_ids": [
+            "gallagher-h1"
+          ],
+          "value_usd": {
+            "low": 7700000000,
+            "high": 7700000000,
+            "confidence": "estimate"
+          },
+          "value_text": "43 fatalities"
+        },
+        {
+          "label": "May 16, 2025",
+          "basis": "At least 27 tornado deaths in one day; EF-4 in Kentucky killed 19",
+          "causal_link": "shared_chain",
+          "source_ids": [
+            "gallagher-may"
+          ],
+          "value_text": "27 deaths in one day"
+        },
+        {
+          "label": "NOAA estimate cited to Congress",
+          "basis": "Extreme weather since 2022: 1,534 fatalities, $461.6B damage",
+          "causal_link": "context",
+          "source_ids": [
+            "senate-s1378"
+          ],
+          "value_usd": {
+            "low": 461600000000,
+            "high": 461600000000,
+            "confidence": "estimate"
+          }
+        },
+        {
+          "label": "What NOAA pays for a partial substitute",
+          "basis": "$67.054M over two years for 10,000 GNSS-RO profiles a day",
+          "causal_link": "direct",
+          "source_ids": [
+            "kcf-doc3"
+          ],
+          "value_usd": {
+            "low": 67054000,
+            "high": 67054000,
+            "confidence": "awarded"
+          }
+        }
+      ],
+      "leverage": {
+        "mode": "scale",
+        "text": "Restoring morning launches at the affected Plains offices is a staffing cost in the low single-digit millions (estimate). The warning system it feeds sits under $50B a year in insured losses and dozens of deaths. The ratio is an upper bound and is not shown as a number."
+      },
+      "bridge": {
+        "summary": "Three vehicles, none paying federal forecasters: $1M to $3M per severe season for supplemental soundings from university mobile sounding programs along a Plains corridor; low six figures for a public dashboard of launch completion by site and hour built from the GTS record so '25 of 30 missed' is visible in real time; low six figures a year for an IGRA mirror and curation partnership with NCEI.",
+        "amount_annual_usd": {
+          "low": 1500000,
+          "high": 3500000,
+          "confidence": "estimate"
+        },
+        "duration_months": 24,
+        "vehicle": "university meteorology programs (OU, Texas Tech, Nebraska, Iowa State); a nonprofit for the monitor; NCEI partnership for IGRA",
+        "keeps": [
+          "pre-convective soundings on outbreak days",
+          "public visibility of launch gaps",
+          "IGRA continuity"
+        ],
+        "step_down_trigger": "NWS restores twice-daily launches at all 92 sites for two consecutive seasons",
+        "cannot_do": "Pay WFO staff (Antideficiency Act); replace the national network.",
+        "confidence": "estimate"
+      },
+      "rstar": {
+        "D": 0.9,
+        "P": 0.8,
+        "RRS": 0.2,
+        "DIRS": 0.9,
+        "note": "Provisional. High D because the cut already happened."
+      },
+      "risk_vector": [
+        "attrition",
+        "consumables"
+      ],
+      "dated_events": [
+        {
+          "date": "2025-02",
+          "label": "Kotzebue AK suspended after NOAA cuts",
+          "status": "realized",
+          "kind": "staffing",
+          "source_ids": [
+            "windborne"
+          ],
+          "node": "wfo-launch-staff"
+        },
+        {
+          "date": "2025-03-20",
+          "label": "Omaha and Rapid City suspended; six sites to once daily",
+          "status": "realized",
+          "kind": "staffing",
+          "source_ids": [
+            "axios-0321"
+          ],
+          "node": "wfo-launch-staff"
+        },
+        {
+          "date": "2026-04-13",
+          "label": "Kansas City outbreak; watch 30 minutes before first touchdown",
+          "status": "realized",
+          "kind": "event",
+          "source_ids": [
+            "globe-0428"
+          ],
+          "node": "spc-watches"
+        },
+        {
+          "date": "2026-05",
+          "label": "25 of 30 Kansas morning launches missed",
+          "status": "realized",
+          "kind": "staffing",
+          "source_ids": [
+            "davids-0819"
+          ],
+          "node": "radiosonde-launch"
+        },
+        {
+          "date": "2026-08-19",
+          "label": "33 members of Congress demand twice-daily schedule restored",
+          "status": "realized",
+          "kind": "policy",
+          "source_ids": [
+            "davids-0819"
+          ]
+        },
+        {
+          "date": "2026-09",
+          "label": "NOAA buys $67M of GNSS-RO over two years",
+          "status": "realized",
+          "kind": "funding",
+          "source_ids": [
+            "kcf-doc3"
+          ],
+          "node": "gnss-ro"
+        }
+      ],
+      "research_track": "2026-10-06_13-59-25_Research-Track-Weather-Balloons-IGRA.md",
+      "open_items": [
+        "Autolauncher unit cost and CONUS deployment count (ask Kevin Schrab).",
+        "Authoritative per-release cost.",
+        "Scrape public sounding archives for actual launch times by site since 2025 to replace the Kansas anecdote with a national dataset.",
+        "Identify and cite the meteorologist 'Morales' quoted by NPR."
+      ],
+      "sources": [
+        {
+          "id": "triple-i-2025",
+          "cite": "Triple-I via Carrier Management, Apr 16 2026",
+          "url": "https://www.carriermanagement.com/news/2026/04/16/286826.htm"
+        },
+        {
+          "id": "gallagher-h1",
+          "cite": "Gallagher Re via NBC, H1 2025",
+          "url": "https://www.nbcdfw.com/news/business/money-report/insurers-just-marked-the-costliest-first-half-of-the-year-since-2011/3888811/?amp=1"
+        },
+        {
+          "id": "gallagher-may",
+          "cite": "Gallagher Re via The Insurer, May 23 2025",
+          "url": "https://www.itiger.com/hans/news/2537133687"
+        },
+        {
+          "id": "senate-s1378",
+          "cite": "Senate Report 119-88 on S.1378",
+          "url": "https://www.govinfo.gov/content/pkg/CRPT-119srpt88/pdf/CRPT-119srpt88.pdf"
+        },
+        {
+          "id": "kcf-doc3",
+          "cite": "KCF research document 3, Sep 2026"
+        },
+        {
+          "id": "windborne",
+          "cite": "WindBorne, Feb 28 2025",
+          "url": "https://www.businesswire.com/news/home/20250228603358/en"
+        },
+        {
+          "id": "axios-0321",
+          "cite": "Axios, Mar 21 2025",
+          "url": "https://www.axios.com/2025/03/21/nws-layoffs-cuts-weather-balloons-forecasts"
+        },
+        {
+          "id": "globe-0428",
+          "cite": "Boston Globe, Apr 28 2026",
+          "url": "https://www.bostonglobe.com/2026/04/28/metro/tornadoes-severe-weather-balloons-storms/"
+        },
+        {
+          "id": "davids-0819",
+          "cite": "Rep. Davids, Aug 19 2026",
+          "url": "https://davids.house.gov/media/press-releases/davids-escalates-calls-weather-safety-demands-federal-action-restore-vital"
+        }
+      ]
+    },
+    {
+      "id": "ocean-heat-content",
+      "name": "Ocean heat content",
+      "category": "climate",
+      "layout": "radial",
+      "status": "partial",
+      "central_question": "The ocean stores most of the excess heat in the climate system. How do we know how much, where it went, and how deep it reached?",
+      "headline": "Three plugs: where, how it crosses the currents, how deep",
+      "frame": "Argo gives the global repeat field. XBT gives high-resolution repeat sections through the boundary currents. GO-SHIP gives the full-depth, climate-quality reference. Pull one plug and the ocean keeps warming; we stop being able to see one dimension of where the heat went.",
+      "branches": [
+        {
+          "id": "argo",
+          "name": "Where, globally",
+          "headline": true,
+          "path": [
+            "argo-us",
+            "aoml-argo-dac",
+            "wod-ncei",
+            "ohc-product",
+            "climate-assessment"
+          ]
+        },
+        {
+          "id": "xbt",
+          "name": "How heat crosses the fast currents",
+          "path": [
+            "xbt-hd",
+            "wod-ncei",
+            "ohc-product",
+            "climate-assessment"
+          ]
+        },
+        {
+          "id": "goship",
+          "name": "How far down, and against what reference",
+          "path": [
+            "go-ship",
+            "cchdo",
+            "wod-ncei",
+            "ohc-product",
+            "climate-assessment"
+          ]
+        }
+      ],
+      "shared_with": [],
+      "scenarios": [
+        {
+          "id": "argo",
+          "name": "Stop buying U.S. floats",
+          "cut_node": "argo-us",
+          "start_clock_months": 24,
+          "lesson": "Existing floats don't die when Congress stops buying replacements. The array thins as batteries fail, and the U.S. share of a 26-nation system shrinks.",
+          "timeline": [
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 1
+              },
+              "level": 0,
+              "affects": "argo-us",
+              "basis": "inferred",
+              "note": "Existing floats continue"
+            },
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 6
+              },
+              "level": 1,
+              "affects": "argo-us",
+              "basis": "inferred",
+              "note": "Replacement deficit emerging"
+            },
+            {
+              "trigger": {
+                "type": "attrition",
+                "fraction_lost": 0.2
+              },
+              "level": 1,
+              "affects": "argo-us",
+              "basis": "inferred",
+              "note": "U.S. contribution shrinking"
+            },
+            {
+              "trigger": {
+                "type": "attrition",
+                "fraction_lost": 0.5
+              },
+              "level": 2,
+              "affects": "argo-us",
+              "basis": "inferred",
+              "note": "Major sampling-density loss"
+            },
+            {
+              "trigger": {
+                "type": "attrition",
+                "fraction_lost": 0.8
+              },
+              "level": 3,
+              "affects": "ohc-product",
+              "basis": "inferred",
+              "note": "Regional gaps growing; estimate increasingly model-dependent"
+            },
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 60
+              },
+              "level": 3,
+              "affects": "argo-us",
+              "basis": "inferred",
+              "level_high": 4,
+              "note": "Sustained U.S. contribution largely lost"
+            }
+          ],
+          "record_bar": {
+            "start_year": 1999,
+            "recoverable": "no",
+            "gap_label": "Profiles never taken"
+          }
+        },
+        {
+          "id": "xbt",
+          "name": "Stop the high-density XBT lines",
+          "cut_node": "xbt-hd",
+          "start_clock_months": 4,
+          "lesson": "The global field remains. Boundary-current heat transport loses resolution. The next transect, not the calendar, is the clock.",
+          "timeline": [
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 0.25
+              },
+              "level": 0,
+              "affects": "xbt-hd",
+              "basis": "inferred",
+              "note": "Existing section current"
+            },
+            {
+              "trigger": {
+                "type": "event",
+                "event": "next scheduled HD transect",
+                "expected_per_year": 4
+              },
+              "level": 2,
+              "affects": "xbt-hd",
+              "basis": "documented",
+              "note": "Next HD section missed"
+            },
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 6
+              },
+              "level": 2,
+              "affects": "xbt-hd",
+              "basis": "inferred",
+              "level_high": 3,
+              "note": "Two seasonal sections may be missing"
+            },
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 12
+              },
+              "level": 3,
+              "affects": "xbt-hd",
+              "basis": "inferred",
+              "note": "Annual cycle poorly resolved"
+            },
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 36
+              },
+              "level": 3,
+              "affects": "xbt-hd",
+              "basis": "inferred",
+              "level_high": 4,
+              "note": "Multiyear transport record broken"
+            },
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 60
+              },
+              "level": 4,
+              "affects": "xbt-hd",
+              "basis": "inferred"
+            }
+          ],
+          "record_bar": {
+            "start_year": 1994,
+            "recoverable": "no",
+            "gap_label": "Sections never occupied"
+          }
+        },
+        {
+          "id": "goship",
+          "name": "Cancel a GO-SHIP occupation",
+          "cut_node": "go-ship",
+          "start_clock_months": 12,
+          "lesson": "The instant the ship passes the opportunity window without sampling, that ocean state is gone. You cannot return in 2036 and measure what the abyss and the carbon inventory were in 2026.",
+          "timeline": [
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 1
+              },
+              "level": 0,
+              "affects": "go-ship",
+              "basis": "documented",
+              "note": "Existing climate record unaffected"
+            },
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 6
+              },
+              "level": 1,
+              "affects": "go-ship",
+              "basis": "inferred",
+              "note": "Upcoming reference occupation lost"
+            },
+            {
+              "trigger": {
+                "type": "event",
+                "event": "scheduled cruise date",
+                "expected_per_year": 0.5
+              },
+              "level": 3,
+              "affects": "go-ship",
+              "basis": "documented",
+              "note": "Full-depth observation never made"
+            },
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 12
+              },
+              "level": 3,
+              "affects": "ohc-product",
+              "basis": "inferred",
+              "note": "Decadal comparison has a hole"
+            },
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 36
+              },
+              "level": 3,
+              "affects": "aoml-argo-dac",
+              "basis": "inferred",
+              "note": "Deep and BGC Argo lose a reference"
+            },
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 120
+              },
+              "level": 4,
+              "affects": "go-ship",
+              "basis": "documented",
+              "note": "One full decadal epoch missing"
+            }
+          ],
+          "record_bar": {
+            "start_year": 1990,
+            "recoverable": "no",
+            "gap_label": "Decadal epoch never measured"
+          }
+        },
+        {
+          "id": "all-three",
+          "name": "Pull all three",
+          "cut_node": "wod-ncei",
+          "start_clock_months": 36,
+          "lesson": "The archive lives. The ocean keeps changing. We stop measuring the change. History wasn't deleted; we stopped writing the next page.",
+          "timeline": [
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 1
+              },
+              "level": 0,
+              "affects": "ohc-product",
+              "basis": "inferred",
+              "note": "OHC product still available"
+            },
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 12
+              },
+              "level": 1,
+              "affects": "ohc-product",
+              "basis": "inferred",
+              "note": "New observational constraint declining"
+            },
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 36
+              },
+              "level": 3,
+              "affects": "ohc-product",
+              "basis": "inferred",
+              "note": "Estimate increasingly dependent on models and old climatology"
+            },
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 60
+              },
+              "level": 4,
+              "affects": "climate-assessment",
+              "basis": "inferred",
+              "note": "Current global ocean heat change no longer adequately observed"
+            }
+          ],
+          "record_bar": {
+            "start_year": 1955,
+            "recoverable": "no",
+            "gap_label": "Next page never written"
+          }
+        }
+      ],
+      "exposure": [
+        {
+          "label": "Argo observational reach",
+          "basis": "About 100,000 profiles a year; 3 million by July 2024; NOAA funds roughly half the international program",
+          "causal_link": "direct",
+          "source_ids": [
+            "aoml-argo"
+          ],
+          "value_text": "100,000 profiles a year"
+        },
+        {
+          "label": "XBT niche",
+          "basis": "About 15% of non-mooring temperature profiles but about 80% of boundary-current profiles",
+          "causal_link": "direct",
+          "source_ids": [
+            "aoml-xbt"
+          ],
+          "value_text": "80% of boundary-current profiles"
+        },
+        {
+          "label": "What depends on OHC",
+          "basis": "Earth energy imbalance, steric sea level, climate model validation, hurricane intensity forecasting",
+          "causal_link": "context",
+          "source_ids": [
+            "ncei-ohc"
+          ],
+          "value_text": "The global warming budget"
+        }
+      ],
+      "leverage": {
+        "mode": "scale",
+        "text": "No dollar ratio is defensible here. The reach of each observing leg is the measure: global profiles, boundary-current resolution, full-depth reference."
+      },
+      "bridge": {
+        "summary": "Concept only until the funding layer is researched: the WOD/OCL harmonization staff at NCEI (the human layer that makes Argo, XBT, and GO-SHIP comparable) and XBT ship-of-opportunity operations are the two legs where a philanthropic bridge is plausible at low single-digit millions; float procurement and GO-SHIP ship time are not.",
+        "vehicle": "NCEI cooperative institute partner; AOML SOOP partners",
+        "keeps": [
+          "WOD QC and bias-correction staff",
+          "XBT line occupations"
+        ],
+        "cannot_do": "Buy floats at scale or charter global-class research vessels.",
+        "confidence": "concept"
+      },
+      "rstar": {
+        "D": 0.5,
+        "P": 0.6,
+        "RRS": 0.4,
+        "DIRS": 0.8,
+        "note": "Provisional."
+      },
+      "risk_vector": [
+        "funding_priority_review",
+        "ship_time",
+        "attrition",
+        "asset_age"
+      ],
+      "dated_events": [
+        {
+          "date": "2024-07",
+          "label": "Argo passes 3 million profiles",
+          "status": "realized",
+          "kind": "event",
+          "source_ids": [
+            "aoml-argo"
+          ],
+          "node": "argo-us"
+        },
+        {
+          "date": "2026",
+          "label": "A16S and P04E completed",
+          "status": "realized",
+          "kind": "event",
+          "source_ids": [
+            "usgoship-news"
+          ],
+          "node": "go-ship"
+        },
+        {
+          "date": "2026-09-03",
+          "label": "NSF RFI on future ocean-observing priorities",
+          "status": "realized",
+          "kind": "policy",
+          "source_ids": [
+            "usgoship-nsf"
+          ],
+          "node": "go-ship"
+        }
+      ],
+      "research_track": "ocean heat content research track, Oct 6 2026",
+      "open_items": [
+        "FY24 to FY27 standalone support for U.S. Argo procurement, XBT/SOOP, and GO-SHIP (NSF award, NOAA contribution, ship time).",
+        "WOD profile counts by year, instrument type, and depth to show the thinning in real numbers.",
+        "Argo asset population: active U.S. floats, failure rate, planned deployments."
+      ],
+      "sources": [
+        {
+          "id": "aoml-argo",
+          "cite": "NOAA AOML Argo",
+          "url": "https://www.aoml.noaa.gov/argo/"
+        },
+        {
+          "id": "aoml-xbt",
+          "cite": "NOAA AOML XBT Network",
+          "url": "https://www.aoml.noaa.gov/xbt-network/"
+        },
+        {
+          "id": "ncei-ohc",
+          "cite": "NCEI Ocean heat, salt, sea level",
+          "url": "https://www.ncei.noaa.gov/products/ocean-heat-salt-sea-level"
+        },
+        {
+          "id": "usgoship-news",
+          "cite": "U.S. GO-SHIP news",
+          "url": "https://usgoship.ucsd.edu/news/"
+        },
+        {
+          "id": "usgoship-nsf",
+          "cite": "U.S. GO-SHIP NSF RFI notice",
+          "url": "https://usgoship.ucsd.edu/2026/09/03/notice-nsf-request-for-input-on-future-ocean-observing-priorities-respond-by-sept-30-2026/"
+        }
+      ]
+    },
+    {
+      "id": "plankton-fisheries",
+      "name": "Plankton observations and fisheries",
+      "category": "fisheries",
+      "layout": "chain",
+      "status": "stub",
+      "central_question": "Is the food web changing in a way that changes fish recruitment and what fisheries can sustainably produce?",
+      "headline": "Under development",
+      "frame": "You can sample next year's plankton. You cannot sample the community this year's juvenile salmon, cod, sardines, or pollock encountered.",
+      "branches": [
+        {
+          "id": "main",
+          "name": "Plankton to catch limits",
+          "headline": true,
+          "path": [
+            "calcofi",
+            "plankton-taxonomy",
+            "ecosystem-status-reports",
+            "stock-assessments",
+            "catch-limits",
+            "fishing-communities"
+          ]
+        }
+      ],
+      "shared_with": [
+        "habs"
+      ],
+      "scenarios": [
+        {
+          "id": "placeholder",
+          "name": "Under development",
+          "cut_node": "calcofi",
+          "lesson": "Research track pending.",
+          "timeline": [
+            {
+              "trigger": {
+                "type": "elapsed",
+                "months": 6
+              },
+              "level": 1,
+              "affects": "ecosystem-status-reports",
+              "basis": "inferred",
+              "note": "Placeholder"
+            }
+          ]
+        }
+      ],
+      "leverage": {
+        "mode": "scale",
+        "text": "No figures until the research track is complete."
+      },
+      "risk_vector": [
+        "ship_time",
+        "attrition"
+      ],
+      "research_track": "scoping note only, Oct 6 2026",
+      "open_items": [
+        "Full research track: components, FY24 to FY27 money, formal versus contextual entry into assessments (Ecosystem Status Reports and risk tables, CalCOFI in sardine and anchovy assessments, EcoFOCI Bering Sea indices), survey cancellation record, named leads.",
+        "Seed shared nodes from the IOOS Plankton Community Knowledge Graph."
+      ],
+      "sources": [
+        {
+          "id": "kcf-plankton-scope",
+          "cite": "KCF plankton research scoping note, Oct 6 2026"
+        }
+      ]
+    }
+  ]
+}

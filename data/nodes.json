@@ -1,0 +1,5184 @@
+{
+  "schema_version": "0.1",
+  "file": "nodes",
+  "updated": "2026-10-06",
+  "nodes": [
+    {
+      "id": "ncmp-jalbtcx",
+      "name": "National Coastal Mapping Program (NCMP), executed by JALBTCX",
+      "short_name": "NCMP coastal lidar flights",
+      "type": "observe",
+      "description": "Repeated topo-bathymetric lidar, imagery, shoreline vectors, and DEMs about 500 m onshore and 1,000 m offshore on a roughly five-year national rotation. USACE calls it the only federal coastal mapping program producing regional engineering, environmental, and economic data along the U.S. coast.",
+      "operator": [
+        "USACE Mobile District",
+        "JALBTCX (USACE ERDC and partners)"
+      ],
+      "funders": [
+        "USACE Civil Works"
+      ],
+      "funding": {
+        "cost_annual_usd": {
+          "low": 4000000,
+          "high": 4000000,
+          "confidence": "enacted",
+          "fiscal_year": "FY26",
+          "source_ids": [
+            "usace-fy26"
+          ]
+        },
+        "funding_instruments": [
+          {
+            "funder": "USACE",
+            "program": "NCMP",
+            "type": "appropriation",
+            "amount_usd": {
+              "low": 14850000,
+              "high": 14850000,
+              "confidence": "enacted",
+              "fiscal_year": "FY23",
+              "source_ids": [
+                "usace-fy26"
+              ]
+            },
+            "confidence": "verified_award",
+            "source_ids": [
+              "usace-fy26"
+            ]
+          },
+          {
+            "funder": "USACE",
+            "program": "NCMP",
+            "type": "appropriation",
+            "amount_usd": {
+              "low": 6930000,
+              "high": 6930000,
+              "confidence": "enacted",
+              "fiscal_year": "FY24",
+              "source_ids": [
+                "usace-fy26"
+              ]
+            },
+            "confidence": "verified_award"
+          },
+          {
+            "funder": "USACE",
+            "program": "NCMP",
+            "type": "appropriation",
+            "amount_usd": {
+              "low": 4500000,
+              "high": 4500000,
+              "confidence": "enacted",
+              "fiscal_year": "FY25",
+              "source_ids": [
+                "usace-fy26"
+              ]
+            },
+            "confidence": "verified_award"
+          },
+          {
+            "funder": "USACE",
+            "program": "NCMP",
+            "type": "appropriation",
+            "amount_usd": {
+              "low": 7300000,
+              "high": 7300000,
+              "confidence": "requested",
+              "fiscal_year": "FY27",
+              "source_ids": [
+                "usace-fy27"
+              ]
+            },
+            "confidence": "verified_award"
+          },
+          {
+            "funder": "USACE",
+            "program": "NCMP statutory authorization",
+            "type": "appropriation",
+            "amount_usd": {
+              "low": 15000000,
+              "high": 15000000,
+              "confidence": "authorized"
+            },
+            "confidence": "verified_program_not_award"
+          }
+        ],
+        "note": "FY26 allocation is 27% of FY23. The $15M authorization is a ceiling and is never displayed as spending."
+      },
+      "risk_vector": [
+        "appropriation"
+      ],
+      "pattern": "slow_burn_irreversible",
+      "sampling_role": {
+        "horizontal": "transect",
+        "repeat": "about five-year national rotation",
+        "variables": [
+          "elevation",
+          "bathymetry",
+          "shoreline position",
+          "imagery"
+        ],
+        "unique_capability": [
+          "repeat topo-bathy across the land-water boundary"
+        ]
+      },
+      "states": {
+        "kind": "node",
+        "labels": [
+          "Operating",
+          "Intermittent",
+          "Coverage reduced",
+          "Largely unavailable",
+          "Unavailable; observations never made"
+        ]
+      },
+      "cadence": "About five-year national rotation plus event-driven rapid response",
+      "dated_events": [
+        {
+          "date": "2023",
+          "label": "NCMP funded at $14.85M",
+          "status": "enacted",
+          "kind": "funding",
+          "source_ids": [
+            "usace-fy26"
+          ]
+        },
+        {
+          "date": "2026",
+          "label": "NCMP funded at $4.0M, 27% of FY23",
+          "status": "enacted",
+          "kind": "funding",
+          "source_ids": [
+            "usace-fy26"
+          ]
+        },
+        {
+          "date": "2027",
+          "label": "FY27 request $7.3M",
+          "status": "proposed",
+          "kind": "funding",
+          "source_ids": [
+            "usace-fy27"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "id": "usace-fy26",
+          "cite": "USACE FY26 Civil Works Budget Justification, Remaining Items",
+          "url": "https://www.usace.army.mil/Portals/2/docs/civilworks/budget/Vol%201-07%20FY26%20Remaining%20Items.pdf"
+        },
+        {
+          "id": "usace-fy27",
+          "cite": "USACE FY27 Army Civil Works Budget"
+        },
+        {
+          "id": "jalbtcx-status",
+          "cite": "JALBTCX Acquisition Status service description",
+          "url": "https://spatial.usace.army.mil/opjarcgis/rest/services/JALBTCX_Acquisition_Status/FeatureServer/0/iteminfo"
+        }
+      ],
+      "status": "operating"
+    },
+    {
+      "id": "3dep",
+      "name": "3D Elevation Program (3DEP) repeat lidar",
+      "short_name": "3DEP repeat lidar",
+      "type": "observe",
+      "description": "National terrestrial lidar. Baseline 99% available or in progress by end of FY25; transitioning to a five-year CONUS refresh. A baseline DEM is an archive; repeat lidar is an observing system.",
+      "operator": [
+        "USGS National Geospatial Program"
+      ],
+      "funders": [
+        "USGS",
+        "state, local, tribal, and federal cost-share partners"
+      ],
+      "funding": {
+        "funding_instruments": [
+          {
+            "funder": "USGS",
+            "program": "3DEP federal acquisition investment",
+            "type": "appropriation",
+            "amount_usd": {
+              "low": 70900000,
+              "high": 70900000,
+              "confidence": "enacted",
+              "fiscal_year": "FY24",
+              "source_ids": [
+                "usgs-3dep-invest"
+              ]
+            },
+            "confidence": "verified_award"
+          },
+          {
+            "funder": "USGS",
+            "program": "3DEP federal acquisition investment",
+            "type": "appropriation",
+            "amount_usd": {
+              "low": 51200000,
+              "high": 51200000,
+              "confidence": "enacted",
+              "fiscal_year": "FY25",
+              "source_ids": [
+                "usgs-3dep-invest"
+              ]
+            },
+            "confidence": "verified_award"
+          }
+        ],
+        "note": "Coastal-specific share not separately appropriated. 28% reduction in federal acquisition investment FY24 to FY25."
+      },
+      "risk_vector": [
+        "appropriation"
+      ],
+      "pattern": "slow_burn_irreversible",
+      "states": {
+        "kind": "node",
+        "labels": [
+          "Operating",
+          "Intermittent",
+          "Coverage reduced",
+          "Largely unavailable",
+          "Unavailable; observations never made"
+        ]
+      },
+      "cadence": "Transitioning to five-year CONUS refresh, eight-year Alaska and territories",
+      "sources": [
+        {
+          "id": "usgs-3dep-invest",
+          "cite": "USGS 3DEP investments figure",
+          "url": "https://www.usgs.gov/media/images/figure-1-3dep-investments"
+        },
+        {
+          "id": "usgs-3dep-what",
+          "cite": "USGS What is 3DEP",
+          "url": "https://www.usgs.gov/3d-elevation-program/what-3dep"
+        },
+        {
+          "id": "usgs-3dntm-faq",
+          "cite": "USGS 3DNTM Data Collaboration Announcement FAQ",
+          "url": "https://www.usgs.gov/3d-national-topography-model/3dntm-data-collaboration-announcement-dca-frequently-asked-questions"
+        }
+      ],
+      "status": "operating"
+    },
+    {
+      "id": "usgs-coastal-surveys",
+      "name": "USGS targeted coastal surveys and rapid storm response",
+      "short_name": "USGS storm surveys",
+      "type": "observe",
+      "description": "Beach and dune topography, storm response, UAS, CoastCam, bathymetry; morphology and model validation. Embedded in CMHRP. The FY27 request would maintain rapid coastal-disaster response on only one of three coastlines.",
+      "operator": [
+        "USGS CMHRP science centers (St. Petersburg, Woods Hole, Pacific)"
+      ],
+      "funders": [
+        "USGS"
+      ],
+      "funding": {
+        "cost_annual_usd": {
+          "low": null,
+          "high": null,
+          "confidence": "embedded_unresolved"
+        },
+        "funding_parent": {
+          "name": "USGS Coastal and Marine Hazards and Resources Program",
+          "note": "See node cmhrp."
+        }
+      },
+      "risk_vector": [
+        "appropriation",
+        "attrition"
+      ],
+      "convergence_point": true,
+      "pattern": "human_transformation_layer",
+      "depends_on": [
+        {
+          "node": "cmhrp",
+          "kind": "feeds",
+          "strength": "direct",
+          "note": "Staff and funding come from CMHRP"
+        }
+      ],
+      "states": {
+        "kind": "node",
+        "labels": [
+          "Operating",
+          "Intermittent",
+          "Coverage reduced",
+          "Largely unavailable",
+          "Unavailable; observations never made"
+        ]
+      },
+      "cadence": "Event and project dependent",
+      "dated_events": [
+        {
+          "date": "2027",
+          "label": "FY27 request: rapid coastal-disaster response maintained on one of three coastlines",
+          "status": "proposed",
+          "kind": "service",
+          "source_ids": [
+            "doi-fy27-greenbook"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "id": "doi-fy27-greenbook",
+          "cite": "DOI/USGS FY2027 Budget Justification (Greenbook), April 2026",
+          "url": "https://www.doi.gov/sites/default/files/documents/2026-04/fy2027greenbookusgs.pdf"
+        }
+      ],
+      "status": "operating"
+    },
+    {
+      "id": "cmhrp",
+      "name": "USGS Coastal and Marine Hazards and Resources Program (CMHRP)",
+      "short_name": "USGS CMHRP scientists",
+      "type": "process",
+      "description": "The human transformation layer for coastal change: data acquisition and processing, short- and long-term coastal change forecasting, data preservation, and decision-support delivery. Hosts Coastal Change Hazards, DSAS, and the USGS half of TWL-CC.",
+      "operator": [
+        "USGS Natural Hazards Mission Area"
+      ],
+      "funders": [
+        "USGS"
+      ],
+      "funding": {
+        "cost_annual_usd": {
+          "low": 38511000,
+          "high": 38511000,
+          "confidence": "enacted",
+          "fiscal_year": "FY26",
+          "source_ids": [
+            "doi-fy27-greenbook"
+          ]
+        },
+        "funding_instruments": [
+          {
+            "funder": "USGS",
+            "program": "CMHRP",
+            "type": "appropriation",
+            "amount_usd": {
+              "low": 43200000,
+              "high": 43200000,
+              "confidence": "estimate",
+              "fiscal_year": "FY24",
+              "source_ids": [
+                "doi-fy25"
+              ]
+            },
+            "confidence": "estimate",
+            "purpose": "FY24 CR level implied by FY25 request language"
+          },
+          {
+            "funder": "USGS",
+            "program": "CMHRP",
+            "type": "appropriation",
+            "amount_usd": {
+              "low": 49200000,
+              "high": 49200000,
+              "confidence": "requested",
+              "fiscal_year": "FY25",
+              "source_ids": [
+                "doi-fy25"
+              ]
+            },
+            "confidence": "verified_award"
+          },
+          {
+            "funder": "USGS",
+            "program": "CMHRP",
+            "type": "appropriation",
+            "amount_usd": {
+              "low": 38511000,
+              "high": 38511000,
+              "confidence": "enacted",
+              "fiscal_year": "FY26",
+              "source_ids": [
+                "doi-fy27-greenbook"
+              ]
+            },
+            "confidence": "verified_award"
+          },
+          {
+            "funder": "USGS",
+            "program": "CMHRP",
+            "type": "appropriation",
+            "amount_usd": {
+              "low": 25245000,
+              "high": 25245000,
+              "confidence": "requested",
+              "fiscal_year": "FY27",
+              "source_ids": [
+                "doi-fy27-greenbook"
+              ]
+            },
+            "confidence": "verified_award"
+          }
+        ],
+        "note": "FY27 request is a $13.266M (34.4%) reduction and 27 fewer FTE (159 to 132). A conflicting FY26 figure of $41.0M appears in the Sep 29 KCF brief; $38.511M is from the Greenbook."
+      },
+      "risk_vector": [
+        "appropriation",
+        "attrition"
+      ],
+      "convergence_point": true,
+      "pattern": "human_transformation_layer",
+      "states": {
+        "kind": "node",
+        "labels": [
+          "Operating",
+          "Backlog growing",
+          "Staff reduced",
+          "Capability largely gone",
+          "Expertise dispersed"
+        ]
+      },
+      "people": [
+        {
+          "name": "Emily Himmelstoss",
+          "role": "Acting Program Coordinator; Associate Program Coordinator for Science",
+          "org": "USGS CMHRP",
+          "as_of": "2026-10-05",
+          "source_ids": [
+            "usgs-cmhrp-connect"
+          ]
+        },
+        {
+          "name": "Nathaniel Plant",
+          "role": "Director, St. Petersburg Coastal and Marine Science Center",
+          "org": "USGS",
+          "as_of": "2026-10-05",
+          "source_ids": [
+            "usgs-cmhrp-connect"
+          ]
+        },
+        {
+          "name": "Brita Jessen",
+          "role": "Director, Woods Hole Coastal and Marine Science Center",
+          "org": "USGS",
+          "as_of": "2026-10-05",
+          "source_ids": [
+            "usgs-cmhrp-connect"
+          ]
+        },
+        {
+          "name": "Louis Licate",
+          "role": "Director, Pacific Coastal and Marine Science Center",
+          "org": "USGS",
+          "as_of": "2026-10-05",
+          "source_ids": [
+            "usgs-cmhrp-connect"
+          ]
+        }
+      ],
+      "users": [
+        "NWS Weather Forecast Offices",
+        "FEMA",
+        "USACE",
+        "state and local coastal planners",
+        "coastal engineers"
+      ],
+      "dated_events": [
+        {
+          "date": "2026",
+          "label": "FY26 enacted $38.511M, 159 FTE",
+          "status": "enacted",
+          "kind": "funding",
+          "source_ids": [
+            "doi-fy27-greenbook"
+          ]
+        },
+        {
+          "date": "2027",
+          "label": "FY27 request $25.245M, 132 FTE; one of three coastlines retains rapid response; mapping concentrates where partner support exists",
+          "status": "proposed",
+          "kind": "funding",
+          "source_ids": [
+            "doi-fy27-greenbook"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "id": "doi-fy27-greenbook",
+          "cite": "DOI/USGS FY2027 Budget Justification (Greenbook), April 2026",
+          "url": "https://www.doi.gov/sites/default/files/documents/2026-04/fy2027greenbookusgs.pdf"
+        },
+        {
+          "id": "doi-fy25",
+          "cite": "DOI FY25 Budget in Brief",
+          "url": "https://edit.doi.gov/ocl/fy25-doi-budget"
+        },
+        {
+          "id": "usgs-cmhrp-connect",
+          "cite": "USGS CMHRP Connect page",
+          "url": "https://www.usgs.gov/programs/cmhrp/connect"
+        },
+        {
+          "id": "usgs-cir1569",
+          "cite": "USGS Circular 1569, CMHRP program description",
+          "url": "https://pubs.usgs.gov/publication/cir1569/full"
+        }
+      ],
+      "status": "operating"
+    },
+    {
+      "id": "dsas",
+      "name": "Digital Shoreline Analysis System (DSAS) and National Shoreline Change",
+      "short_name": "DSAS shoreline rates",
+      "type": "process",
+      "description": "Converts historical shoreline positions (1800s to 2010s) into standardized change rates with uncertainties. DSAS 6.1 released February 2026; national compilation May 2026. The software and old shorelines survive a cut; the workforce that adds and checks new ones does not.",
+      "operator": [
+        "USGS Woods Hole Coastal and Marine Science Center"
+      ],
+      "funders": [
+        "USGS"
+      ],
+      "funding": {
+        "cost_annual_usd": {
+          "low": null,
+          "high": null,
+          "confidence": "embedded_unresolved"
+        },
+        "funding_parent": {
+          "name": "USGS CMHRP"
+        }
+      },
+      "risk_vector": [
+        "attrition"
+      ],
+      "pattern": "human_transformation_layer",
+      "depends_on": [
+        {
+          "node": "cmhrp",
+          "kind": "feeds",
+          "strength": "direct"
+        },
+        {
+          "node": "ncmp-jalbtcx",
+          "kind": "feeds",
+          "strength": "direct",
+          "note": "new shorelines"
+        },
+        {
+          "node": "3dep",
+          "kind": "feeds",
+          "strength": "supporting"
+        }
+      ],
+      "states": {
+        "kind": "node",
+        "labels": [
+          "Rates current",
+          "Updates slowing",
+          "New shorelines not incorporated",
+          "Rates lag the coastline",
+          "Planning rests on stale rates"
+        ]
+      },
+      "people": [
+        {
+          "name": "Rachel Henderson, Amy Farris, Meredith Kratzmann, Emily Himmelstoss, Rob Thieler",
+          "role": "National Shoreline Change authors and maintainers",
+          "org": "USGS",
+          "source_ids": [
+            "usgs-nsc"
+          ]
+        }
+      ],
+      "dated_events": [
+        {
+          "date": "2026-02",
+          "label": "DSAS 6.1 released",
+          "status": "operational",
+          "kind": "upgrade",
+          "source_ids": [
+            "usgs-dsas"
+          ]
+        },
+        {
+          "date": "2026-05",
+          "label": "National Shoreline Change compilation released",
+          "status": "operational",
+          "kind": "upgrade",
+          "source_ids": [
+            "usgs-nsc"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "id": "usgs-dsas",
+          "cite": "USGS DSAS",
+          "url": "https://www.usgs.gov/centers/whcmsc/science/digital-shoreline-analysis-system-dsas"
+        },
+        {
+          "id": "usgs-nsc",
+          "cite": "USGS National Shoreline Change compilation",
+          "url": "https://www.usgs.gov/data/usgs-national-shoreline-change-a-compilation-published-shoreline-change-rates-1800s-2010s"
+        }
+      ],
+      "status": "operating"
+    },
+    {
+      "id": "ncei-coastal-lidar",
+      "name": "NCEI Coastal Lidar Archive",
+      "short_name": "NCEI lidar archive",
+      "type": "archive",
+      "description": "Long-term federal preservation of coastal lidar, about 1996 to present, all coastal states. Not line-itemed; NCEI's whole FY25 request was $73.29M. October 2026 cloud migration is causing intermittent degraded order fulfillment (an operational event, not a threat).",
+      "operator": [
+        "NOAA NESDIS NCEI"
+      ],
+      "funders": [
+        "NOAA"
+      ],
+      "funding": {
+        "cost_annual_usd": {
+          "low": null,
+          "high": null,
+          "confidence": "embedded_unresolved"
+        },
+        "funding_parent": {
+          "name": "NOAA NCEI",
+          "figures": [
+            {
+              "low": 73290000,
+              "high": 73290000,
+              "confidence": "requested",
+              "fiscal_year": "FY25",
+              "source_ids": [
+                "noaa-bluebook-fy25"
+              ]
+            }
+          ]
+        }
+      },
+      "risk_vector": [
+        "attrition"
+      ],
+      "pattern": "portal_survives_feeders_die",
+      "depends_on": [
+        {
+          "node": "ncmp-jalbtcx",
+          "kind": "feeds",
+          "strength": "direct"
+        },
+        {
+          "node": "3dep",
+          "kind": "feeds",
+          "strength": "direct"
+        },
+        {
+          "node": "usgs-coastal-surveys",
+          "kind": "feeds",
+          "strength": "supporting"
+        }
+      ],
+      "states": {
+        "kind": "node",
+        "labels": [
+          "Updating daily",
+          "Updates delayed",
+          "Updates stopped; files persist",
+          "Access impaired",
+          "Preservation at risk"
+        ]
+      },
+      "dated_events": [
+        {
+          "date": "2026-10",
+          "label": "NCEI cloud migration; intermittent degraded order fulfillment",
+          "status": "operational",
+          "kind": "service",
+          "source_ids": [
+            "ncei-home"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "id": "ncei-lidar",
+          "cite": "NCEI Coastal Lidar Archive",
+          "url": "https://www.ncei.noaa.gov/products/coastal-lidar-archive"
+        },
+        {
+          "id": "noaa-bluebook-fy25",
+          "cite": "NOAA FY25 Blue Book",
+          "url": "https://www.noaa.gov/sites/default/files/2024-04/NOAA_Blue_Book_FY25_Budget_Summary.pdf"
+        },
+        {
+          "id": "ncei-home",
+          "cite": "NCEI home page notice",
+          "url": "https://www.ncei.noaa.gov/"
+        }
+      ],
+      "status": "operating"
+    },
+    {
+      "id": "digital-coast",
+      "name": "NOAA Digital Coast and Data Access Viewer",
+      "short_name": "Digital Coast",
+      "type": "product",
+      "description": "Standardizes and distributes lidar and decision-support products. NOAA reports 75% of surveyed users said their projects would not have been possible without it and estimates a return above 400%.",
+      "operator": [
+        "NOAA NOS Office for Coastal Management"
+      ],
+      "funders": [
+        "NOAA"
+      ],
+      "funding": {
+        "cost_annual_usd": {
+          "low": null,
+          "high": null,
+          "confidence": "embedded_unresolved"
+        }
+      },
+      "pattern": "portal_survives_feeders_die",
+      "depends_on": [
+        {
+          "node": "ncei-coastal-lidar",
+          "kind": "feeds",
+          "strength": "direct"
+        },
+        {
+          "node": "ncmp-jalbtcx",
+          "kind": "feeds",
+          "strength": "direct"
+        }
+      ],
+      "states": {
+        "kind": "node",
+        "labels": [
+          "Serving current data",
+          "Serving current data",
+          "Serving aging data",
+          "Serving mostly historical data",
+          "Serving historical data only"
+        ]
+      },
+      "sources": [
+        {
+          "id": "digital-coast-about",
+          "cite": "NOAA Digital Coast About",
+          "url": "https://coast.noaa.gov/digitalcoast/about/"
+        }
+      ],
+      "status": "operating"
+    },
+    {
+      "id": "beach-morphology",
+      "name": "Beach and dune morphology (USGS)",
+      "short_name": "Beach morphology",
+      "type": "process",
+      "description": "The USGS dune and beach elevation product that TWL-CC needs to say whether water will reach the dune toe, crest, or overwash. Built from NCMP, 3DEP, and storm surveys.",
+      "operator": [
+        "USGS CMHRP"
+      ],
+      "funders": [
+        "USGS"
+      ],
+      "funding": {
+        "cost_annual_usd": {
+          "low": null,
+          "high": null,
+          "confidence": "embedded_unresolved"
+        }
+      },
+      "convergence_point": true,
+      "depends_on": [
+        {
+          "node": "ncmp-jalbtcx",
+          "kind": "feeds",
+          "strength": "direct"
+        },
+        {
+          "node": "3dep",
+          "kind": "feeds",
+          "strength": "direct"
+        },
+        {
+          "node": "usgs-coastal-surveys",
+          "kind": "feeds",
+          "strength": "direct"
+        },
+        {
+          "node": "cmhrp",
+          "kind": "feeds",
+          "strength": "direct"
+        }
+      ],
+      "states": {
+        "kind": "node",
+        "labels": [
+          "Operating",
+          "Backlog growing",
+          "Staff reduced",
+          "Capability largely gone",
+          "Expertise dispersed"
+        ]
+      },
+      "sources": [
+        {
+          "id": "usgs-twlcc-expansion",
+          "cite": "USGS TWL-CC expansion news",
+          "url": "https://www.usgs.gov/centers/spcmsc/news/expansion-usgsnoaa-total-water-level-and-coastal-change-twlcc-forecasts"
+        }
+      ],
+      "status": "operating"
+    },
+    {
+      "id": "ndbc",
+      "name": "National Data Buoy Center coastal weather buoys and C-MAN",
+      "short_name": "NDBC buoys",
+      "type": "observe",
+      "description": "More than 100 moored buoys and 40+ C-MAN stations; real-time wind, pressure, temperature, and wave height, period, direction, and spectra. About 240 NOAA stations plus partner data. Shared by coastal erosion, flooding, and HABs. FY27 request removes seven coastal weather buoys (104 to 97), four currently non-operational, with nearby stations or satellite observations as the stated mitigation.",
+      "operator": [
+        "NOAA NWS NDBC"
+      ],
+      "funders": [
+        "NOAA NWS"
+      ],
+      "funding": {
+        "cost_annual_usd": {
+          "low": null,
+          "high": null,
+          "confidence": "embedded_unresolved"
+        },
+        "funding_parent": {
+          "name": "NWS Observations PPA (Marine Observations)",
+          "figures": [
+            {
+              "low": -1803000,
+              "high": -1803000,
+              "confidence": "requested",
+              "fiscal_year": "FY27",
+              "source_ids": [
+                "noaa-fy27-cj"
+              ]
+            }
+          ],
+          "note": "FY27 proposes a $1.803M reduction to Marine Observations."
+        }
+      },
+      "risk_vector": [
+        "appropriation",
+        "asset_age"
+      ],
+      "pattern": "asset_attrition",
+      "asset_population": {
+        "active_count": 104,
+        "confidence": "documented",
+        "source_ids": [
+          "noaa-fy27-cj"
+        ]
+      },
+      "substitutes": [
+        {
+          "node": "satellite-marine-obs",
+          "degree": "partial",
+          "cannot_replace": [
+            "in-situ wave spectra",
+            "local validation"
+          ],
+          "stated_by": "NOAA FY27 CJ",
+          "source_ids": [
+            "noaa-fy27-cj"
+          ]
+        }
+      ],
+      "states": {
+        "kind": "node",
+        "labels": [
+          "Local buoy reporting",
+          "Local buoy reporting",
+          "Nearby or satellite substitute",
+          "Local marine conditions less constrained",
+          "Local wave record broken"
+        ]
+      },
+      "people": [
+        {
+          "name": "Brett Taft",
+          "role": "Chief, Observational Systems Division",
+          "org": "NDBC",
+          "source_ids": [
+            "ndbc-osd"
+          ]
+        }
+      ],
+      "dated_events": [
+        {
+          "date": "2027",
+          "label": "FY27 request: remove 7 coastal weather buoys (104 to 97); end VOS collection (about 5,000 obs/day)",
+          "status": "proposed",
+          "kind": "asset",
+          "source_ids": [
+            "noaa-fy27-cj"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "id": "noaa-fy27-cj",
+          "cite": "NOAA FY2027 Congressional Justification, April 2026",
+          "url": "https://www.noaa.gov/sites/default/files/2026-04/FY2027-NOAA-CJ-Submission.pdf"
+        },
+        {
+          "id": "ndbc-faq",
+          "cite": "NDBC FAQ",
+          "url": "https://www.ndbc.noaa.gov/faq/ndbc.shtml"
+        },
+        {
+          "id": "ndbc-osd",
+          "cite": "NDBC Observational Systems Division",
+          "url": "https://www.ndbc.noaa.gov/leadership/osdiv.shtml"
+        }
+      ],
+      "status": "operating"
+    },
+    {
+      "id": "satellite-marine-obs",
+      "name": "Satellite marine observations (altimetry, scatterometry)",
+      "short_name": "Satellite marine obs",
+      "type": "observe",
+      "description": "Placeholder node for the satellite observations NOAA names as a partial substitute for removed buoys. Not researched in this round.",
+      "operator": [
+        "NOAA NESDIS",
+        "NASA",
+        "international partners"
+      ],
+      "funding": {
+        "cost_annual_usd": {
+          "low": null,
+          "high": null,
+          "confidence": "embedded_unresolved"
+        }
+      },
+      "states": {
+        "kind": "node",
+        "labels": [
+          "Operating",
+          "Intermittent",
+          "Coverage reduced",
+          "Largely unavailable",
+          "Unavailable; observations never made"
+        ]
+      },
+      "sources": [
+        {
+          "id": "noaa-fy27-cj",
+          "cite": "NOAA FY2027 Congressional Justification, April 2026",
+          "url": "https://www.noaa.gov/sites/default/files/2026-04/FY2027-NOAA-CJ-Submission.pdf"
+        }
+      ],
+      "status": "operating"
+    },
+    {
+      "id": "ww3-nwps",
+      "name": "WAVEWATCH III and Nearshore Wave Prediction System",
+      "short_name": "NWPS wave model",
+      "type": "model",
+      "description": "Global wave boundary conditions (WW3) feeding the nearshore wave model (NWPS/SWAN), triggered by forecast wind grids from coastal WFOs and using RTOFS currents. Upgraded 2024.",
+      "operator": [
+        "NOAA NWS NCEP"
+      ],
+      "funders": [
+        "NOAA NWS"
+      ],
+      "funding": {
+        "cost_annual_usd": {
+          "low": null,
+          "high": null,
+          "confidence": "embedded_unresolved"
+        }
+      },
+      "depends_on": [
+        {
+          "node": "ndbc",
+          "kind": "feeds",
+          "strength": "direct",
+          "note": "validation and input"
+        }
+      ],
+      "states": {
+        "kind": "node",
+        "labels": [
+          "Current guidance",
+          "Latest run aging",
+          "Guidance losing skill",
+          "Guidance stale",
+          "No current guidance"
+        ]
+      },
+      "cadence": "Operational WFO cycles",
+      "sources": [
+        {
+          "id": "nwps",
+          "cite": "NCEP NWPS",
+          "url": "https://polar.ncep.noaa.gov/nwps/"
+        }
+      ],
+      "status": "operating"
+    },
+    {
+      "id": "nwlon",
+      "name": "National Water Level Observation Network (NWLON)",
+      "short_name": "NWLON tide gauges",
+      "type": "observe",
+      "description": "210 continuously operating water-level stations on U.S. coasts, territories, and the Great Lakes; some records to the 1850s. One gauge feeds three clocks: real-time flooding, high-tide flood climatology, and relative sea level. FY27 request supports NWLON at reduced capacity: 185 remaining stations, comprehensive annual maintenance including precise leveling at 110.",
+      "operator": [
+        "NOAA NOS CO-OPS"
+      ],
+      "funders": [
+        "NOAA NOS"
+      ],
+      "funding": {
+        "cost_annual_usd": {
+          "low": null,
+          "high": null,
+          "confidence": "embedded_unresolved"
+        },
+        "funding_parent": {
+          "name": "NOAA Navigation, Observations and Positioning",
+          "figures": [
+            {
+              "low": 186328000,
+              "high": 186328000,
+              "confidence": "enacted",
+              "fiscal_year": "FY26",
+              "source_ids": [
+                "noaa-fy27-cj"
+              ]
+            },
+            {
+              "low": 140000000,
+              "high": 140000000,
+              "confidence": "requested",
+              "fiscal_year": "FY27",
+              "source_ids": [
+                "noaa-fy27-cj"
+              ]
+            }
+          ],
+          "note": "Parent activity also funds CORS, PORTS, charting, and hydrography. $140M is not the cost of NWLON. An earlier $25M to $35M estimate was withdrawn."
+        }
+      },
+      "risk_vector": [
+        "appropriation",
+        "asset_age",
+        "attrition"
+      ],
+      "convergence_point": true,
+      "pattern": "asset_attrition",
+      "sampling_role": {
+        "horizontal": "station",
+        "repeat": "continuous, 6-minute data",
+        "variables": [
+          "water level",
+          "tidal datums"
+        ],
+        "unique_capability": [
+          "authoritative local water level",
+          "century-scale relative sea level record"
+        ]
+      },
+      "asset_population": {
+        "active_count": 210,
+        "confidence": "documented",
+        "source_ids": [
+          "nos-nwlon"
+        ]
+      },
+      "states": {
+        "kind": "node",
+        "labels": [
+          "Local water level confirmed",
+          "Local water level confirmed",
+          "Local water level not confirmed",
+          "Local flood status uncertain",
+          "Continuous record broken"
+        ]
+      },
+      "people": [
+        {
+          "name": "Marian Westley",
+          "role": "Director",
+          "org": "NOAA CO-OPS",
+          "source_ids": [
+            "coops-about"
+          ]
+        }
+      ],
+      "users": [
+        "NWS coastal flood warnings",
+        "NHC and STOFS validation",
+        "ports and navigation",
+        "coastal engineers",
+        "FEMA",
+        "tsunami warning centers",
+        "sea level researchers"
+      ],
+      "dated_events": [
+        {
+          "date": "2027",
+          "label": "FY27 request: NWLON at reduced capacity; 185 stations remain, full annual maintenance at 110",
+          "status": "proposed",
+          "kind": "asset",
+          "source_ids": [
+            "noaa-fy27-cj"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "id": "noaa-fy27-cj",
+          "cite": "NOAA FY2027 Congressional Justification, April 2026",
+          "url": "https://www.noaa.gov/sites/default/files/2026-04/FY2027-NOAA-CJ-Submission.pdf"
+        },
+        {
+          "id": "nos-nwlon",
+          "cite": "NOS NWLON fact page",
+          "url": "https://oceanservice.noaa.gov/facts/nwlon.html"
+        },
+        {
+          "id": "coops-about",
+          "cite": "CO-OPS About Us",
+          "url": "https://www.co-ops.nos.noaa.gov/about_us.html"
+        },
+        {
+          "id": "noaa-nwlon-req",
+          "cite": "NOAA NWLON requirements report, 2024",
+          "url": "https://repository.library.noaa.gov/view/noaa/66446"
+        }
+      ],
+      "status": "operating"
+    },
+    {
+      "id": "estofs-stofs",
+      "name": "STOFS family (ESTOFS, STOFS-2D-Global, STOFS-3D-Atlantic, STOFS-3D-Pacific)",
+      "short_name": "STOFS surge+tide",
+      "type": "model",
+      "description": "Operational surge and tide guidance. NOAA states STOFS output is not total-water-level guidance; official guidance stays with NWS forecasters. STOFS-3D-Pacific v3.1 operational August 17, 2026, with river, rain, ocean, tide, and surge inputs: the first compound-flood branch.",
+      "operator": [
+        "NOAA NOS",
+        "NOAA NWS NCEP"
+      ],
+      "funders": [
+        "NOAA"
+      ],
+      "funding": {
+        "cost_annual_usd": {
+          "low": null,
+          "high": null,
+          "confidence": "embedded_unresolved"
+        }
+      },
+      "depends_on": [
+        {
+          "node": "nwlon",
+          "kind": "feeds",
+          "strength": "direct",
+          "note": "validation"
+        },
+        {
+          "node": "ndbc",
+          "kind": "feeds",
+          "strength": "supporting"
+        }
+      ],
+      "states": {
+        "kind": "node",
+        "labels": [
+          "Current guidance",
+          "Latest run aging",
+          "Guidance losing skill",
+          "Guidance stale",
+          "No current guidance"
+        ]
+      },
+      "cadence": "Operational model cycles",
+      "pattern": "immediate_cliff",
+      "dated_events": [
+        {
+          "date": "2026-08-17",
+          "label": "STOFS-3D-Pacific v3.1 operational",
+          "status": "operational",
+          "kind": "upgrade",
+          "source_ids": [
+            "stofs-pac"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "id": "estofs",
+          "cite": "NCEP ESTOFS/STOFS",
+          "url": "https://polar.ncep.noaa.gov/estofs/"
+        },
+        {
+          "id": "stofs-pac",
+          "cite": "STOFS-3D-Pacific",
+          "url": "https://polar.ncep.noaa.gov/estofs/pac.htm"
+        }
+      ],
+      "status": "operating"
+    },
+    {
+      "id": "psurge",
+      "name": "P-Surge tropical cyclone surge probabilities",
+      "short_name": "P-Surge",
+      "type": "model",
+      "description": "Probabilistic storm surge guidance during tropical cyclones. v3.2 effective June 2, 2026, patched July 2026. Credited with zero U.S. surge deaths in the 2017 hurricane season (KCF brief).",
+      "operator": [
+        "NOAA NWS NHC",
+        "NCEP",
+        "MDL"
+      ],
+      "funders": [
+        "NOAA NWS"
+      ],
+      "funding": {
+        "cost_annual_usd": {
+          "low": null,
+          "high": null,
+          "confidence": "embedded_unresolved"
+        }
+      },
+      "depends_on": [
+        {
+          "node": "nwlon",
+          "kind": "feeds",
+          "strength": "direct",
+          "note": "validation"
+        }
+      ],
+      "states": {
+        "kind": "node",
+        "labels": [
+          "Current guidance",
+          "Latest run aging",
+          "Guidance losing skill",
+          "Guidance stale",
+          "No current guidance"
+        ]
+      },
+      "cadence": "Operational during tropical cyclones",
+      "pattern": "immediate_cliff",
+      "dated_events": [
+        {
+          "date": "2026-06-02",
+          "label": "P-Surge v3.2 effective",
+          "status": "operational",
+          "kind": "upgrade",
+          "source_ids": [
+            "mdl-notices"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "id": "mdl-notices",
+          "cite": "NWS MDL storm surge technical notices",
+          "url": "https://vlab.noaa.gov/web/mdl/technical-notices-storm-surge"
+        }
+      ],
+      "status": "operating"
+    },
+    {
+      "id": "twl-cc",
+      "name": "Total Water Level and Coastal Change (TWL-CC) forecast",
+      "short_name": "TWL-CC forecast",
+      "type": "model",
+      "description": "USGS beach morphology plus NOAA waves, tides, and surge plus runup physics, giving hourly, six-day forecasts of erosion, overwash, and inundation potential. The operational convergence point for the erosion system; delivered into NWS AWIPS and to FEMA and USACE during storms.",
+      "operator": [
+        "USGS CMHRP",
+        "NOAA NWS NCEP"
+      ],
+      "funders": [
+        "USGS",
+        "NOAA"
+      ],
+      "funding": {
+        "cost_annual_usd": {
+          "low": null,
+          "high": null,
+          "confidence": "embedded_unresolved"
+        },
+        "note": "USGS portion inside CMHRP; NOAA inputs inside NWS/NCEP."
+      },
+      "risk_vector": [
+        "appropriation",
+        "attrition"
+      ],
+      "convergence_point": true,
+      "pattern": "immediate_cliff",
+      "depends_on": [
+        {
+          "node": "beach-morphology",
+          "kind": "feeds",
+          "strength": "direct"
+        },
+        {
+          "node": "ww3-nwps",
+          "kind": "feeds",
+          "strength": "direct"
+        },
+        {
+          "node": "estofs-stofs",
+          "kind": "feeds",
+          "strength": "direct"
+        },
+        {
+          "node": "psurge",
+          "kind": "feeds",
+          "strength": "direct"
+        },
+        {
+          "node": "nwlon",
+          "kind": "feeds",
+          "strength": "direct"
+        },
+        {
+          "node": "cmhrp",
+          "kind": "feeds",
+          "strength": "direct"
+        }
+      ],
+      "states": {
+        "kind": "node",
+        "labels": [
+          "Six-day guidance current",
+          "Six-day guidance current",
+          "Guidance aging",
+          "No integrated answer for new storms",
+          "Forecast discontinued"
+        ]
+      },
+      "cadence": "Hourly, six-day guidance",
+      "people": [
+        {
+          "name": "Margaret (Meg) Palmsten",
+          "role": "Research Oceanographer, TWL-CC project lead",
+          "org": "USGS SPCMSC",
+          "source_ids": [
+            "usgs-twlcc-expansion"
+          ]
+        },
+        {
+          "name": "Kara Doran",
+          "role": "Supervisory Physical Scientist",
+          "org": "USGS SPCMSC",
+          "source_ids": [
+            "usgs-twlcc-expansion"
+          ]
+        }
+      ],
+      "users": [
+        "NWS Weather Forecast Offices via AWIPS",
+        "FEMA",
+        "USACE",
+        "local emergency planners"
+      ],
+      "sources": [
+        {
+          "id": "usgs-twlcc-expansion",
+          "cite": "USGS TWL-CC expansion",
+          "url": "https://www.usgs.gov/centers/spcmsc/news/expansion-usgsnoaa-total-water-level-and-coastal-change-twlcc-forecasts"
+        },
+        {
+          "id": "usgs-twlcc-training",
+          "cite": "USGS TWL-CC NWS training",
+          "url": "https://www.usgs.gov/centers/spcmsc/news/usgs-scientists-will-provide-training-national-weather-service-total-water"
+        }
+      ],
+      "status": "operating"
+    },
+    {
+      "id": "awips-coastal",
+      "name": "NWS AWIPS delivery of coastal guidance",
+      "short_name": "AWIPS to forecasters",
+      "type": "product",
+      "description": "Puts TWL-CC and surge guidance on the forecaster workstation. Also hosts the CCH Portal and TWL viewer and API for the public.",
+      "operator": [
+        "NOAA NWS",
+        "USGS",
+        "NOAA OCM"
+      ],
+      "funders": [
+        "NOAA",
+        "USGS"
+      ],
+      "funding": {
+        "cost_annual_usd": {
+          "low": null,
+          "high": null,
+          "confidence": "embedded_unresolved"
+        }
+      },
+      "depends_on": [
+        {
+          "node": "twl-cc",
+          "kind": "feeds",
+          "strength": "direct"
+        }
+      ],
+      "states": {
+        "kind": "node",
+        "labels": [
+          "Serving current data",
+          "Serving current data",
+          "Serving aging data",
+          "Serving mostly historical data",
+          "Serving historical data only"
+        ]
+      },
+      "sources": [
+        {
+          "id": "cch-portal",
+          "cite": "USGS Coastal Change Hazards Portal",
+          "url": "https://marine.usgs.gov/coastalchangehazardsportal/"
+        }
+      ],
+      "status": "operating"
+    },
+    {
+      "id": "coastal-flood-warning",
+      "name": "NWS Coastal Flood Watch, Warning, Advisory",
+      "short_name": "Coastal flood warning",
+      "type": "decide",
+      "description": "Official coastal flood products from 122 WFOs, translating predicted water level into feet of inundation above ground, flooded roads, and property. Up to 40% vacancy at some offices (KCF brief).",
+      "operator": [
+        "NOAA NWS Weather Forecast Offices"
+      ],
+      "funders": [
+        "NOAA NWS"
+      ],
+      "funding": {
+        "cost_annual_usd": {
+          "low": null,
+          "high": null,
+          "confidence": "embedded_unresolved"
+        }
+      },
+      "risk_vector": [
+        "attrition"
+      ],
+      "convergence_point": true,
+      "depends_on": [
+        {
+          "node": "estofs-stofs",
+          "kind": "feeds",
+          "strength": "direct"
+        },
+        {
+          "node": "psurge",
+          "kind": "feeds",
+          "strength": "direct"
+        },
+        {
+          "node": "nwlon",
+          "kind": "feeds",
+          "strength": "direct"
+        },
+        {
+          "node": "ww3-nwps",
+          "kind": "feeds",
+          "strength": "direct"
+        },
+        {
+          "node": "twl-cc",
+          "kind": "feeds",
+          "strength": "supporting"
+        },
+        {
+          "node": "inundation-dashboard",
+          "kind": "feeds",
+          "strength": "supporting"
+        }
+      ],
+      "states": {
+        "kind": "decision",
+        "labels": [
+          "Local water level confirmed",
+          "Model or nearby observation",
+          "Local impact uncertain",
+          "No integrated local answer",
+          "No current guidance"
+        ]
+      },
+      "users": [
+        "emergency managers",
+        "ports",
+        "the public"
+      ],
+      "sources": [
+        {
+          "id": "nws-cfa",
+          "cite": "NWS Coastal Flood Advisory example",
+          "url": "https://forecast.weather.gov/"
+        }
+      ],
+      "status": "operating"
+    },
+    {
+      "id": "shoreline-planning",
+      "name": "Setbacks, rebuild permits, and nourishment design",
+      "short_name": "Setback and rebuild decisions",
+      "type": "decide",
+      "description": "Where erosion rates and coastal change forecasts become local land-use and engineering decisions.",
+      "operator": [
+        "state coastal agencies",
+        "counties",
+        "USACE districts"
+      ],
+      "funders": [
+        "state and local"
+      ],
+      "funding": {
+        "cost_annual_usd": {
+          "low": null,
+          "high": null,
+          "confidence": "embedded_unresolved"
+        }
+      },
+      "depends_on": [
+        {
+          "node": "dsas",
+          "kind": "feeds",
+          "strength": "direct"
+        },
+        {
+          "node": "twl-cc",
+          "kind": "feeds",
+          "strength": "supporting"
+        },
+        {
+          "node": "digital-coast",
+          "kind": "feeds",
+          "strength": "supporting"
+        }
+      ],
+      "states": {
+        "kind": "decision",
+        "labels": [
+          "Current rates in hand",
+          "Rates aging",
+          "Decisions on stale rates",
+          "Decisions without current rates",
+          "No defensible basis"
+        ]
+      },
+      "sources": [
+        {
+          "id": "usgs-cir1569",
+          "cite": "USGS Circular 1569",
+          "url": "https://pubs.usgs.gov/publication/cir1569/full"
+        }
+      ],
+      "status": "operating"
+    },
+    {
+      "id": "coastal-communities",
+      "name": "Homeowners, insurers, road departments, emergency managers",
+      "short_name": "Coastal communities",
+      "type": "impact",
+      "operator": [
+        "n/a"
+      ],
+      "depends_on": [
+        {
+          "node": "coastal-flood-warning",
+          "kind": "feeds",
+          "strength": "direct"
+        },
+        {
+          "node": "shoreline-planning",
+          "kind": "feeds",
+          "strength": "direct"
+        }
+      ],
+      "states": {
+        "kind": "node",
+        "labels": [
+          "Protected",
+          "Wider safety margins",
+          "Avoidable losses rising",
+          "Decisions made blind",
+          "Losses that warnings would have prevented"
+        ]
+      },
+      "sources": [
+        {
+          "id": "kcf-brief-0929",
+          "cite": "KCF philanthropy brief, Sep 29 2026"
+        }
+      ],
+      "status": "operating"
+    },
+    {
+      "id": "inundation-dashboard",
+      "name": "Coastal Inundation Dashboard",
+      "short_name": "Inundation dashboard",
+      "type": "product",
+      "description": "Real-time, forecast, and historical water levels for more than 200 NOS stations; near-term flooding and long-term inundation assessment.",
+      "operator": [
+        "NOAA CO-OPS"
+      ],
+      "funders": [
+        "NOAA NOS"
+      ],
+      "funding": {
+        "cost_annual_usd": {
+          "low": null,
+          "high": null,
+          "confidence": "embedded_unresolved"
+        }
+      },
+      "depends_on": [
+        {
+          "node": "nwlon",
+          "kind": "feeds",
+          "strength": "direct"
+        }
+      ],
+      "states": {
+        "kind": "node",
+        "labels": [
+          "Serving current data",
+          "Serving current data",
+          "Serving aging data",
+          "Serving mostly historical data",
+          "Serving historical data only"
+        ]
+      },
+      "sources": [
+        {
+          "id": "coops-inundation",
+          "cite": "NOAA Coastal Inundation Dashboard info",
+          "url": "https://tidesandcurrents.noaa.gov/inundationdb_info.html"
+        }
+      ],
+      "status": "operating"
+    },
+    {
+      "id": "ports",
+      "name": "PORTS real-time port systems",
+      "short_name": "PORTS",
+      "type": "observe",
+      "description": "Water levels, currents, and met at about 40 ports, cost-shared with local partners. FY27 request retains the program. NOAA cites a 33% reduction in maritime accidents and 59% reduction in groundings since inception (candidate for avoided_loss after audit).",
+      "operator": [
+        "NOAA CO-OPS",
+        "port partners"
+      ],
+      "funders": [
+        "NOAA",
+        "local cost-share"
+      ],
+      "funding": {
+        "cost_annual_usd": {
+          "low": null,
+          "high": null,
+          "confidence": "embedded_unresolved"
+        },
+        "funding_parent": {
+          "name": "NOAA Navigation, Observations and Positioning"
+        }
+      },
+      "depends_on": [
+        {
+          "node": "nwlon",
+          "kind": "feeds",
+          "strength": "supporting",
+          "note": "federal QC backbone"
+        }
+      ],
+      "states": {
+        "kind": "node",
+        "labels": [
+          "Operating",
+          "Intermittent",
+          "Coverage reduced",
+          "Largely unavailable",
+          "Unavailable; observations never made"
+        ]
+      },
+      "sources": [
+        {
+          "id": "noaa-fy27-cj",
+          "cite": "NOAA FY2027 Congressional Justification, April 2026",
+          "url": "https://www.noaa.gov/sites/default/files/2026-04/FY2027-NOAA-CJ-Submission.pdf"
+        }
+      ],
+      "status": "operating"
+    },
+    {
+      "id": "cors",
+      "name": "NGS Continuously Operating Reference Stations (CORS)",
+      "short_name": "CORS",
+      "type": "observe",
+      "description": "About 2,800 GNSS reference stations; vertical land motion that turns a tide gauge reading into relative sea level. Shared with coastal erosion.",
+      "operator": [
+        "NOAA National Geodetic Survey"
+      ],
+      "funders": [
+        "NOAA NOS"
+      ],
+      "funding": {
+        "cost_annual_usd": {
+          "low": null,
+          "high": null,
+          "confidence": "embedded_unresolved"
+        },
+        "funding_parent": {
+          "name": "NOAA Navigation, Observations and Positioning"
+        }
+      },
+      "states": {
+        "kind": "node",
+        "labels": [
+          "Operating",
+          "Intermittent",
+          "Coverage reduced",
+          "Largely unavailable",
+          "Unavailable; observations never made"
+        ]
+      },
+      "dated_events": [
+        {
+          "date": "2027",
+          "label": "FY27: about 2,800 CORS retained",
+          "status": "proposed",
+          "kind": "asset",
+          "source_ids": [
+            "noaa-fy27-cj"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "id": "noaa-fy27-cj",
+          "cite": "NOAA FY2027 Congressional Justification, April 2026",
+          "url": "https://www.noaa.gov/sites/default/files/2026-04/FY2027-NOAA-CJ-Submission.pdf"
+        },
+        {
+          "id": "ngs-progress",
+          "cite": "NGS modernized NSRS progress",
+          "url": "https://beta.ngs.noaa.gov/new-datums/track-our-progress.html"
+        }
+      ],
+      "status": "operating"
+    },
+    {
+      "id": "vdatum",
+      "name": "VDatum and the National Spatial Reference System",
+      "short_name": "VDatum (vertical transform)",
+      "type": "transform",
+      "description": "Puts ocean (tidal datums), land (NAVD88), and GNSS (ellipsoidal) heights in one vertical frame. Without it, a good water measurement and a good land measurement still don't give flood depth. FY27 proposes enhanced VDatum coverage.",
+      "operator": [
+        "NOAA NGS",
+        "NOAA CO-OPS"
+      ],
+      "funders": [
+        "NOAA NOS"
+      ],
+      "funding": {
+        "cost_annual_usd": {
+          "low": null,
+          "high": null,
+          "confidence": "embedded_unresolved"
+        }
+      },
+      "convergence_point": true,
+      "depends_on": [
+        {
+          "node": "cors",
+          "kind": "feeds",
+          "strength": "direct"
+        },
+        {
+          "node": "nwlon",
+          "kind": "feeds",
+          "strength": "direct"
+        }
+      ],
+      "states": {
+        "kind": "node",
+        "labels": [
+          "Transforms current",
+          "Transforms current",
+          "Coverage not refreshed",
+          "Frames drifting apart",
+          "Heights not comparable"
+        ]
+      },
+      "sources": [
+        {
+          "id": "noaa-fy27-cj",
+          "cite": "NOAA FY2027 Congressional Justification, April 2026",
+          "url": "https://www.noaa.gov/sites/default/files/2026-04/FY2027-NOAA-CJ-Submission.pdf"
+        }
+      ],
+      "status": "operating"
+    },
+    {
+      "id": "htf-outlook",
+      "name": "High Tide Flooding Outlook",
+      "short_name": "High-tide flood outlook",
+      "type": "product",
+      "description": "Annual and monthly flood-frequency outlook from NWLON threshold exceedances. 2026 to 27 outlook: national median 7 to 12 high-tide flood days, a record.",
+      "operator": [
+        "NOAA CO-OPS"
+      ],
+      "funders": [
+        "NOAA NOS"
+      ],
+      "funding": {
+        "cost_annual_usd": {
+          "low": null,
+          "high": null,
+          "confidence": "embedded_unresolved"
+        }
+      },
+      "depends_on": [
+        {
+          "node": "nwlon",
+          "kind": "feeds",
+          "strength": "direct"
+        }
+      ],
+      "states": {
+        "kind": "constraint",
+        "labels": [
+          "Current flood frequency known",
+          "Current year incomplete",
+          "Frequency estimate aging",
+          "Local flood climatology uncertain",
+          "No current local baseline"
+        ]
+      },
+      "sources": [
+        {
+          "id": "htf-outlook",
+          "cite": "NOAA High Tide Flooding Outlook",
+          "url": "https://www.tidesandcurrents.noaa.gov/high-tide-flooding/annual-outlook.html"
+        }
+      ],
+      "status": "operating"
+    },
+    {
+      "id": "sea-level-trends",
+      "name": "Relative Sea Level Trends and Extremes",
+      "short_name": "Sea level trends",
+      "type": "product",
+      "description": "Trends at 142 long-term U.S. stations with at least 30 years of record. Precision depends on record length: about ±1.5 mm/yr at 30 years, ±0.5 mm/yr at 60 years. Incorporates vertical land motion. Jointly supported with NOAA OAR Climate Observation Division.",
+      "operator": [
+        "NOAA CO-OPS"
+      ],
+      "funders": [
+        "NOAA NOS",
+        "NOAA OAR"
+      ],
+      "funding": {
+        "cost_annual_usd": {
+          "low": null,
+          "high": null,
+          "confidence": "embedded_unresolved"
+        }
+      },
+      "depends_on": [
+        {
+          "node": "nwlon",
+          "kind": "feeds",
+          "strength": "direct"
+        },
+        {
+          "node": "cors",
+          "kind": "feeds",
+          "strength": "direct"
+        },
+        {
+          "node": "vdatum",
+          "kind": "feeds",
+          "strength": "direct"
+        }
+      ],
+      "states": {
+        "kind": "constraint",
+        "labels": [
+          "Current observational baseline",
+          "Recent record incomplete",
+          "Recent local trend less constrained",
+          "Multi-year gap in climate record",
+          "Legacy continuity lost"
+        ]
+      },
+      "sources": [
+        {
+          "id": "sltrends",
+          "cite": "NOAA Sea Level Trends",
+          "url": "https://www.tidesandcurrents.noaa.gov/sltrends/"
+        },
+        {
+          "id": "sltrends-faq",
+          "cite": "NOAA Sea Level Trends FAQ",
+          "url": "https://www.tidesandcurrents.noaa.gov/sltrends/faq.shtml"
+        },
+        {
+          "id": "trends-extremes",
+          "cite": "NOAA Sea Level Trends and Extremes",
+          "url": "https://tidesandcurrents.noaa.gov/trends-and-extremes/index.html"
+        }
+      ],
+      "status": "operating"
+    },
+    {
+      "id": "slr-viewer",
+      "name": "Sea Level Rise Viewer and Sea Level Calculator",
+      "short_name": "Sea level planning tools",
+      "type": "product",
+      "description": "Screening-level planning maps and scenarios; NOAA says not for navigation, permitting, or legal use.",
+      "operator": [
+        "NOAA OCM"
+      ],
+      "funders": [
+        "NOAA NOS"
+      ],
+      "funding": {
+        "cost_annual_usd": {
+          "low": null,
+          "high": null,
+          "confidence": "embedded_unresolved"
+        }
+      },
+      "depends_on": [
+        {
+          "node": "sea-level-trends",
+          "kind": "feeds",
+          "strength": "direct"
+        },
+        {
+          "node": "3dep",
+          "kind": "feeds",
+          "strength": "direct"
+        },
+        {
+          "node": "vdatum",
+          "kind": "feeds",
+          "strength": "direct"
+        }
+      ],
+      "states": {
+        "kind": "node",
+        "labels": [
+          "Serving current data",
+          "Serving current data",
+          "Serving aging data",
+          "Serving mostly historical data",
+          "Serving historical data only"
+        ]
+      },
+      "sources": [
+        {
+          "id": "slr-viewer",
+          "cite": "NOAA Sea Level Rise Viewer",
+          "url": "https://coast.noaa.gov/slr/"
+        }
+      ],
+      "status": "operating"
+    },
+    {
+      "id": "coastal-planning",
+      "name": "Long-term coastal planning and infrastructure design",
+      "short_name": "Long-term planning",
+      "type": "decide",
+      "operator": [
+        "state and local governments",
+        "utilities",
+        "FEMA",
+        "USACE"
+      ],
+      "funders": [
+        "various"
+      ],
+      "funding": {
+        "cost_annual_usd": {
+          "low": null,
+          "high": null,
+          "confidence": "embedded_unresolved"
+        }
+      },
+      "depends_on": [
+        {
+          "node": "sea-level-trends",
+          "kind": "feeds",
+          "strength": "direct"
+        },
+        {
+          "node": "htf-outlook",
+          "kind": "feeds",
+          "strength": "direct"
+        },
+        {
+          "node": "slr-viewer",
+          "kind": "feeds",
+          "strength": "supporting"
+        }
+      ],
+      "states": {
+        "kind": "decision",
+        "labels": [
+          "Current observational baseline",
+          "Baseline aging",
+          "Recent local change poorly constrained",
+          "Planning on model and regional information",
+          "Continuous record broken"
+        ]
+      },
+      "sources": [
+        {
+          "id": "slr-viewer",
+          "cite": "NOAA Sea Level Rise Viewer",
+          "url": "https://coast.noaa.gov/slr/"
+        }
+      ],
+      "status": "operating"
+    },
+    {
+      "id": "ioos-ra",
+      "name": "IOOS Regional Associations: regional buoys, HF radar, gliders, models",
+      "short_name": "IOOS regional observing",
+      "type": "observe",
+      "description": "Eleven Regional Associations, 100% grant-funded, operating the last-mile coastal observing. Regional Observations: $42.5M FY23 to FY25, $47.5M FY26, $0 requested FY27 (termination). FY26 awards run Sep 2026 to Aug 2031 subject to annual appropriation. NOAA's FY25 justification stated what a cut to $10M would do: staff reductions, decommissioned assets, time series stop updating, reduced regional modeling and forecasting.",
+      "operator": [
+        "11 IOOS Regional Associations (universities, nonprofits)"
+      ],
+      "funders": [
+        "NOAA IOOS Office",
+        "IRA",
+        "BIL",
+        "states and partners"
+      ],
+      "funding": {
+        "cost_annual_usd": {
+          "low": 47500000,
+          "high": 47500000,
+          "confidence": "enacted",
+          "fiscal_year": "FY26",
+          "source_ids": [
+            "ioos-fac-2026"
+          ]
+        },
+        "funding_instruments": [
+          {
+            "funder": "NOAA IOOS",
+            "program": "Regional Observations",
+            "type": "appropriation",
+            "amount_usd": {
+              "low": 42500000,
+              "high": 42500000,
+              "confidence": "enacted",
+              "fiscal_year": "FY24",
+              "source_ids": [
+                "noaa-bluebook-fy24"
+              ]
+            },
+            "confidence": "verified_award"
+          },
+          {
+            "funder": "NOAA IOOS",
+            "program": "Regional Observations",
+            "type": "appropriation",
+            "amount_usd": {
+              "low": 42500000,
+              "high": 42500000,
+              "confidence": "enacted",
+              "fiscal_year": "FY25",
+              "source_ids": [
+                "ioos-fac-2026"
+              ]
+            },
+            "confidence": "verified_award"
+          },
+          {
+            "funder": "NOAA IOOS",
+            "program": "Regional Observations",
+            "type": "appropriation",
+            "amount_usd": {
+              "low": 47500000,
+              "high": 47500000,
+              "confidence": "enacted",
+              "fiscal_year": "FY26",
+              "source_ids": [
+                "noaa-fy27-cj"
+              ]
+            },
+            "confidence": "verified_award"
+          },
+          {
+            "funder": "NOAA IOOS",
+            "program": "Regional Observations",
+            "type": "appropriation",
+            "amount_usd": {
+              "low": 0,
+              "high": 0,
+              "confidence": "requested",
+              "fiscal_year": "FY27",
+              "source_ids": [
+                "noaa-fy27-cj"
+              ]
+            },
+            "confidence": "verified_award",
+            "purpose": "Termination proposed; DMAC retained"
+          },
+          {
+            "funder": "NOAA IOOS",
+            "program": "FY26 RA cooperative agreements",
+            "type": "cooperative_agreement",
+            "award_start": "2026-09-01",
+            "award_end": "2031-08-31",
+            "amount_usd": {
+              "low": null,
+              "high": 5000000,
+              "confidence": "awarded",
+              "source_ids": [
+                "ioos-fy26-nofo"
+              ]
+            },
+            "subject_to_annual_appropriation": true,
+            "confidence": "verified_program_not_award"
+          },
+          {
+            "funder": "NOAA IOOS",
+            "program": "IRA ocean observing awards",
+            "type": "IRA",
+            "amount_usd": {
+              "low": 101500000,
+              "high": 101500000,
+              "confidence": "awarded",
+              "fiscal_year": "FY24",
+              "source_ids": [
+                "ioos-ira"
+              ]
+            },
+            "confidence": "verified_award",
+            "purpose": "12 awards, 2024; capital, not recurring"
+          }
+        ],
+        "note": "House FY27 CJS bill rejects termination and recommends $56M (AGU Bridge, May 2026)."
+      },
+      "risk_vector": [
+        "appropriation",
+        "grant_lapse"
+      ],
+      "pattern": "grant_lapse_cascade",
+      "states": {
+        "kind": "node",
+        "labels": [
+          "Observations operating",
+          "Operating on existing funds",
+          "Maintenance and staffing contracting",
+          "Regional coverage developing holes",
+          "Sustained regional system lost"
+        ]
+      },
+      "users": [
+        "NWS",
+        "USCG search and rescue",
+        "ports",
+        "HAB forecasters",
+        "fishers",
+        "surfers and boaters",
+        "researchers"
+      ],
+      "dated_events": [
+        {
+          "date": "2024",
+          "label": "IRA: $101.5M across 12 IOOS awards",
+          "status": "realized",
+          "kind": "funding",
+          "source_ids": [
+            "ioos-ira"
+          ]
+        },
+        {
+          "date": "2026-09-01",
+          "label": "FY26 RA cooperative agreements begin (to 2031-08-31)",
+          "status": "realized",
+          "kind": "funding",
+          "source_ids": [
+            "ioos-fy26-nofo"
+          ]
+        },
+        {
+          "date": "2027",
+          "label": "FY27 request: terminate IOOS Regional Observations ($47.5M to $0); DMAC retained",
+          "status": "proposed",
+          "kind": "funding",
+          "source_ids": [
+            "noaa-fy27-cj"
+          ]
+        },
+        {
+          "date": "2026-05",
+          "label": "House FY27 CJS mark: $56M for IOOS Regional Observations",
+          "status": "proposed",
+          "kind": "funding",
+          "source_ids": [
+            "agu-fy27"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "id": "noaa-fy27-cj",
+          "cite": "NOAA FY2027 Congressional Justification, April 2026",
+          "url": "https://www.noaa.gov/sites/default/files/2026-04/FY2027-NOAA-CJ-Submission.pdf"
+        },
+        {
+          "id": "noaa-fy25-cj",
+          "cite": "NOAA FY2025 Congressional Justification, March 2024",
+          "url": "https://www.noaa.gov/sites/default/files/2024-03/NOAA_FY25_Congressional_Justification.pdf"
+        },
+        {
+          "id": "noaa-bluebook-fy24",
+          "cite": "NOAA FY24 Blue Book",
+          "url": "https://www.noaa.gov/sites/default/files/2023-05/NOAA_Blue_Book_2024.pdf"
+        },
+        {
+          "id": "ioos-fac-2026",
+          "cite": "IOOS Association written update to FAC, Jan 2026",
+          "url": "https://cdn.ioos.noaa.gov/media/2026/01/IOOS-FAC_IOOSA-written-update_Jan2026.pdf"
+        },
+        {
+          "id": "ioos-fy26-nofo",
+          "cite": "IOOS FY26 Regional Associations NOFO",
+          "url": "https://ioos.noaa.gov/about/funding-opportunities/implementing-the-ioos-regional-associations-fy26-nofo/"
+        },
+        {
+          "id": "ioos-ira",
+          "cite": "IOOS IRA awards news",
+          "url": "https://ioos.noaa.gov/news/biden-harris-administration-invests-101-5-million-for-ocean-observing-systems/"
+        },
+        {
+          "id": "agu-fy27",
+          "cite": "AGU Bridge FY27 appropriations update, May 26 2026",
+          "url": "https://thebridge.agu.org/2026/05/26/fy2027-appropriations-update-nasa-noaa-and-nsf/"
+        }
+      ],
+      "status": "operating"
+    },
+    {
+      "id": "ioos-dmac",
+      "name": "IOOS Data Management and Cyberinfrastructure (DMAC) and HF Radar DAC",
+      "short_name": "IOOS data portal",
+      "type": "archive",
+      "description": "The national assembly and distribution layer: Environmental Sensor Map integrates more than 32,000 stations. Explicitly retained in the FY27 request even as Regional Observations is terminated. The portal survives; there is progressively less living ocean underneath it.",
+      "operator": [
+        "NOAA IOOS Office",
+        "partners"
+      ],
+      "funders": [
+        "NOAA IOOS"
+      ],
+      "funding": {
+        "cost_annual_usd": {
+          "low": null,
+          "high": null,
+          "confidence": "embedded_unresolved"
+        }
+      },
+      "pattern": "portal_survives_feeders_die",
+      "depends_on": [
+        {
+          "node": "ioos-ra",
+          "kind": "feeds",
+          "strength": "direct"
+        },
+        {
+          "node": "nwlon",
+          "kind": "feeds",
+          "strength": "supporting"
+        },
+        {
+          "node": "ndbc",
+          "kind": "feeds",
+          "strength": "supporting"
+        }
+      ],
+      "states": {
+        "kind": "node",
+        "labels": [
+          "Serving current data",
+          "Serving current data",
+          "Serving aging data",
+          "Serving mostly historical data",
+          "Serving historical data only"
+        ]
+      },
+      "dated_events": [
+        {
+          "date": "2027",
+          "label": "FY27: DMAC and HF Radar DAC sustained under reduced funding",
+          "status": "proposed",
+          "kind": "service",
+          "source_ids": [
+            "noaa-fy27-cj"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "id": "noaa-fy27-cj",
+          "cite": "NOAA FY2027 Congressional Justification, April 2026",
+          "url": "https://www.noaa.gov/sites/default/files/2026-04/FY2027-NOAA-CJ-Submission.pdf"
+        },
+        {
+          "id": "ioos-data",
+          "cite": "IOOS data access",
+          "url": "https://ioos.noaa.gov/data/access-ioos-data/"
+        }
+      ],
+      "status": "operating"
+    },
+    {
+      "id": "vos",
+      "name": "Voluntary Observing Ship program",
+      "short_name": "VOS ship reports",
+      "type": "observe",
+      "description": "About 5,000 daily ship observations incorporated into NWS products. FY27 request ends NDBC collection of VOS observations.",
+      "operator": [
+        "NOAA NWS NDBC",
+        "participating ships"
+      ],
+      "funders": [
+        "NOAA NWS"
+      ],
+      "funding": {
+        "cost_annual_usd": {
+          "low": null,
+          "high": null,
+          "confidence": "embedded_unresolved"
+        }
+      },
+      "risk_vector": [
+        "appropriation"
+      ],
+      "states": {
+        "kind": "node",
+        "labels": [
+          "Operating",
+          "Intermittent",
+          "Coverage reduced",
+          "Largely unavailable",
+          "Unavailable; observations never made"
+        ]
+      },
+      "dated_events": [
+        {
+          "date": "2027",
+          "label": "FY27 request: end VOS collection (about 5,000 obs/day)",
+          "status": "proposed",
+          "kind": "service",
+          "source_ids": [
+            "noaa-fy27-cj"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "id": "noaa-fy27-cj",
+          "cite": "NOAA FY2027 Congressional Justification, April 2026",
+          "url": "https://www.noaa.gov/sites/default/files/2026-04/FY2027-NOAA-CJ-Submission.pdf"
+        }
+      ],
+      "status": "operating"
+    },
+    {
+      "id": "wfo-launch-staff",
+      "name": "Weather Forecast Office launch staff",
+      "short_name": "WFO launch staff",
+      "type": "process",
+      "description": "The people who prepare, inflate, release, and track the flight, about an hour of prep per launch. The single point of failure in 2025 to 26: pre-dawn launches dropped where staffing fell, so balloons went up during office hours instead of at 12Z.",
+      "operator": [
+        "NOAA NWS Weather Forecast Offices"
+      ],
+      "funders": [
+        "NOAA NWS"
+      ],
+      "funding": {
+        "cost_annual_usd": {
+          "low": null,
+          "high": null,
+          "confidence": "embedded_unresolved"
+        },
+        "funding_parent": {
+          "name": "NWS field office staffing"
+        }
+      },
+      "status": "degraded",
+      "risk_vector": [
+        "attrition"
+      ],
+      "convergence_point": true,
+      "pattern": "human_transformation_layer",
+      "states": {
+        "kind": "node",
+        "labels": [
+          "Twice daily, on time",
+          "Specials dropped",
+          "One launch a day or delayed",
+          "Launches when staffing permits",
+          "Site suspended"
+        ]
+      },
+      "dated_events": [
+        {
+          "date": "2025-02",
+          "label": "About 1,000 NOAA positions cut; Kotzebue AK launches suspended",
+          "status": "realized",
+          "kind": "staffing",
+          "source_ids": [
+            "windborne"
+          ]
+        },
+        {
+          "date": "2025-03-11",
+          "label": "NWS notice: launches suspended at Albany NY, Gray ME, Kotzebue AK for lack of WFO staffing",
+          "status": "realized",
+          "kind": "staffing",
+          "source_ids": [
+            "nws-dm032506"
+          ]
+        },
+        {
+          "date": "2025-03-20",
+          "label": "Omaha NE and Rapid City SD suspended; Aberdeen, Grand Junction, Green Bay, Gaylord, North Platte, Riverton reduced to once daily",
+          "status": "realized",
+          "kind": "staffing",
+          "source_ids": [
+            "axios-0321"
+          ]
+        },
+        {
+          "date": "2026-04-13",
+          "label": "Kansas City outbreak: morning launches reportedly skipped across the Midwest; tornado watch about 30 minutes before first touchdown",
+          "status": "realized",
+          "kind": "event",
+          "source_ids": [
+            "globe-0428"
+          ]
+        },
+        {
+          "date": "2026-05",
+          "label": "Public records: 25 of 30 standard morning launches missed at Kansas sites in peak season",
+          "status": "realized",
+          "kind": "staffing",
+          "source_ids": [
+            "davids-0819"
+          ]
+        },
+        {
+          "date": "2026-05-06",
+          "label": "NWS: more than 200 positions filled since the cuts; almost all 92 sites functioning normally",
+          "status": "realized",
+          "kind": "staffing",
+          "source_ids": [
+            "npr-0506"
+          ]
+        },
+        {
+          "date": "2026-08-19",
+          "label": "33 members of Congress demand restoration of twice-daily schedule",
+          "status": "realized",
+          "kind": "policy",
+          "source_ids": [
+            "davids-0819"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "id": "windborne",
+          "cite": "WindBorne press release, Feb 28 2025",
+          "url": "https://www.businesswire.com/news/home/20250228603358/en"
+        },
+        {
+          "id": "nws-dm032506",
+          "cite": "NWS Data Management Message DM03-25.06",
+          "url": "https://weather.gov/source/datamgmt/DM032506.txt"
+        },
+        {
+          "id": "axios-0321",
+          "cite": "Axios, Mar 21 2025",
+          "url": "https://www.axios.com/2025/03/21/nws-layoffs-cuts-weather-balloons-forecasts"
+        },
+        {
+          "id": "globe-0428",
+          "cite": "Boston Globe, Apr 28 2026",
+          "url": "https://www.bostonglobe.com/2026/04/28/metro/tornadoes-severe-weather-balloons-storms/"
+        },
+        {
+          "id": "davids-0819",
+          "cite": "Rep. Davids press release, Aug 19 2026",
+          "url": "https://davids.house.gov/media/press-releases/davids-escalates-calls-weather-safety-demands-federal-action-restore-vital"
+        },
+        {
+          "id": "npr-0506",
+          "cite": "NPR, May 6 2026",
+          "url": "https://www.npr.org/2026/05/06/nx-s1-5805228/tornado-outbreaks-catch-forecasters-by-surprise-after-national-weather-service-cuts"
+        }
+      ]
+    },
+    {
+      "id": "radiosonde-consumables",
+      "name": "Radiosondes, balloons, hydrogen and helium",
+      "short_name": "Consumables",
+      "type": "process",
+      "description": "About 75,000 sondes a year, about 20% recovered. Per-release cost reported at $200 to $325 (secondary sources). 2022 helium shortage reduced launches at about 9% of 101 sites; most since converted to hydrogen. Vaisala named as sonde vendor in press.",
+      "operator": [
+        "NOAA NWS procurement"
+      ],
+      "funders": [
+        "NOAA NWS"
+      ],
+      "funding": {
+        "cost_annual_usd": {
+          "low": 15000000,
+          "high": 24000000,
+          "confidence": "estimate",
+          "source_ids": [
+            "scribd-cost",
+            "weather-rev"
+          ]
+        },
+        "note": "Arithmetic from per-release estimates times 75,000; not a budget figure."
+      },
+      "risk_vector": [
+        "consumables",
+        "contract_expiry"
+      ],
+      "states": {
+        "kind": "node",
+        "labels": [
+          "Operating",
+          "Intermittent",
+          "Coverage reduced",
+          "Largely unavailable",
+          "Unavailable; observations never made"
+        ]
+      },
+      "dated_events": [
+        {
+          "date": "2022-03-29",
+          "label": "Helium shortage: launches reduced at about 9% of 101 sites",
+          "status": "realized",
+          "kind": "service",
+          "source_ids": [
+            "nws-helium"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "id": "nws-helium",
+          "cite": "NWS notice on helium shortage, Mar 2022",
+          "url": "https://weather.gov/bou/HeliumShortageandBalloonLaunches"
+        },
+        {
+          "id": "weather-rev",
+          "cite": "NWS Reno upper air tour (75,000 sondes/yr)",
+          "url": "https://www.weather.gov/rev/upperair"
+        },
+        {
+          "id": "scribd-cost",
+          "cite": "Secondary: cost and use of radiosondes ($200/release)",
+          "url": "https://www.scribd.com/document/882346390/Weather-Balloons"
+        }
+      ],
+      "status": "operating"
+    },
+    {
+      "id": "autolaunchers",
+      "name": "Radiosonde autolaunchers",
+      "short_name": "Autolaunchers",
+      "type": "process",
+      "description": "Automated launch units: 24 balloons per load, 12 days unattended. Alaska units paid by spectrum sale proceeds; 2018 plan put autolaunchers at about 25% of the network. Current CONUS deployment count unresolved.",
+      "operator": [
+        "NOAA NWS"
+      ],
+      "funders": [
+        "spectrum sale proceeds (Alaska)",
+        "NOAA NWS"
+      ],
+      "funding": {
+        "cost_annual_usd": {
+          "low": null,
+          "high": null,
+          "confidence": "embedded_unresolved"
+        },
+        "funding_instruments": [
+          {
+            "funder": "U.S. Treasury spectrum auction",
+            "program": "Radiosonde Frequency Migration",
+            "type": "spectrum_sale",
+            "purpose": "Alaska autolaunchers",
+            "confidence": "verified_program_not_award",
+            "source_ids": [
+              "noaa-autolaunch"
+            ]
+          }
+        ]
+      },
+      "states": {
+        "kind": "node",
+        "labels": [
+          "Operating",
+          "Backlog growing",
+          "Staff reduced",
+          "Capability largely gone",
+          "Expertise dispersed"
+        ]
+      },
+      "substitutes": [],
+      "sources": [
+        {
+          "id": "noaa-autolaunch",
+          "cite": "NOAA, 6 benefits of automated balloon launches",
+          "url": "https://www.noaa.gov/stories/up-up-and-away-6-benefits-of-automated-weather-balloon-launches"
+        },
+        {
+          "id": "obs-2018",
+          "cite": "NWS Office of Observations partners meeting, Jan 2018",
+          "url": "https://www.weather.gov/media/wrn/calendar/OBS-NWS-AMS-PartnersMeeting2018-read-ahead.pdf"
+        }
+      ],
+      "status": "operating"
+    },
+    {
+      "id": "radiosonde-launch",
+      "name": "NWS upper-air radiosonde launches (92 stations)",
+      "short_name": "Radiosonde launch",
+      "type": "observe",
+      "description": "92 stations (69 CONUS, 13 Alaska, 9 Pacific, 1 Puerto Rico) plus 10 Caribbean CHUAS stations; launches at 00Z and 12Z with specials at 06Z/18Z. Temperature, humidity, pressure, and GPS winds to about 100,000 ft. The only node with no redundancy for in-situ profiles.",
+      "operator": [
+        "NOAA NWS Office of Observations",
+        "Weather Forecast Offices"
+      ],
+      "funders": [
+        "NOAA NWS"
+      ],
+      "funding": {
+        "cost_annual_usd": {
+          "low": null,
+          "high": null,
+          "confidence": "embedded_unresolved"
+        },
+        "funding_parent": {
+          "name": "NWS Observations PPA (ORF)",
+          "figures": [
+            {
+              "low": 255000000,
+              "high": 255000000,
+              "confidence": "requested",
+              "fiscal_year": "FY25",
+              "source_ids": [
+                "noaa-fy25-cj"
+              ]
+            }
+          ],
+          "note": "No upper-air line item in the Congressional Justification."
+        }
+      },
+      "status": "degraded",
+      "risk_vector": [
+        "attrition",
+        "consumables"
+      ],
+      "convergence_point": true,
+      "sampling_role": {
+        "horizontal": "network",
+        "vertical_m": {
+          "min": 0,
+          "max": 30000
+        },
+        "repeat": "twice daily 00Z/12Z",
+        "variables": [
+          "temperature",
+          "humidity",
+          "pressure",
+          "wind"
+        ],
+        "unique_capability": [
+          "in-situ vertical profile",
+          "pre-convective 12Z sounding"
+        ]
+      },
+      "depends_on": [
+        {
+          "node": "wfo-launch-staff",
+          "kind": "feeds",
+          "strength": "direct"
+        },
+        {
+          "node": "radiosonde-consumables",
+          "kind": "feeds",
+          "strength": "direct"
+        },
+        {
+          "node": "autolaunchers",
+          "kind": "feeds",
+          "strength": "supporting",
+          "note": "partial substitute for staff"
+        }
+      ],
+      "substitutes": [
+        {
+          "node": "gnss-ro",
+          "degree": "partial",
+          "cannot_replace": [
+            "boundary-layer humidity detail",
+            "local wind shear",
+            "same-site repeat"
+          ],
+          "stated_by": "research track inference"
+        }
+      ],
+      "states": {
+        "kind": "node",
+        "labels": [
+          "Twice daily, 92 sites",
+          "Specials dropped",
+          "Launches delayed to office hours",
+          "Regional morning gap",
+          "Profile never taken"
+        ]
+      },
+      "people": [
+        {
+          "name": "Dr. Kevin Schrab",
+          "role": "Portfolio Manager, Office of Observations (Surface and Upper Air Division, NDBC, radar)",
+          "org": "NOAA NWS",
+          "contact": "kevin.schrab@noaa.gov, (301) 427-9320",
+          "as_of": "2026-10-06",
+          "source_ids": [
+            "vlab-obs"
+          ]
+        },
+        {
+          "name": "Ken Graham",
+          "role": "Director",
+          "org": "NOAA NWS",
+          "source_ids": [
+            "nbc-rcna331826"
+          ]
+        }
+      ],
+      "users": [
+        "NCEP models",
+        "Storm Prediction Center",
+        "National Hurricane Center",
+        "every WFO",
+        "broadcast and commercial meteorologists",
+        "aviation",
+        "ECMWF and global NWP via GTS",
+        "climate researchers via IGRA"
+      ],
+      "sources": [
+        {
+          "id": "nws-upperair",
+          "cite": "NWS Upper-air Observations Program",
+          "url": "https://www.weather.gov/upperair/"
+        },
+        {
+          "id": "nws-factsheet",
+          "cite": "NWS radiosonde fact sheet",
+          "url": "https://www.weather.gov/upperair/factsheet"
+        },
+        {
+          "id": "noaa-fy25-cj",
+          "cite": "NOAA FY2025 Congressional Justification, March 2024",
+          "url": "https://www.noaa.gov/sites/default/files/2024-03/NOAA_FY25_Congressional_Justification.pdf"
+        },
+        {
+          "id": "vlab-obs",
+          "cite": "NOAA VLab Office of Observations",
+          "url": "https://vlab.noaa.gov/web/obs/office-of-observations-obs"
+        },
+        {
+          "id": "nbc-rcna331826",
+          "cite": "NBC News, Apr 2026",
+          "url": "https://www.nbcnews.com/weather/tornadoes/tornadoes-kansas-concerns-changes-national-weather-service-rcna331826"
+        }
+      ]
+    },
+    {
+      "id": "gnss-ro",
+      "name": "Commercial GNSS radio occultation",
+      "short_name": "GNSS-RO (partial substitute)",
+      "type": "observe",
+      "description": "NOAA bought $67.054M over two years in September 2026 for 10,000 atmospheric profiles a day plus 500 TEC observations. The price the government pays for a partial substitute.",
+      "operator": [
+        "NOAA NESDIS Commercial Data Program",
+        "commercial providers"
+      ],
+      "funders": [
+        "NOAA NESDIS"
+      ],
+      "funding": {
+        "cost_annual_usd": {
+          "low": 33500000,
+          "high": 33500000,
+          "confidence": "awarded",
+          "fiscal_year": "FY26",
+          "source_ids": [
+            "kcf-doc3"
+          ]
+        }
+      },
+      "states": {
+        "kind": "node",
+        "labels": [
+          "Operating",
+          "Intermittent",
+          "Coverage reduced",
+          "Largely unavailable",
+          "Unavailable; observations never made"
+        ]
+      },
+      "sources": [
+        {
+          "id": "kcf-doc3",
+          "cite": "KCF research document 3 (Sep 2026), citing NOAA Sep 2026 commercial data award"
+        }
+      ],
+      "status": "operating"
+    },
+    {
+      "id": "gts-ncep-da",
+      "name": "GTS transmission and NCEP data assimilation (GFS, RAP, HRRR)",
+      "short_name": "NCEP assimilation",
+      "type": "model",
+      "description": "Soundings go out on GTS/NOAAPort to all WFOs, NCEP, and the world, and initialize the models. ECMWF's 2015 Russia case: reduced radiosondes degraded forecasts first locally, then downstream over the Pacific, then hemispheric scores at longer leads; largest in winter.",
+      "operator": [
+        "NOAA NWS NCEP EMC",
+        "NCO"
+      ],
+      "funders": [
+        "NOAA NWS"
+      ],
+      "funding": {
+        "cost_annual_usd": {
+          "low": null,
+          "high": null,
+          "confidence": "embedded_unresolved"
+        }
+      },
+      "depends_on": [
+        {
+          "node": "radiosonde-launch",
+          "kind": "feeds",
+          "strength": "direct"
+        },
+        {
+          "node": "gnss-ro",
+          "kind": "feeds",
+          "strength": "direct"
+        },
+        {
+          "node": "satellite-marine-obs",
+          "kind": "feeds",
+          "strength": "supporting",
+          "note": "satellite sounders; weaker over land in winter"
+        }
+      ],
+      "states": {
+        "kind": "node",
+        "labels": [
+          "Current guidance",
+          "Latest run aging",
+          "Guidance losing skill",
+          "Guidance stale",
+          "No current guidance"
+        ]
+      },
+      "cadence": "Model cycles",
+      "sources": [
+        {
+          "id": "ecmwf-149",
+          "cite": "ECMWF Newsletter 149, Global radiosonde network under pressure",
+          "url": "https://www.ecmwf.int/en/newsletter/149/meteorology/global-radiosonde-network-under-pressure"
+        },
+        {
+          "id": "kutty-2015",
+          "cite": "Kutty et al. 2015, radiosonde vs AMSU denial in GFS",
+          "url": "https://doi.org/10.1155/2015/280546"
+        },
+        {
+          "id": "ecmwf-839",
+          "cite": "ECMWF Tech Memo 839, global OSEs",
+          "url": "https://www.ecmwf.int/sites/default/files/elibrary/2019/18859-global-observing-system-experiments-ecmwf-assimilation-system.pdf"
+        }
+      ],
+      "status": "operating"
+    },
+    {
+      "id": "spc-watches",
+      "name": "Storm Prediction Center outlooks and tornado watches",
+      "short_name": "SPC tornado watch",
+      "type": "decide",
+      "description": "Where model guidance becomes a decision. April 13, 2026: watch issued about 30 minutes before first touchdown in the Kansas City outbreak after morning soundings were missing across the Midwest.",
+      "operator": [
+        "NOAA NWS Storm Prediction Center, Norman OK"
+      ],
+      "funders": [
+        "NOAA NWS"
+      ],
+      "funding": {
+        "cost_annual_usd": {
+          "low": null,
+          "high": null,
+          "confidence": "embedded_unresolved"
+        }
+      },
+      "convergence_point": true,
+      "depends_on": [
+        {
+          "node": "gts-ncep-da",
+          "kind": "feeds",
+          "strength": "direct"
+        },
+        {
+          "node": "radiosonde-launch",
+          "kind": "feeds",
+          "strength": "direct",
+          "note": "forecasters read the 12Z sounding directly"
+        }
+      ],
+      "states": {
+        "kind": "decision",
+        "labels": [
+          "Watch at normal lead",
+          "Outlook less confident",
+          "Watch late",
+          "No pre-convective profile",
+          "Watch function lost"
+        ]
+      },
+      "users": [
+        "WFOs",
+        "emergency managers",
+        "schools",
+        "broadcasters"
+      ],
+      "sources": [
+        {
+          "id": "globe-0428",
+          "cite": "Boston Globe, Apr 28 2026",
+          "url": "https://www.bostonglobe.com/2026/04/28/metro/tornadoes-severe-weather-balloons-storms/"
+        }
+      ],
+      "status": "operating"
+    },
+    {
+      "id": "wfo-tornado-warnings",
+      "name": "WFO tornado warnings and dissemination",
+      "short_name": "Tornado warning",
+      "type": "decide",
+      "operator": [
+        "NOAA NWS WFOs",
+        "NOAA Weather Radio",
+        "WEA"
+      ],
+      "funders": [
+        "NOAA NWS"
+      ],
+      "funding": {
+        "cost_annual_usd": {
+          "low": null,
+          "high": null,
+          "confidence": "embedded_unresolved"
+        }
+      },
+      "risk_vector": [
+        "attrition"
+      ],
+      "depends_on": [
+        {
+          "node": "spc-watches",
+          "kind": "feeds",
+          "strength": "direct"
+        },
+        {
+          "node": "radar-mesonets",
+          "kind": "feeds",
+          "strength": "direct",
+          "note": "detect, do not predict"
+        }
+      ],
+      "states": {
+        "kind": "decision",
+        "labels": [
+          "Warnings with normal lead",
+          "Lead time shrinking",
+          "Reactive warnings",
+          "Warnings without watch context",
+          "Office not staffed"
+        ]
+      },
+      "sources": [
+        {
+          "id": "npr-0506",
+          "cite": "NPR, May 6 2026",
+          "url": "https://www.npr.org/2026/05/06/nx-s1-5805228/tornado-outbreaks-catch-forecasters-by-surprise-after-national-weather-service-cuts"
+        }
+      ],
+      "status": "operating"
+    },
+    {
+      "id": "radar-mesonets",
+      "name": "NEXRAD radar and state mesonets",
+      "short_name": "Radar and mesonets",
+      "type": "observe",
+      "description": "Sibling inputs that detect storms once formed. Not researched in this round; placeholder.",
+      "operator": [
+        "NOAA NWS",
+        "states"
+      ],
+      "funding": {
+        "cost_annual_usd": {
+          "low": null,
+          "high": null,
+          "confidence": "embedded_unresolved"
+        }
+      },
+      "states": {
+        "kind": "node",
+        "labels": [
+          "Operating",
+          "Intermittent",
+          "Coverage reduced",
+          "Largely unavailable",
+          "Unavailable; observations never made"
+        ]
+      },
+      "sources": [
+        {
+          "id": "agu-fy27",
+          "cite": "AGU Bridge FY27 update ($40M mesonet expansion in House mark)",
+          "url": "https://thebridge.agu.org/2026/05/26/fy2027-appropriations-update-nasa-noaa-and-nsf/"
+        }
+      ],
+      "status": "operating"
+    },
+    {
+      "id": "severe-weather-public",
+      "name": "Families, schools, hospitals, aviation, insurers",
+      "short_name": "People in the path",
+      "type": "impact",
+      "operator": [
+        "n/a"
+      ],
+      "depends_on": [
+        {
+          "node": "wfo-tornado-warnings",
+          "kind": "feeds",
+          "strength": "direct"
+        }
+      ],
+      "states": {
+        "kind": "node",
+        "labels": [
+          "Protected",
+          "Wider safety margins",
+          "Avoidable losses rising",
+          "Decisions made blind",
+          "Losses that warnings would have prevented"
+        ]
+      },
+      "sources": [
+        {
+          "id": "triple-i-2025",
+          "cite": "Triple-I, 2025 SCS losses $51B insured",
+          "url": "https://www.carriermanagement.com/news/2026/04/16/286826.htm"
+        }
+      ],
+      "status": "operating"
+    },
+    {
+      "id": "igra",
+      "name": "Integrated Global Radiosonde Archive (IGRA) v2.2",
+      "short_name": "IGRA archive",
+      "type": "archive",
+      "description": "Quality-assured radiosonde and pilot balloon data from more than 2,800 stations, 1905 to present, updated daily from about 800 to 900 stations. Derived products include RATPAC. A missed launch is a permanent hole here from the day it is missed, even while the station shows as operating. ECMWF's RHARM builds on IGRA.",
+      "operator": [
+        "NOAA NESDIS NCEI"
+      ],
+      "funders": [
+        "NOAA"
+      ],
+      "funding": {
+        "cost_annual_usd": {
+          "low": null,
+          "high": null,
+          "confidence": "embedded_unresolved"
+        },
+        "funding_parent": {
+          "name": "NOAA NCEI"
+        }
+      },
+      "pattern": "portal_survives_feeders_die",
+      "depends_on": [
+        {
+          "node": "radiosonde-launch",
+          "kind": "feeds",
+          "strength": "direct"
+        },
+        {
+          "node": "gts-ncep-da",
+          "kind": "feeds",
+          "strength": "direct",
+          "note": "GTS and BUFR streams"
+        }
+      ],
+      "states": {
+        "kind": "node",
+        "labels": [
+          "Updating daily",
+          "Updates delayed",
+          "Updates stopped; files persist",
+          "Access impaired",
+          "Preservation at risk"
+        ]
+      },
+      "people": [
+        {
+          "name": "Imke Durre",
+          "role": "IGRA lead",
+          "org": "NCEI",
+          "contact": "ncei.igra@noaa.gov",
+          "source_ids": [
+            "durre-2023"
+          ]
+        },
+        {
+          "name": "Xungang Yin",
+          "role": "IGRA team",
+          "org": "NCEI",
+          "source_ids": [
+            "durre-2023"
+          ]
+        }
+      ],
+      "users": [
+        "climate researchers",
+        "RATPAC",
+        "ECMWF reanalysis and RHARM",
+        "satellite calibration"
+      ],
+      "dated_events": [
+        {
+          "date": "2023",
+          "label": "IGRA v2.2 begins (BUFR streams added)",
+          "status": "operational",
+          "kind": "upgrade",
+          "source_ids": [
+            "igra-desc"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "id": "igra",
+          "cite": "NCEI IGRA product page",
+          "url": "https://www.ncei.noaa.gov/products/weather-balloon/integrated-global-radiosonde-archive"
+        },
+        {
+          "id": "igra-desc",
+          "cite": "IGRA 2 product description",
+          "url": "https://www.ncei.noaa.gov/pub/data/igra/igra2-product-description.pdf"
+        },
+        {
+          "id": "durre-2023",
+          "cite": "Durre, NCEI radiosonde data services presentation, 2023",
+          "url": "https://cpaess.ucar.edu/sites/default/files/2023-08/Durre-Imke.pdf"
+        },
+        {
+          "id": "ecmwf-rharm",
+          "cite": "ECMWF RHARM description",
+          "url": "https://www.ecmwf.int/node/37592"
+        }
+      ],
+      "status": "operating"
+    },
+    {
+      "id": "ocean-color-satellite",
+      "name": "Satellite ocean color (Sentinel-3 OLCI, NOAA)",
+      "short_name": "Ocean color satellite",
+      "type": "observe",
+      "description": "Tells you where surface blooms are. Does not tell you whether the species is toxic now or whether toxin has accumulated in shellfish. Shared with plankton.",
+      "operator": [
+        "ESA/EUMETSAT",
+        "NOAA NESDIS"
+      ],
+      "funders": [
+        "EU",
+        "NOAA"
+      ],
+      "funding": {
+        "cost_annual_usd": {
+          "low": null,
+          "high": null,
+          "confidence": "embedded_unresolved"
+        }
+      },
+      "states": {
+        "kind": "node",
+        "labels": [
+          "Operating",
+          "Intermittent",
+          "Coverage reduced",
+          "Largely unavailable",
+          "Unavailable; observations never made"
+        ]
+      },
+      "sources": [
+        {
+          "id": "nccos-forecasts",
+          "cite": "NCCOS HAB forecasts",
+          "url": "https://coastalscience.noaa.gov/science-areas/habs/hab-forecasts/"
+        }
+      ],
+      "status": "operating"
+    },
+    {
+      "id": "nccos-satellite-processing",
+      "name": "NCCOS satellite HAB processing",
+      "short_name": "NCCOS satellite processing",
+      "type": "process",
+      "operator": [
+        "NOAA NCCOS"
+      ],
+      "funders": [
+        "NOAA NOS"
+      ],
+      "funding": {
+        "cost_annual_usd": {
+          "low": null,
+          "high": null,
+          "confidence": "embedded_unresolved"
+        }
+      },
+      "depends_on": [
+        {
+          "node": "ocean-color-satellite",
+          "kind": "feeds",
+          "strength": "direct"
+        }
+      ],
+      "states": {
+        "kind": "node",
+        "labels": [
+          "Operating",
+          "Backlog growing",
+          "Staff reduced",
+          "Capability largely gone",
+          "Expertise dispersed"
+        ]
+      },
+      "sources": [
+        {
+          "id": "nccos-forecasts",
+          "cite": "NCCOS HAB forecasts",
+          "url": "https://coastalscience.noaa.gov/science-areas/habs/hab-forecasts/"
+        }
+      ],
+      "status": "operating"
+    },
+    {
+      "id": "hab-field-sampling",
+      "name": "Regional cell counts, water samples, and shellfish tissue sampling",
+      "short_name": "Cell counts and tissue samples",
+      "type": "observe",
+      "description": "State, tribal, university, and citizen (HABscope) sampling: the observation that makes a satellite picture actionable. Gulf respiratory forecast ingests Karenia counts into a forecast refreshed every three hours out to 30 hours, so this input ages the day it stops.",
+      "operator": [
+        "state agencies (FWRI, WDFW, ODFW, Ohio EPA)",
+        "universities (UW ORHAB)",
+        "tribes",
+        "HABscope volunteers"
+      ],
+      "funders": [
+        "states",
+        "NOAA NCCOS",
+        "IOOS/NHABON",
+        "EPA GLRI"
+      ],
+      "funding": {
+        "cost_annual_usd": {
+          "low": null,
+          "high": null,
+          "confidence": "embedded_unresolved"
+        },
+        "note": "PNW: UW ESP program institutionalized with a $1,199,542 IOOS OTT award; the earlier $1M to $2M PNW estimate has no source."
+      },
+      "risk_vector": [
+        "grant_lapse",
+        "attrition"
+      ],
+      "convergence_point": true,
+      "substitutes": [
+        {
+          "node": "ocean-color-satellite",
+          "degree": "nominal",
+          "cannot_replace": [
+            "species identification",
+            "toxicity",
+            "tissue toxin levels"
+          ]
+        }
+      ],
+      "states": {
+        "kind": "node",
+        "labels": [
+          "Fresh samples",
+          "Sampling thinner",
+          "Toxicity status uncertain",
+          "No current cell counts",
+          "Season's samples never taken"
+        ]
+      },
+      "sources": [
+        {
+          "id": "nccos-gulf-faq",
+          "cite": "NCCOS Gulf Coast HAB forecast FAQ",
+          "url": "https://coastalscience.noaa.gov/science-areas/habs/hab-forecasts/gulf-coast/faqs/"
+        },
+        {
+          "id": "ioos-ott-fy23",
+          "cite": "IOOS OTT FY23 awards (UW ESP $1,199,542)",
+          "url": "https://ioos.noaa.gov/news/ott-fy23/"
+        }
+      ],
+      "status": "operating"
+    },
+    {
+      "id": "ifcb-esp",
+      "name": "IFCB, ESP, and autonomous HAB sensors (NHABON)",
+      "short_name": "IFCB/ESP sensors",
+      "type": "observe",
+      "description": "Imaging FlowCytobots and Environmental Sample Processors on buoys and moorings. NHABON appropriation: $1.0M FY20, $2.5M FY21-22, $3.0M FY23, $3.5M FY24 across all 11 RAs (GLOS got $276,000 in FY24). GLERL's Lake Erie ESPs were bought with EPA GLRI money. IOOS OTT FY26-29: up to $7.5M total, $400K per project per year.",
+      "operator": [
+        "IOOS Regional Associations",
+        "NOAA GLERL",
+        "universities"
+      ],
+      "funders": [
+        "NOAA IOOS (NHABON, OTT)",
+        "EPA GLRI",
+        "NOAA NCCOS"
+      ],
+      "funding": {
+        "cost_annual_usd": {
+          "low": 3500000,
+          "high": 3500000,
+          "confidence": "enacted",
+          "fiscal_year": "FY24",
+          "source_ids": [
+            "ioos-101"
+          ]
+        },
+        "funding_instruments": [
+          {
+            "funder": "NOAA IOOS",
+            "program": "NHABON",
+            "type": "appropriation",
+            "amount_usd": {
+              "low": 3500000,
+              "high": 3500000,
+              "confidence": "enacted",
+              "fiscal_year": "FY24",
+              "source_ids": [
+                "nhabon-fy24"
+              ]
+            },
+            "confidence": "verified_award"
+          },
+          {
+            "funder": "EPA",
+            "program": "Great Lakes Restoration Initiative",
+            "purpose": "ESP acquisition at GLERL",
+            "type": "other",
+            "confidence": "verified_program_not_award",
+            "source_ids": [
+              "glerl-esp"
+            ]
+          },
+          {
+            "funder": "NOAA IOOS",
+            "program": "Ocean Technology Transition FY26-29",
+            "type": "grant",
+            "amount_usd": {
+              "low": null,
+              "high": 7500000,
+              "confidence": "awarded"
+            },
+            "confidence": "verified_program_not_award"
+          }
+        ]
+      },
+      "risk_vector": [
+        "grant_lapse",
+        "asset_age"
+      ],
+      "pattern": "grant_lapse_cascade",
+      "depends_on": [
+        {
+          "node": "ioos-ra",
+          "kind": "feeds",
+          "strength": "direct",
+          "note": "platforms and technicians"
+        }
+      ],
+      "states": {
+        "kind": "node",
+        "labels": [
+          "Operating",
+          "Intermittent",
+          "Coverage reduced",
+          "Largely unavailable",
+          "Unavailable; observations never made"
+        ]
+      },
+      "sources": [
+        {
+          "id": "ioos-101",
+          "cite": "IOOS Association 101 for FAC, Jan 2025",
+          "url": "https://cdn.ioos.noaa.gov/attachments/2025/IOOS%20Assoc%20101_FAC%20Jan2025.pdf"
+        },
+        {
+          "id": "nhabon-fy24",
+          "cite": "NHABON FY24 funding awards",
+          "url": "https://cdn.ioos.noaa.gov/attachments/2025/NHABON%20Funding%20Awards%20FY24.pdf"
+        },
+        {
+          "id": "glerl-esp",
+          "cite": "GLERL ESP page",
+          "url": "https://www.glerl.noaa.gov/res/HABs_and_Hypoxia/esp.html"
+        },
+        {
+          "id": "ioos-habs",
+          "cite": "IOOS HABs project page",
+          "url": "https://ioos.noaa.gov/project/habs/"
+        }
+      ],
+      "status": "operating"
+    },
+    {
+      "id": "toxin-lab",
+      "name": "Toxin and tissue testing laboratories",
+      "short_name": "Toxin lab",
+      "type": "process",
+      "description": "The safety determination. Without it, a harvest cannot be confirmed safe or unsafe; managers must close blind or gamble.",
+      "operator": [
+        "state shellfish labs",
+        "FDA",
+        "tribal labs",
+        "university labs"
+      ],
+      "funders": [
+        "states",
+        "NOAA",
+        "FDA"
+      ],
+      "funding": {
+        "cost_annual_usd": {
+          "low": null,
+          "high": null,
+          "confidence": "embedded_unresolved"
+        }
+      },
+      "risk_vector": [
+        "attrition"
+      ],
+      "convergence_point": true,
+      "pattern": "human_transformation_layer",
+      "depends_on": [
+        {
+          "node": "hab-field-sampling",
+          "kind": "feeds",
+          "strength": "direct"
+        }
+      ],
+      "states": {
+        "kind": "node",
+        "labels": [
+          "Results on schedule",
+          "Backlog",
+          "Safety determination impaired",
+          "Cannot confirm safe harvest",
+          "Decision chain broken"
+        ]
+      },
+      "sources": [
+        {
+          "id": "nanoos-bulletins",
+          "cite": "NANOOS PNW HAB Bulletins",
+          "url": "https://nanoos.org/products/habs/forecasts/bulletins.php"
+        }
+      ],
+      "status": "operating"
+    },
+    {
+      "id": "nccos-competitive-habs",
+      "name": "NCCOS competitive HAB and hypoxia research (ECOHAB, MERHAB, PCMHAB)",
+      "short_name": "NCCOS HAB research",
+      "type": "process",
+      "description": "The R&D-to-operations pipeline. $15.2M awarded 2025; $13.4M awarded September 2026 ($5.5M new, $7.9M continuing 42 projects). Line zeroed in FY27 request. Projects run up to five years, so a zeroed line fails by grant-lapse cascade, not overnight.",
+      "operator": [
+        "NOAA NCCOS",
+        "university PIs"
+      ],
+      "funders": [
+        "NOAA NOS"
+      ],
+      "funding": {
+        "cost_annual_usd": {
+          "low": 13400000,
+          "high": 13400000,
+          "confidence": "awarded",
+          "fiscal_year": "FY26",
+          "source_ids": [
+            "nccos-134"
+          ]
+        },
+        "funding_instruments": [
+          {
+            "funder": "NOAA NCCOS",
+            "program": "Competitive HAB/hypoxia awards",
+            "type": "grant",
+            "amount_usd": {
+              "low": 15200000,
+              "high": 15200000,
+              "confidence": "awarded",
+              "fiscal_year": "FY25",
+              "source_ids": [
+                "nccos-152"
+              ]
+            },
+            "confidence": "verified_award"
+          },
+          {
+            "funder": "NOAA NCCOS",
+            "program": "Competitive HAB/hypoxia awards",
+            "type": "grant",
+            "award_start": "2026-09-01",
+            "award_end": "2029-09-01",
+            "amount_usd": {
+              "low": 13400000,
+              "high": 13400000,
+              "confidence": "awarded",
+              "fiscal_year": "FY26",
+              "source_ids": [
+                "nccos-134"
+              ]
+            },
+            "confidence": "verified_award",
+            "purpose": "$7.9M continues 42 projects; cohort runs to about 2029"
+          },
+          {
+            "funder": "NOAA NCCOS",
+            "program": "HAB competitive line",
+            "type": "appropriation",
+            "amount_usd": {
+              "low": 0,
+              "high": 0,
+              "confidence": "requested",
+              "fiscal_year": "FY27",
+              "source_ids": [
+                "kcf-brief-0929"
+              ]
+            },
+            "confidence": "verified_program_not_award"
+          }
+        ]
+      },
+      "risk_vector": [
+        "appropriation",
+        "grant_lapse"
+      ],
+      "pattern": "grant_lapse_cascade",
+      "states": {
+        "kind": "node",
+        "labels": [
+          "Operating",
+          "Backlog growing",
+          "Staff reduced",
+          "Capability largely gone",
+          "Expertise dispersed"
+        ]
+      },
+      "dated_events": [
+        {
+          "date": "2025",
+          "label": "NCCOS awards $15.2M",
+          "status": "realized",
+          "kind": "funding",
+          "source_ids": [
+            "nccos-152"
+          ]
+        },
+        {
+          "date": "2026-09",
+          "label": "NCCOS awards $13.4M; cohort runs to about 2029",
+          "status": "realized",
+          "kind": "funding",
+          "source_ids": [
+            "nccos-134"
+          ]
+        },
+        {
+          "date": "2027",
+          "label": "FY27 request zeroes the NCCOS competitive HAB line",
+          "status": "proposed",
+          "kind": "funding",
+          "source_ids": [
+            "kcf-brief-0929"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "id": "nccos-134",
+          "cite": "NCCOS $13.4M awarded, Sep 2026",
+          "url": "https://coastalscience.noaa.gov/news/13-4-million-awarded-for-harmful-algal-bloom-and-hypoxia-research/"
+        },
+        {
+          "id": "nccos-152",
+          "cite": "NCCOS $15.2M awarded, 2025",
+          "url": "https://coastalscience.noaa.gov/news/15-2-million-awarded-for-harmful-algal-bloom-and-hypoxia-research/"
+        },
+        {
+          "id": "kcf-brief-0929",
+          "cite": "KCF philanthropy brief, Sep 29 2026"
+        }
+      ],
+      "status": "operating"
+    },
+    {
+      "id": "pnw-hab-bulletin",
+      "name": "Pacific Northwest HAB Bulletin (NANOOS)",
+      "short_name": "PNW HAB Bulletin",
+      "type": "model",
+      "description": "Combines regional observations into a management-risk product; assessments trigger additional shellfish sampling and marine-mammal toxin testing. Cadence is event and season responsive: six bulletins in 2026 (Apr 8, Apr 22, May 12, May 26, Sep 24, Oct 4), not twice weekly.",
+      "operator": [
+        "NANOOS",
+        "University of Washington",
+        "NOAA NCCOS"
+      ],
+      "funders": [
+        "NOAA IOOS",
+        "NOAA NCCOS"
+      ],
+      "funding": {
+        "cost_annual_usd": {
+          "low": null,
+          "high": null,
+          "confidence": "embedded_unresolved"
+        }
+      },
+      "risk_vector": [
+        "grant_lapse",
+        "attrition"
+      ],
+      "depends_on": [
+        {
+          "node": "hab-field-sampling",
+          "kind": "feeds",
+          "strength": "direct"
+        },
+        {
+          "node": "ifcb-esp",
+          "kind": "feeds",
+          "strength": "direct"
+        },
+        {
+          "node": "nccos-satellite-processing",
+          "kind": "feeds",
+          "strength": "direct"
+        },
+        {
+          "node": "ndbc",
+          "kind": "feeds",
+          "strength": "supporting"
+        },
+        {
+          "node": "ioos-ra",
+          "kind": "feeds",
+          "strength": "direct"
+        }
+      ],
+      "states": {
+        "kind": "node",
+        "labels": [
+          "Bulletin issued for events",
+          "Bulletin issued for events",
+          "Bulletin without fresh toxin data",
+          "Decision windows missed",
+          "No bulletin"
+        ]
+      },
+      "cadence": "Event and season responsive, weeks apart",
+      "dated_events": [
+        {
+          "date": "2026-10-04",
+          "label": "Sixth PNW bulletin of 2026 issued",
+          "status": "operational",
+          "kind": "service",
+          "source_ids": [
+            "nanoos-bulletins"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "id": "nanoos-bulletins",
+          "cite": "NANOOS PNW HAB Bulletins",
+          "url": "https://nanoos.org/products/habs/forecasts/bulletins.php"
+        }
+      ],
+      "status": "operating"
+    },
+    {
+      "id": "lake-erie-hab-forecast",
+      "name": "Lake Erie HAB Forecast and Bulletin",
+      "short_name": "Lake Erie HAB forecast",
+      "type": "model",
+      "description": "Weekly early-season projections from mid-May; Monday and Thursday bulletins in season; transport forecast about 96 hours. Inputs: OLCI, NCCOS processing, GLERL samples, state and university samples, NWS water temperature, NDBC winds, LEOFS currents, ESP toxin measurements.",
+      "operator": [
+        "NOAA NCCOS",
+        "NOAA GLERL",
+        "CIGLR"
+      ],
+      "funders": [
+        "NOAA NOS",
+        "NOAA OAR",
+        "EPA GLRI"
+      ],
+      "funding": {
+        "cost_annual_usd": {
+          "low": null,
+          "high": null,
+          "confidence": "embedded_unresolved"
+        }
+      },
+      "risk_vector": [
+        "attrition",
+        "appropriation"
+      ],
+      "depends_on": [
+        {
+          "node": "nccos-satellite-processing",
+          "kind": "feeds",
+          "strength": "direct"
+        },
+        {
+          "node": "hab-field-sampling",
+          "kind": "feeds",
+          "strength": "direct"
+        },
+        {
+          "node": "ifcb-esp",
+          "kind": "feeds",
+          "strength": "direct"
+        },
+        {
+          "node": "ndbc",
+          "kind": "feeds",
+          "strength": "supporting"
+        }
+      ],
+      "states": {
+        "kind": "node",
+        "labels": [
+          "Current guidance",
+          "Latest run aging",
+          "Guidance losing skill",
+          "Guidance stale",
+          "No current guidance"
+        ]
+      },
+      "cadence": "Mon/Thu in season; ~96 h transport",
+      "sources": [
+        {
+          "id": "nccos-erie-faq",
+          "cite": "NCCOS Lake Erie HAB forecast FAQ",
+          "url": "https://coastalscience.noaa.gov/science-areas/habs/hab-forecasts/lake-erie/faqs/"
+        }
+      ],
+      "status": "operating"
+    },
+    {
+      "id": "gulf-respiratory-forecast",
+      "name": "Gulf Coast red tide respiratory forecast",
+      "short_name": "Gulf respiratory forecast",
+      "type": "model",
+      "description": "Karenia brevis cell counts plus forecast wind and shoreline geometry; new forecast every three hours out to 30 hours. Monitored daily by NCCOS. The shortest clock in the HAB system.",
+      "operator": [
+        "NOAA NCCOS",
+        "FWRI",
+        "GCOOS"
+      ],
+      "funders": [
+        "NOAA NOS",
+        "Florida"
+      ],
+      "funding": {
+        "cost_annual_usd": {
+          "low": null,
+          "high": null,
+          "confidence": "embedded_unresolved"
+        }
+      },
+      "pattern": "immediate_cliff",
+      "depends_on": [
+        {
+          "node": "hab-field-sampling",
+          "kind": "feeds",
+          "strength": "direct"
+        },
+        {
+          "node": "nccos-satellite-processing",
+          "kind": "feeds",
+          "strength": "supporting"
+        }
+      ],
+      "states": {
+        "kind": "node",
+        "labels": [
+          "Current guidance",
+          "Latest run aging",
+          "Guidance losing skill",
+          "Guidance stale",
+          "No current guidance"
+        ]
+      },
+      "cadence": "Every 3 hours, 30-hour horizon",
+      "sources": [
+        {
+          "id": "nccos-gulf-faq",
+          "cite": "NCCOS Gulf Coast HAB forecast FAQ",
+          "url": "https://coastalscience.noaa.gov/science-areas/habs/hab-forecasts/gulf-coast/faqs/"
+        },
+        {
+          "id": "nccos-gulf",
+          "cite": "NCCOS Gulf Coast forecasts",
+          "url": "https://coastalscience.noaa.gov/science-areas/habs/hab-forecasts/gulf-coast/"
+        }
+      ],
+      "status": "operating"
+    },
+    {
+      "id": "gom-cyst-survey",
+      "name": "Gulf of Maine winter Alexandrium cyst survey",
+      "short_name": "Winter cyst survey",
+      "type": "observe",
+      "description": "Winter sediment sampling (59 stations, February 2026) initializes the seasonal Alexandrium model. Cut it and nothing happens until spring, when the seasonal forecast has no initial condition.",
+      "operator": [
+        "NOAA NCCOS",
+        "WHOI"
+      ],
+      "funders": [
+        "NOAA NOS"
+      ],
+      "funding": {
+        "cost_annual_usd": {
+          "low": null,
+          "high": null,
+          "confidence": "embedded_unresolved"
+        }
+      },
+      "pattern": "delayed_seasonal",
+      "states": {
+        "kind": "node",
+        "labels": [
+          "Operating",
+          "Intermittent",
+          "Coverage reduced",
+          "Largely unavailable",
+          "Unavailable; observations never made"
+        ]
+      },
+      "cadence": "Annual, winter",
+      "dated_events": [
+        {
+          "date": "2026-02",
+          "label": "59-station cyst survey completed",
+          "status": "realized",
+          "kind": "event",
+          "source_ids": [
+            "nccos-gom-model"
+          ]
+        },
+        {
+          "date": "2026-05-11",
+          "label": "2026 seasonal forecast issued",
+          "status": "operational",
+          "kind": "service",
+          "source_ids": [
+            "nccos-gom-2026"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "id": "nccos-gom-model",
+          "cite": "NCCOS Gulf of Maine nowcast/forecast",
+          "url": "https://coastalscience.noaa.gov/science-areas/habs/hab-forecasts/gulf-of-maine/nowcast-forecast-simulation/"
+        },
+        {
+          "id": "nccos-gom-2026",
+          "cite": "NCCOS 2026 Gulf of Maine forecast",
+          "url": "https://coastalscience.noaa.gov/news/low-to-moderate-gulf-of-maine-red-tide-predicted-for-summer-2026/"
+        }
+      ],
+      "status": "operating"
+    },
+    {
+      "id": "gom-forecast",
+      "name": "Gulf of Maine seasonal and weekly Alexandrium forecast",
+      "short_name": "Gulf of Maine forecast",
+      "type": "model",
+      "operator": [
+        "NOAA NCCOS",
+        "WHOI"
+      ],
+      "funders": [
+        "NOAA NOS"
+      ],
+      "funding": {
+        "cost_annual_usd": {
+          "low": null,
+          "high": null,
+          "confidence": "embedded_unresolved"
+        }
+      },
+      "pattern": "delayed_seasonal",
+      "depends_on": [
+        {
+          "node": "gom-cyst-survey",
+          "kind": "feeds",
+          "strength": "direct"
+        },
+        {
+          "node": "ndbc",
+          "kind": "feeds",
+          "strength": "supporting"
+        }
+      ],
+      "states": {
+        "kind": "node",
+        "labels": [
+          "Current guidance",
+          "Latest run aging",
+          "Guidance losing skill",
+          "Guidance stale",
+          "No current guidance"
+        ]
+      },
+      "cadence": "Seasonal in May, weekly in season",
+      "sources": [
+        {
+          "id": "nccos-gom-2026",
+          "cite": "NCCOS 2026 Gulf of Maine forecast",
+          "url": "https://coastalscience.noaa.gov/news/low-to-moderate-gulf-of-maine-red-tide-predicted-for-summer-2026/"
+        }
+      ],
+      "status": "operating"
+    },
+    {
+      "id": "ahab",
+      "name": "Alaska Harmful Algal Bloom Network (AHAB)",
+      "short_name": "Alaska HAB Network",
+      "type": "process",
+      "description": "Formed 2017; tribal organizations, local monitoring, Alaska Sea Grant, NCCOS, USGS, WHOI. In subsistence communities the person collecting the shellfish may be the person eating it; no industrial seafood safety chain in between.",
+      "operator": [
+        "AOOS",
+        "tribal organizations",
+        "Alaska Sea Grant"
+      ],
+      "funders": [
+        "NOAA IOOS",
+        "NOAA NCCOS",
+        "NERRS"
+      ],
+      "funding": {
+        "cost_annual_usd": {
+          "low": null,
+          "high": null,
+          "confidence": "embedded_unresolved"
+        }
+      },
+      "risk_vector": [
+        "grant_lapse"
+      ],
+      "depends_on": [
+        {
+          "node": "hab-field-sampling",
+          "kind": "feeds",
+          "strength": "direct"
+        },
+        {
+          "node": "toxin-lab",
+          "kind": "feeds",
+          "strength": "direct"
+        },
+        {
+          "node": "ioos-ra",
+          "kind": "feeds",
+          "strength": "direct"
+        }
+      ],
+      "states": {
+        "kind": "node",
+        "labels": [
+          "Operating",
+          "Backlog growing",
+          "Staff reduced",
+          "Capability largely gone",
+          "Expertise dispersed"
+        ]
+      },
+      "sources": [
+        {
+          "id": "ahab",
+          "cite": "Alaska HAB Network",
+          "url": "https://ahab.aoos.org/ahab-network/"
+        }
+      ],
+      "status": "operating"
+    },
+    {
+      "id": "shellfish-harvest-decision",
+      "name": "Shellfish and crab harvest openings and closures",
+      "short_name": "Harvest open or closed",
+      "type": "decide",
+      "description": "A closure can mean the system worked. The failure state is not that the fishery closes; it is that nobody can tell whether it should be open.",
+      "operator": [
+        "WDFW",
+        "ODFW",
+        "CDFW",
+        "state shellfish programs",
+        "tribes"
+      ],
+      "funders": [
+        "states",
+        "tribes"
+      ],
+      "funding": {
+        "cost_annual_usd": {
+          "low": null,
+          "high": null,
+          "confidence": "embedded_unresolved"
+        }
+      },
+      "convergence_point": true,
+      "depends_on": [
+        {
+          "node": "toxin-lab",
+          "kind": "feeds",
+          "strength": "direct"
+        },
+        {
+          "node": "pnw-hab-bulletin",
+          "kind": "feeds",
+          "strength": "direct"
+        },
+        {
+          "node": "ahab",
+          "kind": "feeds",
+          "strength": "supporting"
+        },
+        {
+          "node": "gom-forecast",
+          "kind": "feeds",
+          "strength": "supporting"
+        }
+      ],
+      "states": {
+        "kind": "decision",
+        "labels": [
+          "Open on evidence",
+          "Increased sampling",
+          "Precautionary closure",
+          "Status uncertain",
+          "Safe status cannot be determined"
+        ]
+      },
+      "sources": [
+        {
+          "id": "noaa-habs-hurts",
+          "cite": "NOAA Fisheries, Hitting us where it hurts: HABs",
+          "url": "https://www.fisheries.noaa.gov/west-coast/science-data/hitting-us-where-it-hurts-untold-story-harmful-algal-blooms"
+        }
+      ],
+      "status": "operating"
+    },
+    {
+      "id": "drinking-water-decision",
+      "name": "Drinking-water plant operations",
+      "short_name": "Drinking water operations",
+      "type": "decide",
+      "description": "More than 19 million Americans rely on Great Lakes drinking water. Toledo, August 2014: about 500,000 people told not to drink tap water for three days.",
+      "operator": [
+        "municipal water utilities"
+      ],
+      "funders": [
+        "ratepayers"
+      ],
+      "funding": {
+        "cost_annual_usd": {
+          "low": null,
+          "high": null,
+          "confidence": "embedded_unresolved"
+        }
+      },
+      "depends_on": [
+        {
+          "node": "lake-erie-hab-forecast",
+          "kind": "feeds",
+          "strength": "direct"
+        },
+        {
+          "node": "ifcb-esp",
+          "kind": "feeds",
+          "strength": "direct"
+        },
+        {
+          "node": "hab-field-sampling",
+          "kind": "feeds",
+          "strength": "direct"
+        }
+      ],
+      "states": {
+        "kind": "decision",
+        "labels": [
+          "Treatment tuned to forecast",
+          "Treatment on margin",
+          "Reactive treatment",
+          "Intake risk unknown",
+          "Do-not-drink after the fact"
+        ]
+      },
+      "sources": [
+        {
+          "id": "nhabon-fy24",
+          "cite": "NHABON FY24 awards (19M people)",
+          "url": "https://cdn.ioos.noaa.gov/attachments/2025/NHABON%20Funding%20Awards%20FY24.pdf"
+        },
+        {
+          "id": "noaa-habs-hurts",
+          "cite": "NOAA Fisheries, Hitting us where it hurts",
+          "url": "https://www.fisheries.noaa.gov/west-coast/science-data/hitting-us-where-it-hurts-untold-story-harmful-algal-blooms"
+        }
+      ],
+      "status": "operating"
+    },
+    {
+      "id": "beach-health-decision",
+      "name": "Beach advisories and respiratory health guidance",
+      "short_name": "Beach health guidance",
+      "type": "decide",
+      "operator": [
+        "county health departments",
+        "Florida DOH"
+      ],
+      "funders": [
+        "states",
+        "counties"
+      ],
+      "funding": {
+        "cost_annual_usd": {
+          "low": null,
+          "high": null,
+          "confidence": "embedded_unresolved"
+        }
+      },
+      "depends_on": [
+        {
+          "node": "gulf-respiratory-forecast",
+          "kind": "feeds",
+          "strength": "direct"
+        }
+      ],
+      "states": {
+        "kind": "decision",
+        "labels": [
+          "Location-specific guidance",
+          "Guidance less specific",
+          "Guidance stale",
+          "Blanket advisories",
+          "No guidance"
+        ]
+      },
+      "sources": [
+        {
+          "id": "nccos-27b",
+          "cite": "NCCOS: total economic impact of 2018 red tide $2.7B",
+          "url": "https://coastalscience.noaa.gov/news/total-economic-impact-of-2018-red-tide-now-estimated-at-2-7b/"
+        }
+      ],
+      "status": "operating"
+    },
+    {
+      "id": "hab-communities",
+      "name": "Harvesters, coastal towns, water utilities, people with asthma and COPD",
+      "short_name": "Coastal communities and health",
+      "type": "impact",
+      "operator": [
+        "n/a"
+      ],
+      "depends_on": [
+        {
+          "node": "shellfish-harvest-decision",
+          "kind": "feeds",
+          "strength": "direct"
+        },
+        {
+          "node": "drinking-water-decision",
+          "kind": "feeds",
+          "strength": "direct"
+        },
+        {
+          "node": "beach-health-decision",
+          "kind": "feeds",
+          "strength": "direct"
+        }
+      ],
+      "states": {
+        "kind": "node",
+        "labels": [
+          "Protected",
+          "Wider safety margins",
+          "Avoidable losses rising",
+          "Decisions made blind",
+          "Losses that warnings would have prevented"
+        ]
+      },
+      "sources": [
+        {
+          "id": "noaa-habs-hurts",
+          "cite": "NOAA Fisheries, Hitting us where it hurts",
+          "url": "https://www.fisheries.noaa.gov/west-coast/science-data/hitting-us-where-it-hurts-untold-story-harmful-algal-blooms"
+        }
+      ],
+      "status": "operating"
+    },
+    {
+      "id": "ncei-habofs-archive",
+      "name": "NCEI HABOFS archive",
+      "short_name": "HAB forecast archive",
+      "type": "archive",
+      "operator": [
+        "NOAA NCEI"
+      ],
+      "funders": [
+        "NOAA"
+      ],
+      "funding": {
+        "cost_annual_usd": {
+          "low": null,
+          "high": null,
+          "confidence": "embedded_unresolved"
+        }
+      },
+      "pattern": "portal_survives_feeders_die",
+      "depends_on": [
+        {
+          "node": "lake-erie-hab-forecast",
+          "kind": "feeds",
+          "strength": "direct"
+        },
+        {
+          "node": "gulf-respiratory-forecast",
+          "kind": "feeds",
+          "strength": "direct"
+        }
+      ],
+      "states": {
+        "kind": "node",
+        "labels": [
+          "Updating daily",
+          "Updates delayed",
+          "Updates stopped; files persist",
+          "Access impaired",
+          "Preservation at risk"
+        ]
+      },
+      "sources": [
+        {
+          "id": "nccos-forecasts",
+          "cite": "NCCOS HAB forecasts (NCEI preserves HABOFS inputs and outputs)",
+          "url": "https://coastalscience.noaa.gov/science-areas/habs/hab-forecasts/"
+        }
+      ],
+      "status": "operating"
+    },
+    {
+      "id": "argo-us",
+      "name": "U.S. Argo float array contribution",
+      "short_name": "Argo floats",
+      "type": "observe",
+      "description": "Floats profile 0 to 2,000 m every 10 days; about 100,000 profiles a year globally; 3 million profiles by July 2024. NOAA funds roughly half the international program; 26 countries participate. A U.S. cut thins the global array; it does not switch Argo off. Existing floats keep profiling until batteries fail.",
+      "operator": [
+        "NOAA AOML (U.S. DAC)",
+        "Scripps",
+        "UW",
+        "WHOI",
+        "PMEL"
+      ],
+      "funders": [
+        "NOAA GOMO",
+        "NSF (partial)",
+        "Navy (partial)"
+      ],
+      "funding": {
+        "cost_annual_usd": {
+          "low": null,
+          "high": null,
+          "confidence": "embedded_unresolved"
+        },
+        "funding_parent": {
+          "name": "NOAA Global Ocean Monitoring and Observing"
+        },
+        "note": "Standalone FY24-FY27 procurement and deployment figure unresolved."
+      },
+      "risk_vector": [
+        "appropriation",
+        "asset_age"
+      ],
+      "pattern": "asset_attrition",
+      "sampling_role": {
+        "horizontal": "global",
+        "vertical_m": {
+          "min": 0,
+          "max": 2000
+        },
+        "repeat": "P10D",
+        "variables": [
+          "temperature",
+          "salinity"
+        ],
+        "unique_capability": [
+          "global repeat sampling",
+          "salinity"
+        ]
+      },
+      "asset_population": {
+        "confidence": "estimate",
+        "typical_lifetime_years": 5
+      },
+      "substitutes": [
+        {
+          "node": "xbt-hd",
+          "degree": "partial",
+          "cannot_replace": [
+            "global spatial coverage",
+            "salinity"
+          ]
+        }
+      ],
+      "states": {
+        "kind": "constraint",
+        "labels": [
+          "Global 0-2000 m field well sampled",
+          "Replacement deficit emerging",
+          "Sampling density falling",
+          "Regional gaps growing",
+          "Global upper-ocean change poorly constrained"
+        ]
+      },
+      "sources": [
+        {
+          "id": "aoml-argo",
+          "cite": "NOAA AOML Argo",
+          "url": "https://www.aoml.noaa.gov/argo/"
+        },
+        {
+          "id": "noaa-argo-25",
+          "cite": "NOAA, Argo turns 25",
+          "url": "https://prod-01-alb-www-noaa.woc.noaa.gov/news/argo-crown-jewel-of-ocean-observing-systems-turns-25"
+        }
+      ],
+      "status": "operating"
+    },
+    {
+      "id": "xbt-hd",
+      "name": "High-density XBT transects (Ship of Opportunity Program)",
+      "short_name": "XBT transects",
+      "type": "observe",
+      "description": "About 15% of global non-mooring temperature profiles but about 80% of profiles in boundary currents. HD lines repeated about four times a year at 10 to 35 km spacing; AOML maintains 11 Atlantic transects. More than 2 million XBTs deployed; some lines exceed 30 years. The dominant profile observation from the 1970s until Argo (about 2007).",
+      "operator": [
+        "NOAA AOML SOOP",
+        "partner institutions"
+      ],
+      "funders": [
+        "NOAA Office of Climate Observations / GOMO"
+      ],
+      "funding": {
+        "cost_annual_usd": {
+          "low": null,
+          "high": null,
+          "confidence": "embedded_unresolved"
+        },
+        "funding_parent": {
+          "name": "NOAA climate and global ocean observing"
+        }
+      },
+      "risk_vector": [
+        "appropriation",
+        "ship_time"
+      ],
+      "sampling_role": {
+        "horizontal": "transect",
+        "vertical_m": {
+          "min": 0,
+          "max": 1000
+        },
+        "repeat": "about quarterly (HD); up to 18/yr (FR)",
+        "variables": [
+          "temperature"
+        ],
+        "unique_capability": [
+          "repeat mesoscale boundary-current sections",
+          "pre-Argo historical continuity"
+        ]
+      },
+      "substitutes": [
+        {
+          "node": "argo-us",
+          "degree": "nominal",
+          "cannot_replace": [
+            "repeat cross-current sections at 25 km"
+          ]
+        }
+      ],
+      "states": {
+        "kind": "constraint",
+        "labels": [
+          "Boundary-current transport resolved",
+          "Next occupation at risk",
+          "Next HD section missed",
+          "Seasonal transport poorly constrained",
+          "Boundary-current heat transport record broken"
+        ]
+      },
+      "sources": [
+        {
+          "id": "aoml-xbt",
+          "cite": "NOAA AOML XBT Network",
+          "url": "https://www.aoml.noaa.gov/xbt-network/"
+        },
+        {
+          "id": "aoml-soop",
+          "cite": "NOAA AOML Ships of Opportunity",
+          "url": "https://www.aoml.noaa.gov/ships-of-opportunity/"
+        },
+        {
+          "id": "aoml-xbt-ack",
+          "cite": "AOML XBT acknowledgement (funder)",
+          "url": "https://www.aoml.noaa.gov/proj/xbt-network/"
+        }
+      ],
+      "status": "operating"
+    },
+    {
+      "id": "go-ship",
+      "name": "U.S. GO-SHIP repeat hydrography",
+      "short_name": "GO-SHIP sections",
+      "type": "observe",
+      "description": "Full-depth, reference-quality CTD and bottle hydrography: heat, freshwater, carbon, oxygen, nutrients, tracers. 55 sustained sections internationally; about decadal repeat. Funded by NSF and NOAA. Calibrates Deep and BGC Argo. 2026: A16S and P04E completed; NSF request for input on future ocean-observing priorities (Sep 2026) puts future support under review, not terminated.",
+      "operator": [
+        "U.S. GO-SHIP (Scripps, WHOI, AOML, PMEL, universities)",
+        "CCHDO (data)"
+      ],
+      "funders": [
+        "NSF OCE",
+        "NOAA GOMO"
+      ],
+      "funding": {
+        "cost_annual_usd": {
+          "low": null,
+          "high": null,
+          "confidence": "embedded_unresolved"
+        },
+        "note": "Separate the science award, technical support, ship time, and CCHDO stewardship before assigning any figure."
+      },
+      "risk_vector": [
+        "funding_priority_review",
+        "ship_time"
+      ],
+      "sampling_role": {
+        "horizontal": "transect",
+        "vertical_m": {
+          "min": 0,
+          "max": "seafloor"
+        },
+        "repeat": "about decadal",
+        "variables": [
+          "temperature",
+          "salinity",
+          "oxygen",
+          "carbon",
+          "nutrients",
+          "transient tracers"
+        ],
+        "unique_capability": [
+          "full depth",
+          "climate-quality reference",
+          "multi-parameter"
+        ]
+      },
+      "states": {
+        "kind": "constraint",
+        "labels": [
+          "Full-depth reference section scheduled",
+          "Occupation at risk",
+          "Occupation cancelled",
+          "Decadal reference point missing",
+          "Deep-ocean change and sensor reference gap"
+        ]
+      },
+      "dated_events": [
+        {
+          "date": "2026",
+          "label": "A16S and P04E occupations completed",
+          "status": "realized",
+          "kind": "event",
+          "source_ids": [
+            "usgoship-news"
+          ]
+        },
+        {
+          "date": "2026-09-03",
+          "label": "NSF request for input on future ocean-observing priorities (responses due Sep 30)",
+          "status": "realized",
+          "kind": "policy",
+          "source_ids": [
+            "usgoship-nsf"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "id": "usgoship",
+          "cite": "U.S. GO-SHIP",
+          "url": "https://usgoship.ucsd.edu/"
+        },
+        {
+          "id": "usgoship-news",
+          "cite": "U.S. GO-SHIP news",
+          "url": "https://usgoship.ucsd.edu/news/"
+        },
+        {
+          "id": "usgoship-nsf",
+          "cite": "U.S. GO-SHIP notice on NSF RFI, Sep 3 2026",
+          "url": "https://usgoship.ucsd.edu/2026/09/03/notice-nsf-request-for-input-on-future-ocean-observing-priorities-respond-by-sept-30-2026/"
+        },
+        {
+          "id": "aoml-goship",
+          "cite": "NOAA AOML GO-SHIP",
+          "url": "https://www.aoml.noaa.gov/occ-goship-new/"
+        },
+        {
+          "id": "goship-calib",
+          "cite": "GO-SHIP calibration role (NSF PAR)",
+          "url": "https://par.nsf.gov/servlets/purl/10351558"
+        }
+      ],
+      "status": "operating"
+    },
+    {
+      "id": "aoml-argo-dac",
+      "name": "AOML U.S. Argo Data Assembly Center",
+      "short_name": "Argo DAC",
+      "type": "process",
+      "operator": [
+        "NOAA AOML"
+      ],
+      "funders": [
+        "NOAA GOMO"
+      ],
+      "funding": {
+        "cost_annual_usd": {
+          "low": null,
+          "high": null,
+          "confidence": "embedded_unresolved"
+        }
+      },
+      "depends_on": [
+        {
+          "node": "argo-us",
+          "kind": "feeds",
+          "strength": "direct"
+        },
+        {
+          "node": "go-ship",
+          "kind": "calibrates",
+          "strength": "direct",
+          "note": "reference hydrography for Deep and BGC Argo quality"
+        }
+      ],
+      "states": {
+        "kind": "node",
+        "labels": [
+          "Operating",
+          "Backlog growing",
+          "Staff reduced",
+          "Capability largely gone",
+          "Expertise dispersed"
+        ]
+      },
+      "cadence": "Real-time within about 24 hours",
+      "sources": [
+        {
+          "id": "aoml-argo",
+          "cite": "NOAA AOML Argo",
+          "url": "https://www.aoml.noaa.gov/argo/"
+        }
+      ],
+      "status": "operating"
+    },
+    {
+      "id": "cchdo",
+      "name": "CLIVAR and Carbon Hydrographic Data Office (CCHDO)",
+      "short_name": "CCHDO",
+      "type": "archive",
+      "operator": [
+        "Scripps Institution of Oceanography"
+      ],
+      "funders": [
+        "NSF",
+        "NOAA"
+      ],
+      "funding": {
+        "cost_annual_usd": {
+          "low": null,
+          "high": null,
+          "confidence": "embedded_unresolved"
+        }
+      },
+      "depends_on": [
+        {
+          "node": "go-ship",
+          "kind": "feeds",
+          "strength": "direct"
+        }
+      ],
+      "states": {
+        "kind": "node",
+        "labels": [
+          "Updating daily",
+          "Updates delayed",
+          "Updates stopped; files persist",
+          "Access impaired",
+          "Preservation at risk"
+        ]
+      },
+      "sources": [
+        {
+          "id": "usgoship",
+          "cite": "U.S. GO-SHIP",
+          "url": "https://usgoship.ucsd.edu/"
+        }
+      ],
+      "status": "operating"
+    },
+    {
+      "id": "wod-ncei",
+      "name": "World Ocean Database: ingest, QC, bias correction, harmonization",
+      "short_name": "World Ocean Database",
+      "type": "process",
+      "description": "Makes heterogeneous observations across decades, platforms, nations, and instrument generations comparable: Argo QC, XBT fall-rate and bias corrections, CTD reference quality. The human transformation layer for the ocean record.",
+      "operator": [
+        "NOAA NCEI Ocean Climate Laboratory"
+      ],
+      "funders": [
+        "NOAA NESDIS"
+      ],
+      "funding": {
+        "cost_annual_usd": {
+          "low": null,
+          "high": null,
+          "confidence": "embedded_unresolved"
+        },
+        "funding_parent": {
+          "name": "NOAA NCEI"
+        }
+      },
+      "risk_vector": [
+        "attrition"
+      ],
+      "convergence_point": true,
+      "pattern": "human_transformation_layer",
+      "depends_on": [
+        {
+          "node": "argo-us",
+          "kind": "feeds",
+          "strength": "direct"
+        },
+        {
+          "node": "xbt-hd",
+          "kind": "feeds",
+          "strength": "direct"
+        },
+        {
+          "node": "go-ship",
+          "kind": "feeds",
+          "strength": "direct"
+        },
+        {
+          "node": "aoml-argo-dac",
+          "kind": "feeds",
+          "strength": "direct"
+        },
+        {
+          "node": "cchdo",
+          "kind": "feeds",
+          "strength": "direct"
+        }
+      ],
+      "states": {
+        "kind": "node",
+        "labels": [
+          "Operating",
+          "Backlog growing",
+          "Staff reduced",
+          "Capability largely gone",
+          "Expertise dispersed"
+        ]
+      },
+      "sources": [
+        {
+          "id": "wod",
+          "cite": "NCEI World Ocean Database",
+          "url": "https://www.ncei.noaa.gov/products/world-ocean-database"
+        }
+      ],
+      "status": "operating"
+    },
+    {
+      "id": "ohc-product",
+      "name": "NCEI Ocean Heat Content product",
+      "short_name": "Ocean heat content",
+      "type": "product",
+      "description": "Temperature anomalies at standard depths integrated through the water column; monthly, seasonal, yearly, pentadal fields. Uncertainty depends not only on measurement error but on the geographic and temporal distribution of subsurface observations. Pull observations out and the number can still be produced; its constraint deteriorates.",
+      "operator": [
+        "NOAA NCEI"
+      ],
+      "funders": [
+        "NOAA NESDIS"
+      ],
+      "funding": {
+        "cost_annual_usd": {
+          "low": null,
+          "high": null,
+          "confidence": "embedded_unresolved"
+        }
+      },
+      "pattern": "portal_survives_feeders_die",
+      "depends_on": [
+        {
+          "node": "wod-ncei",
+          "kind": "feeds",
+          "strength": "direct"
+        }
+      ],
+      "states": {
+        "kind": "constraint",
+        "labels": [
+          "Global OHC well constrained",
+          "Observational coverage reduced",
+          "Regional and depth gaps growing",
+          "Change increasingly model-dependent",
+          "Global OHC update not defensible"
+        ]
+      },
+      "sources": [
+        {
+          "id": "ncei-ohc",
+          "cite": "NCEI Ocean heat, salt, sea level",
+          "url": "https://www.ncei.noaa.gov/products/ocean-heat-salt-sea-level"
+        }
+      ],
+      "status": "operating"
+    },
+    {
+      "id": "climate-assessment",
+      "name": "Earth energy imbalance, sea level attribution, climate and ocean models",
+      "short_name": "Climate assessment",
+      "type": "decide",
+      "description": "Where OHC becomes the global warming budget, steric sea level projections, and model validation. Downstream users: IPCC, reinsurers, coastal planners, hurricane intensity forecasting.",
+      "operator": [
+        "IPCC",
+        "NOAA",
+        "NASA",
+        "academic community"
+      ],
+      "funders": [
+        "various"
+      ],
+      "funding": {
+        "cost_annual_usd": {
+          "low": null,
+          "high": null,
+          "confidence": "embedded_unresolved"
+        }
+      },
+      "depends_on": [
+        {
+          "node": "ohc-product",
+          "kind": "feeds",
+          "strength": "direct"
+        },
+        {
+          "node": "argo-us",
+          "kind": "feeds",
+          "strength": "direct",
+          "note": "operational and reanalysis use"
+        }
+      ],
+      "states": {
+        "kind": "constraint",
+        "labels": [
+          "Heat budget closes",
+          "Residuals growing",
+          "Attribution less certain",
+          "Projections lean on models",
+          "Current ocean heat change no longer adequately observed"
+        ]
+      },
+      "sources": [
+        {
+          "id": "ncei-ohc",
+          "cite": "NCEI Ocean heat, salt, sea level",
+          "url": "https://www.ncei.noaa.gov/products/ocean-heat-salt-sea-level"
+        }
+      ],
+      "status": "operating"
+    },
+    {
+      "id": "calcofi",
+      "name": "CalCOFI plankton and hydrographic surveys",
+      "short_name": "CalCOFI plankton and hydrogr",
+      "type": "observe",
+      "operator": [
+        "Scripps",
+        "NOAA SWFSC",
+        "CDFW"
+      ],
+      "funding": {
+        "cost_annual_usd": {
+          "low": null,
+          "high": null,
+          "confidence": "embedded_unresolved"
+        }
+      },
+      "states": {
+        "kind": "node",
+        "labels": [
+          "Operating",
+          "Intermittent",
+          "Coverage reduced",
+          "Largely unavailable",
+          "Unavailable; observations never made"
+        ]
+      },
+      "description": "Plankton track is scoped, not researched. Placeholder pending the research document.",
+      "sources": [
+        {
+          "id": "kcf-plankton-scope",
+          "cite": "KCF plankton research scoping note, Oct 6 2026"
+        }
+      ],
+      "status": "operating"
+    },
+    {
+      "id": "ecofoci",
+      "name": "EcoFOCI Bering Sea and Gulf of Alaska ecosystem surveys",
+      "short_name": "EcoFOCI Bering Sea and Gulf ",
+      "type": "observe",
+      "operator": [
+        "NOAA PMEL",
+        "NOAA AFSC"
+      ],
+      "funding": {
+        "cost_annual_usd": {
+          "low": null,
+          "high": null,
+          "confidence": "embedded_unresolved"
+        }
+      },
+      "states": {
+        "kind": "node",
+        "labels": [
+          "Operating",
+          "Intermittent",
+          "Coverage reduced",
+          "Largely unavailable",
+          "Unavailable; observations never made"
+        ]
+      },
+      "description": "Plankton track is scoped, not researched. Placeholder pending the research document.",
+      "sources": [
+        {
+          "id": "kcf-plankton-scope",
+          "cite": "KCF plankton research scoping note, Oct 6 2026"
+        }
+      ],
+      "status": "operating"
+    },
+    {
+      "id": "ecomon",
+      "name": "NEFSC Ecosystem Monitoring (EcoMon) plankton tows",
+      "short_name": "NEFSC Ecosystem Monitoring",
+      "type": "observe",
+      "operator": [
+        "NOAA NEFSC"
+      ],
+      "funding": {
+        "cost_annual_usd": {
+          "low": null,
+          "high": null,
+          "confidence": "embedded_unresolved"
+        }
+      },
+      "states": {
+        "kind": "node",
+        "labels": [
+          "Operating",
+          "Intermittent",
+          "Coverage reduced",
+          "Largely unavailable",
+          "Unavailable; observations never made"
+        ]
+      },
+      "description": "Plankton track is scoped, not researched. Placeholder pending the research document.",
+      "sources": [
+        {
+          "id": "kcf-plankton-scope",
+          "cite": "KCF plankton research scoping note, Oct 6 2026"
+        }
+      ],
+      "status": "operating"
+    },
+    {
+      "id": "cpr",
+      "name": "Continuous Plankton Recorder lines",
+      "short_name": "Continuous Plankton Recorder",
+      "type": "observe",
+      "operator": [
+        "NOAA",
+        "Marine Biological Association (UK)",
+        "partners"
+      ],
+      "funding": {
+        "cost_annual_usd": {
+          "low": null,
+          "high": null,
+          "confidence": "embedded_unresolved"
+        }
+      },
+      "states": {
+        "kind": "node",
+        "labels": [
+          "Operating",
+          "Intermittent",
+          "Coverage reduced",
+          "Largely unavailable",
+          "Unavailable; observations never made"
+        ]
+      },
+      "description": "Plankton track is scoped, not researched. Placeholder pending the research document.",
+      "sources": [
+        {
+          "id": "kcf-plankton-scope",
+          "cite": "KCF plankton research scoping note, Oct 6 2026"
+        }
+      ],
+      "status": "operating"
+    },
+    {
+      "id": "plankton-taxonomy",
+      "name": "Taxonomy, counts, and image classification",
+      "short_name": "Taxonomy, counts, and image ",
+      "type": "process",
+      "operator": [
+        "NOAA science centers",
+        "universities",
+        "IOOS RAs"
+      ],
+      "funding": {
+        "cost_annual_usd": {
+          "low": null,
+          "high": null,
+          "confidence": "embedded_unresolved"
+        }
+      },
+      "states": {
+        "kind": "node",
+        "labels": [
+          "Operating",
+          "Backlog growing",
+          "Staff reduced",
+          "Capability largely gone",
+          "Expertise dispersed"
+        ]
+      },
+      "description": "Plankton track is scoped, not researched. Placeholder pending the research document.",
+      "sources": [
+        {
+          "id": "kcf-plankton-scope",
+          "cite": "KCF plankton research scoping note, Oct 6 2026"
+        }
+      ],
+      "status": "operating"
+    },
+    {
+      "id": "ecosystem-status-reports",
+      "name": "Ecosystem Status Reports and State of the Ecosystem",
+      "short_name": "Ecosystem Status Reports and",
+      "type": "product",
+      "operator": [
+        "NOAA AFSC",
+        "NOAA NEFSC",
+        "councils"
+      ],
+      "funding": {
+        "cost_annual_usd": {
+          "low": null,
+          "high": null,
+          "confidence": "embedded_unresolved"
+        }
+      },
+      "states": {
+        "kind": "node",
+        "labels": [
+          "Serving current data",
+          "Serving current data",
+          "Serving aging data",
+          "Serving mostly historical data",
+          "Serving historical data only"
+        ]
+      },
+      "description": "Plankton track is scoped, not researched. Placeholder pending the research document.",
+      "sources": [
+        {
+          "id": "kcf-plankton-scope",
+          "cite": "KCF plankton research scoping note, Oct 6 2026"
+        }
+      ],
+      "status": "operating"
+    },
+    {
+      "id": "stock-assessments",
+      "name": "Stock assessments and risk tables",
+      "short_name": "Stock assessments and risk t",
+      "type": "model",
+      "operator": [
+        "NOAA Fisheries science centers"
+      ],
+      "funding": {
+        "cost_annual_usd": {
+          "low": null,
+          "high": null,
+          "confidence": "embedded_unresolved"
+        }
+      },
+      "states": {
+        "kind": "node",
+        "labels": [
+          "Current guidance",
+          "Latest run aging",
+          "Guidance losing skill",
+          "Guidance stale",
+          "No current guidance"
+        ]
+      },
+      "description": "Plankton track is scoped, not researched. Placeholder pending the research document.",
+      "sources": [
+        {
+          "id": "kcf-plankton-scope",
+          "cite": "KCF plankton research scoping note, Oct 6 2026"
+        }
+      ],
+      "status": "operating"
+    },
+    {
+      "id": "catch-limits",
+      "name": "Annual catch limits, seasons, closures",
+      "short_name": "Annual catch limits, seasons",
+      "type": "decide",
+      "operator": [
+        "Regional Fishery Management Councils",
+        "NOAA Fisheries"
+      ],
+      "funding": {
+        "cost_annual_usd": {
+          "low": null,
+          "high": null,
+          "confidence": "embedded_unresolved"
+        }
+      },
+      "states": {
+        "kind": "decision",
+        "labels": [
+          "Limits on full ecosystem context",
+          "Context aging",
+          "Data-limited assessment",
+          "Precautionary cuts without evidence",
+          "Status unknown"
+        ]
+      },
+      "description": "Plankton track is scoped, not researched. Placeholder pending the research document.",
+      "sources": [
+        {
+          "id": "kcf-plankton-scope",
+          "cite": "KCF plankton research scoping note, Oct 6 2026"
+        }
+      ],
+      "status": "operating"
+    },
+    {
+      "id": "fishing-communities",
+      "name": "Fleets, processors, ports",
+      "short_name": "Fleets, processors, ports",
+      "type": "impact",
+      "operator": [
+        "n/a"
+      ],
+      "funding": {
+        "cost_annual_usd": {
+          "low": null,
+          "high": null,
+          "confidence": "embedded_unresolved"
+        }
+      },
+      "states": {
+        "kind": "node",
+        "labels": [
+          "Protected",
+          "Wider safety margins",
+          "Avoidable losses rising",
+          "Decisions made blind",
+          "Losses that warnings would have prevented"
+        ]
+      },
+      "description": "Plankton track is scoped, not researched. Placeholder pending the research document.",
+      "sources": [
+        {
+          "id": "kcf-plankton-scope",
+          "cite": "KCF plankton research scoping note, Oct 6 2026"
+        }
+      ],
+      "status": "operating"
+    }
+  ]
+}

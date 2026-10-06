@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pull the Plug: what stops working when an observation goes unfunded</title>
+<meta name="description" content="Cut funding to one link in a U.S. environmental observing chain and watch what stops working. Keeling Curve Foundation, Data Continuity Initiative.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#EDF0F2; --panel:#FFFFFF; --ink:#16232B; --ink2:#4A5A64; --line:#CBD3D8; --soft:#F3F5F6;
+  --ok:#1C7C6E; --ok-dim:#5A9E93; --warn:#C58A1B; --bad:#B5462B; --lost:#3B1F1B; --sel:#0F5C9E;
+  --ok-bg:#EEF4F2; --warn-bg:#FBF6EA; --bad-bg:#F9EFEB; --lost-bg:#F2E9E7;
+  --serif:"Source Serif 4","Charter","Georgia",serif; --sans:"Source Sans 3","Helvetica Neue",Arial,sans-serif;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --paper:#141A1E; --panel:#1C242A; --ink:#E6EBEE; --ink2:#A4B0B8; --line:#35424A; --soft:#222C33;
+  --ok-bg:#1B2E2B; --warn-bg:#2F2A1C; --bad-bg:#2F2220; --lost-bg:#2A1F1D; --sel:#6FB1EA; }}
+:root[data-theme="dark"]{ --paper:#141A1E; --panel:#1C242A; --ink:#E6EBEE; --ink2:#A4B0B8; --line:#35424A; --soft:#222C33; --ok-bg:#1B2E2B; --warn-bg:#2F2A1C; --bad-bg:#2F2220; --lost-bg:#2A1F1D; --sel:#6FB1EA; }
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:inherit}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.4}
+.wrap{max-width:1440px;margin:0 auto;padding:22px 28px 28px;display:grid;gap:16px}
+h1{font-family:var(--serif);font-weight:400;font-size:clamp(24px,3vw,34px);margin:0;letter-spacing:-.01em;line-height:1.15}
+h2{font-family:var(--serif);font-weight:400;font-size:21px;margin:0}
+.sub{color:var(--ink2);max-width:820px;margin-top:6px}
+.top{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;flex-wrap:wrap}
+.brand{text-align:right;font-size:13px;color:var(--ink2);line-height:1.4}
+.brand b{display:block;color:var(--ink);font-size:14px}
+.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.row .cat{font-size:13px;color:var(--ink2);margin-right:2px}
+button{font:inherit;color:inherit;cursor:pointer}
+.chip{border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:6px 13px;font-size:14px;display:flex;gap:8px;align-items:center}
+.chip i{width:9px;height:9px;border-radius:50%;display:inline-block;flex:none}
+.chip.on{border-color:var(--sel);color:var(--sel);font-weight:700;background:color-mix(in srgb,var(--sel) 10%,var(--panel))}
+.chip.stub{border-style:dashed;color:var(--ink2)}
+.chip:focus-visible,.node:focus-visible,.btn:focus-visible{outline:3px solid var(--sel);outline-offset:2px}
+.main{display:grid;grid-template-columns:1fr 360px;gap:16px;min-width:0;align-items:start}
+@media (max-width:980px){.main{grid-template-columns:1fr}}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px 20px;min-width:0}
+.chainhead{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:12px;flex-wrap:wrap}
+.hint{font-size:13px;color:var(--ink2)}
+.frame{font-size:14px;color:var(--ink2);margin:0 0 14px;max-width:70ch}
+/* chain */
+.chain{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(160px,1fr);gap:0;align-items:stretch;overflow-x:auto;padding:14px 2px 6px}
+.node{position:relative;text-align:left;padding:12px 12px 12px 14px;border:1.5px solid var(--line);border-radius:8px;background:var(--panel);margin-right:30px;min-height:170px;display:flex;flex-direction:column;gap:5px;transition:background .25s,border-color .25s}
+.node:last-child{margin-right:0}
+.node:not(:last-child)::after{content:"";position:absolute;right:-27px;top:50%;width:24px;height:2px;background:var(--line)}
+.node:not(:last-child)::before{content:"";position:absolute;right:-29px;top:calc(50% - 5px);border:6px solid transparent;border-left:8px solid var(--line);border-right:0}
+.node .stage{font-size:12px;color:var(--ink2)}
+.node .name{font-weight:700;font-size:14.5px;line-height:1.25}
+.node .meta{font-size:12.5px;color:var(--ink2);line-height:1.35;flex:1}
+.node .state{display:inline-block;margin-top:4px;padding:3px 8px;border-radius:5px;font-size:12px;font-weight:700;color:#fff;align-self:flex-start}
+.node .plug{position:absolute;top:-12px;right:10px;background:var(--lost);color:#fff;font-size:11px;padding:3px 8px;border-radius:5px;font-weight:700}
+.node .conv{position:absolute;top:-12px;left:10px;background:var(--panel);border:1px solid var(--line);color:var(--ink2);font-size:11px;padding:2px 7px;border-radius:5px}
+.node.l1{border-color:var(--ok-dim);background:var(--ok-bg)} .node.l2{border-color:var(--warn);background:var(--warn-bg)} .node.l3{border-color:var(--bad);background:var(--bad-bg)} .node.l4{border-color:var(--lost);background:var(--lost-bg)}
+.node.cut{border-width:2px;border-color:var(--lost)} .node.cut .name{text-decoration:line-through;color:var(--lost)}
+.node.cuttable{cursor:pointer} .node.cuttable:hover{border-color:var(--sel)}
+.st0{background:var(--ok)} .st1{background:var(--ok-dim)} .st2{background:var(--warn)} .st3{background:var(--bad)} .st4{background:var(--lost)}
+/* radial as hub and lanes */
+.hub{display:grid;grid-template-columns:200px 1fr;gap:22px;align-items:center}
+@media (max-width:700px){.hub{grid-template-columns:1fr}.lane{grid-template-columns:1fr}.lane .lname{border-left:0;padding-left:0;font-weight:700;color:var(--ink)}.hubnode{max-width:260px}}
+.hubnode{min-height:140px;margin-right:0!important}
+.hubnode::after,.hubnode::before{display:none!important}
+.lanes{display:grid;gap:14px;min-width:0}
+.lane{display:grid;grid-template-columns:120px 1fr;gap:10px;align-items:center;min-width:0}
+.lane .lname{font-size:13px;color:var(--ink2);line-height:1.25;padding-left:10px;border-left:2px solid var(--line)}
+.lane .chain{padding:12px 2px 4px}
+.lane .node{min-height:120px}
+.legend{display:flex;gap:14px;margin-top:12px;font-size:12.5px;color:var(--ink2);align-items:center;flex-wrap:wrap}
+.legend i{width:12px;height:12px;border-radius:3px;display:inline-block;margin-right:5px;vertical-align:-1px}
+.callout{margin-top:12px;font-size:13.5px;background:var(--soft);border-left:3px solid var(--sel);padding:9px 12px;line-height:1.4}
+.callout b{display:block;font-size:12.5px;color:var(--ink2);font-weight:600;margin-bottom:2px}
+/* side */
+.side h2{margin-bottom:10px}
+.big{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+.big .k{font-size:12.5px;color:var(--ink2);line-height:1.3}
+.big .v{font-family:var(--serif);font-size:28px;line-height:1.05;margin-top:4px;word-break:break-word}
+.big .v.red{color:var(--bad)} .big .v.small{font-size:16px;line-height:1.3;font-family:var(--sans);color:var(--ink2);padding-top:6px}
+.ratio{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:11px 0;margin:4px 0 12px;font-size:13.5px;line-height:1.4}
+.ratio .n{font-family:var(--serif);font-size:30px;white-space:nowrap;display:block;margin-bottom:4px}
+.rec{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:8px;border:1px solid var(--line);font-size:13.5px;line-height:1.35;background:var(--soft)}
+.rec .dot{width:14px;height:14px;border-radius:50%;flex:none;margin-top:2px}
+.rec b{display:block}
+.src{font-size:12px;color:var(--ink2);margin-top:10px;line-height:1.45}
+.est{display:inline-block;border:1px solid var(--line);border-radius:4px;padding:0 5px;font-size:11px;margin-left:3px;vertical-align:1px}
+.bridge{margin-top:12px;padding:12px;border-radius:8px;background:var(--ok-bg);border:1px solid color-mix(in srgb,var(--ok) 35%,var(--line));font-size:13.5px;line-height:1.4}
+.bridge b{display:block;color:var(--ok);margin-bottom:3px}
+.rstar{margin-top:10px;font-size:12.5px;color:var(--ink2);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+/* timeline */
+.tlhead{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:8px;flex-wrap:wrap}
+.tlhead .now{font-size:14px}.tlhead .now b{color:var(--bad)}
+.btns{display:flex;gap:8px}
+.btn{border:1px solid var(--line);background:var(--panel);border-radius:7px;padding:7px 13px;font-size:13.5px;font-weight:600}
+.btn.primary{background:var(--sel);border-color:var(--sel);color:#fff}
+.btn.restore{background:var(--ok);border-color:var(--ok);color:#fff}
+.track{position:relative;height:100px;margin:0 10px}
+.rail{position:absolute;left:0;right:0;top:64px;height:6px;border-radius:3px;background:var(--line)}
+.rail .past{position:absolute;left:0;top:0;height:6px;border-radius:3px;background:repeating-linear-gradient(90deg,#8C979E 0 6px,transparent 6px 10px)}
+.rail .fut{position:absolute;top:0;height:6px;border-radius:3px}
+.tick{position:absolute;top:76px;font-size:12px;color:var(--ink2);transform:translateX(-50%);white-space:nowrap}
+.tick.today{color:var(--ink);font-weight:700}.tick.today::before{content:"";position:absolute;left:50%;top:-16px;width:2px;height:14px;background:var(--ink)}
+.ev{position:absolute;top:30px;transform:translateX(-50%);font-size:11px;color:var(--ink2);white-space:nowrap;max-width:150px;overflow:hidden;text-overflow:ellipsis}
+.ev::after{content:"";position:absolute;left:50%;bottom:-16px;width:8px;height:8px;border-radius:50%;transform:translateX(-50%);background:var(--lost)}
+.ev.proposed::after{background:var(--panel);border:2px solid var(--bad);width:6px;height:6px}
+.ev.operational::after{background:var(--ok)} .ev.cliff::after{background:var(--warn);border-radius:1px;transform:translateX(-50%) rotate(45deg)}
+.ev.r0{top:34px}.ev.r0::after{bottom:-12px}.ev.r1{top:18px}.ev.r1::after{bottom:-28px}.ev.r1::before{content:"";position:absolute;left:50%;bottom:-22px;width:1px;height:16px;background:var(--line)}.ev.r2{top:2px}.ev.r2::after{bottom:-44px}.ev.r2::before{content:"";position:absolute;left:50%;bottom:-38px;width:1px;height:32px;background:var(--line)}.ev.dot{top:34px;width:0;height:0;overflow:visible}.ev.dot::after{bottom:-12px}
+input[type=range].knob{position:absolute;left:0;right:0;top:50px;width:100%;margin:0;-webkit-appearance:none;appearance:none;background:transparent;height:34px}
+input[type=range].knob::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;border-radius:50%;background:#fff;border:3px solid var(--sel);box-shadow:0 1px 4px rgba(0,0,0,.3);cursor:grab}
+input[type=range].knob::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:#fff;border:3px solid var(--sel);cursor:grab}
+input[type=range].knob::-webkit-slider-runnable-track{height:34px;background:transparent}
+.foot{display:flex;justify-content:space-between;font-size:12px;color:var(--ink2);margin-top:8px;gap:12px;flex-wrap:wrap}
+.foot b{color:var(--ink);word-break:break-all}
+/* record bar */
+.recbar{margin-top:14px}
+.recbar .lab{font-size:12.5px;color:var(--ink2);margin-bottom:5px;display:flex;justify-content:space-between}
+.recbar .bar{position:relative;height:16px;border-radius:4px;background:var(--ok);overflow:hidden}
+.recbar .gap{position:absolute;top:0;bottom:0;background:var(--lost)}
+.recbar .fut{position:absolute;top:0;bottom:0;right:0;background:repeating-linear-gradient(90deg,var(--line) 0 4px,transparent 4px 8px)}
+.recbar .gaplab{font-size:12px;color:var(--lost);font-weight:700;margin-top:4px}
+.clocks{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:8px;margin-top:12px}
+.clock{border:1px solid var(--line);border-radius:7px;padding:8px 10px;font-size:12.5px;background:var(--soft)}
+.clock .q{color:var(--ink2);font-size:12px}.clock .a{font-weight:700;margin-top:2px;display:flex;gap:6px;align-items:center}.clock .a i{width:10px;height:10px;border-radius:50%;display:inline-block}
+.stubnote{padding:14px;border:1px dashed var(--line);border-radius:8px;color:var(--ink2);font-size:14px}
+.sitefoot{font-size:12px;color:var(--ink2);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-top:4px}
+.sitefoot a{color:inherit}
+.sr{position:absolute;left:-9999px}
+@media (prefers-reduced-motion: reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap" id="app">
+  <div class="top">
+    <div>
+      <h1 id="h1">Pull the plug on one observation. Watch what stops working.</h1>
+      <div class="sub" id="sub"></div>
+    </div>
+    <div class="brand"><b>Keeling Curve Foundation</b>Data Continuity Initiative<br><span id="asof"></span></div>
+  </div>
+
+  <div class="row" id="systems"><span class="cat">Choose a system:</span></div>
+  <div class="row" id="scenarios"><span class="cat">Pull the plug on:</span></div>
+
+  <div class="main">
+    <div class="panel">
+      <div class="chainhead"><h2 id="headline"></h2><span class="hint" id="hint"></span></div>
+      <p class="frame" id="frame"></p>
+      <div id="graph"></div>
+      <div class="legend" id="legend"></div>
+      <div class="callout" id="callout"></div>
+      <div class="clocks" id="clocks"></div>
+    </div>
+    <div class="panel side" id="side"></div>
+  </div>
+
+  <div class="panel">
+    <div class="tlhead">
+      <h2>Drag the clock</h2>
+      <span class="now" id="now"></span>
+      <div class="btns"><button class="btn" id="reset">Reset</button><button class="btn restore" id="restore">Restore funding</button></div>
+    </div>
+    <div class="track" id="track"></div>
+    <div class="recbar" id="recbar"></div>
+    <div class="foot"><span>Dotted rail: what has already happened. Solid rail: what follows your cut. Hollow dots: proposed in the FY27 request, not enacted. Diamonds: funding cliffs.</span><span>Share this scenario: <b id="share"></b></span></div>
+  </div>
+
+  <div class="sitefoot"><span>Figures are ranges with their confidence shown; sources are in the data files. Where no line item exists, no number is shown.</span><span>Last updated 2026-10-06 · <a href="data/systems.json">data</a> · <a href="https://github.com/keelingcurve/pull-the-plug">source</a></span></div>
+</div>
+
+<script>
+(async function(){
+const TODAY = new Date(2026,9,6); // fixed "today" for reproducible scenarios; update at build
+const [nodesDoc, sysDoc] = await Promise.all([fetch('data/nodes.json').then(r=>r.json()), fetch('data/systems.json').then(r=>r.json())]);
+const NODES = Object.fromEntries(nodesDoc.nodes.map(n=>[n.id,n]));
+const SYS = sysDoc.systems; const DISP = sysDoc.display||{}; const LEVELS = sysDoc.levels;
+const TL0 = DISP.timeline_start_year||2024, TL1 = DISP.timeline_end_year||2031;
+const COL = {0:'var(--ok)',1:'var(--ok-dim)',2:'var(--warn)',3:'var(--bad)',4:'var(--lost)'};
+const STAGE = {observe:'Observe',process:'Check and process',transform:'Put in one frame',model:'Forecast',product:'Deliver',decide:'Decide',archive:'Preserve',impact:'Who feels it'};
+const $ = s=>document.querySelector(s);
+
+// ---------- state from URL
+const q = new URLSearchParams(location.search);
+let state = { system: q.get('system')||SYS[0].id, scenario: q.get('scenario')||null, t: q.has('t')?parseFloat(q.get('t')):null, restored: q.get('restored')==='1', restoreAt: q.has('r')?parseFloat(q.get('r')):null };
+function sys(){ return SYS.find(s=>s.id===state.system)||SYS[0]; }
+function scen(){ const s=sys(); return s.scenarios.find(x=>x.id===state.scenario)||s.scenarios[0]; }
+function pushURL(){ const p=new URLSearchParams({system:state.system,scenario:scen().id,t:String(Math.round(state.t*10)/10)}); if(state.restored){p.set('restored','1');p.set('r',String(state.restoreAt));} history.replaceState(null,'','?'+p.toString()); $('#share').textContent=location.origin+location.pathname+'?'+p.toString(); }
+
+// ---------- time helpers
+const cutDate = TODAY; // the visitor cuts "today"
+function monthsBetween(a,b){ return (b.getFullYear()-a.getFullYear())*12+(b.getMonth()-a.getMonth())+(b.getDate()-a.getDate())/30; }
+function dateOf(months){ const d=new Date(cutDate); d.setMonth(d.getMonth()+Math.floor(months)); d.setDate(d.getDate()+Math.round((months%1)*30)); return d; }
+function fmt(d){ return d.toLocaleString('en-US',{month:'short',year:'numeric'}); }
+function parseDate(s){ const p=s.split('-').map(Number); return new Date(p[0],(p[1]||1)-1,p[2]||1); }
+const totalMonths = (TL1-TL0+1)*12; const t0 = new Date(TL0,0,1);
+function pct(d){ return Math.max(0,Math.min(100, monthsBetween(t0,d)/totalMonths*100)); }
+
+// when does a timeline entry fire (months after cut)? null = never within horizon
+function fireAt(entry, sc){
+  const tr=entry.trigger, cut=NODES[sc.cut_node];
+  if(tr.type==='elapsed') return tr.months;
+  if(tr.type==='event') return tr.expected_per_year? 12/tr.expected_per_year : 6;
+  if(tr.type==='calendar'){ for(let m=0;m<120;m++){ const mo=dateOf(m).getMonth()+1; const inWin = tr.month_from<=tr.month_to ? (mo>=tr.month_from&&mo<=tr.month_to) : (mo>=tr.month_from||mo<=tr.month_to); if(inWin && m>0) return m; } return null; }
+  if(tr.type==='attrition'){ const life=(cut.asset_population&&cut.asset_population.typical_lifetime_years)||5; return tr.fraction_lost*life*12; }
+  if(tr.type==='funding_cliff'){ const fi=((cut.funding||{}).funding_instruments||[])[tr.instrument_index]; if(fi&&fi.award_end){ return Math.max(0.5, monthsBetween(cutDate,parseDate(fi.award_end))); } return 12; }
+  return null;
+}
+
+// ---------- engine: levels per node at time t
+function computeLevels(sc, t){
+  const lv={}, label={}, basis={};
+  if(state.restored){ // after restore: everything recovers except the record (handled by record bar)
+    return {lv,label,basis};
+  }
+  for(const e of sc.timeline){ const f=fireAt(e,sc); if(f===null||f>t) continue; const L=Math.max(lv[e.affects]||0, e.level); if(L!==lv[e.affects]){ lv[e.affects]=L; label[e.affects]=e.state_label||null; basis[e.affects]=e.basis; } }
+  lv[sc.cut_node]=Math.max(lv[sc.cut_node]||0, t>0?2:0);
+  // propagate downstream through feeds edges, up to a fixed point
+  const ids=Object.keys(NODES); let changed=true, guard=0;
+  while(changed && guard++<12){ changed=false;
+    for(const id of ids){ const n=NODES[id]; let inherit=0;
+      for(const d of (n.depends_on||[])){ if(d.kind!=='feeds') continue; const up=lv[d.node]||0; const pen = d.strength==='direct'?0 : d.strength==='supporting'?1 : 4; inherit=Math.max(inherit, Math.max(0, up-pen)); }
+      // archives inherit at most 2 from upstream (files persist); impacts inherit fully
+      if(n.type==='archive') inherit=Math.min(inherit,2);
+      const L=Math.max(lv[id]||0, inherit); if(L!==(lv[id]||0)){ lv[id]=L; changed=true; } }
+  }
+  return {lv,label,basis};
+}
+
+// ---------- rendering
+function money(m){ if(!m||m.low==null&&m.high==null) return null; const f=v=>v>=1e9?`$${(v/1e9).toFixed(v%1e9?1:0)}B`:v>=1e6?`$${(v/1e6).toFixed(v%1e6?1:0)}M`:v>=1e3?`$${Math.round(v/1e3)}K`:`$${v}`; if(m.low!=null&&m.high!=null&&m.low!==m.high) return `${f(m.low)}–${f(m.high)}`; return f(m.low!=null?m.low:m.high); }
+function conf(c){ return c==='estimate'?'<span class="est" title="Derived or secondary figure">est.</span>':c==='requested'?'<span class="est">FY27 request</span>':c==='authorized'?'<span class="est">authorized</span>':''; }
+function costOf(n){ const f=n.funding||{}; const c=f.cost_annual_usd; if(c&&c.confidence!=='embedded_unresolved'&&money(c)) return {v:money(c), note:conf(c.confidence)+(c.fiscal_year?' '+c.fiscal_year:'')}; if(f.funding_parent){ const figs=(f.funding_parent.figures||[]).map(x=>`${money(x)}${x.fiscal_year?' '+x.fiscal_year:''} ${x.confidence}`).join('; '); return {v:'Funding not resolved', small:true, note:`Inside ${f.funding_parent.name}${figs?' ('+figs+')':''}. No line item.`}; } return {v:'Funding not resolved', small:true, note:'No line item in the budget. The tool does not estimate it.'}; }
+
+function nodeBox(id, L, lab, sc, isHub){
+  const n=NODES[id]; const level=L.lv[id]||0; const stLabel = L.label[id] || (n.states.labels[level]);
+  const cost=costOf(n); const op=(n.operator||[]).slice(0,2).join('; ');
+  const metaBits = n.type==='impact' ? [] : [op, cost.v!=='Funding not resolved'?`About ${cost.v}/yr`:'', n.cadence?n.cadence:''].filter(Boolean);
+  const cuttable = !isHub && n.type!=='impact' && sys().scenarios.some(s=>s.cut_node===id);
+  return `<button class="node l${level} ${id===sc.cut_node?'cut':''} ${cuttable?'cuttable':''} ${isHub?'hubnode':''}" data-node="${id}" ${cuttable?`title="Pull the plug on ${n.short_name||n.name}"`:''}>
+    ${id===sc.cut_node&&!state.restored?'<span class="plug">Unplugged by you</span>':''}${n.convergence_point&&id!==sc.cut_node?'<span class="conv">convergence point</span>':''}
+    <span class="stage">${STAGE[n.type]||n.type}</span><span class="name">${n.short_name||n.name}</span>
+    <span class="meta">${metaBits.join('<br>')}</span>
+    <span class="state st${level}">${stLabel}</span></button>`;
+}
+
+function renderGraph(){
+  const s=sys(), sc=scen(), L=computeLevels(sc,state.t);
+  const g=$('#graph');
+  if(s.status==='stub'){ g.innerHTML=`<div class="stubnote"><b>Under development.</b> ${s.frame||''} The research track for this system is pending; no figures are shown until it is sourced.</div>`; return L; }
+  if(s.layout==='chain'){ const b=s.branches.find(x=>x.headline)||s.branches[0]; g.innerHTML=`<div class="chain">${b.path.map(id=>nodeBox(id,L,null,sc)).join('')}</div>`; }
+  else { // hub and lanes: the shared first node becomes the hub if all branches share it
+    const first=s.branches[0].path[0]; const shared=s.branches.filter(b=>b.path[0]===first).length>=2;
+    const hub = shared? first : null;
+    const lanes = s.branches.filter(b=>b.id!=='shared'&&b.id!=='regional'&&b.id!=='archive'||s.branches.length<=3).slice(0,5);
+    g.innerHTML = `<div class="hub">${hub?nodeBox(hub,L,null,sc,true):'<div></div>'}<div class="lanes">${lanes.map(b=>`<div class="lane"><div class="lname">${b.name}</div><div class="chain">${b.path.filter(id=>id!==hub).map(id=>nodeBox(id,L,null,sc)).join('')}</div></div>`).join('')}</div></div>`;
+  }
+  g.querySelectorAll('.node.cuttable').forEach(el=>el.addEventListener('click',()=>{ const id=el.dataset.node; const sc2=s.scenarios.find(x=>x.cut_node===id); if(sc2){ state.scenario=sc2.id; state.restored=false; state.t=sc2.start_clock_months??6; render(); } }));
+  return L;
+}
+
+function renderSide(L){
+  const s=sys(), sc=scen(), cut=NODES[sc.cut_node];
+  const side=$('#side');
+  if(s.status==='stub'){ side.innerHTML=`<h2>What this link costs, and what it protects</h2><div class="stubnote">Numbers appear when the research track is complete.</div>`; return; }
+  const cost=costOf(cut);
+  const ex=(s.exposure||[]); const lead=ex.find(e=>e.causal_link!=='direct')||ex[0]; const rest=ex.filter(e=>e!==lead);
+  const exV = lead? (lead.value_usd&&money(lead.value_usd)? money(lead.value_usd) : lead.value_text||'') : '';
+  const lev=s.leverage; let ratioHTML='';
+  if(lev.mode==='ratio' && lead && lead.value_usd && cut.funding && cut.funding.cost_annual_usd && cut.funding.cost_annual_usd.low){ ratioHTML=`<span class="n">documented gap</span>${lev.text}<div class="src">${lev.ratio_note||''}</div>`; }
+  else ratioHTML=`<span class="n" style="font-size:18px">${lev.mode==='scale'?'Scale, not ratio':lev.mode==='avoided_loss'?'Documented avoided loss':'Documented gap'}</span>${lev.text}`;
+  const rb=sc.record_bar||{recoverable:'partial'}; const recCol = rb.recoverable==='no'?'var(--lost)':rb.recoverable==='partial'?'var(--warn)':'var(--ok)';
+  const recTxt = rb.recoverable==='no'?'No.':rb.recoverable==='partial'?'Partly.':'Yes.';
+  const recBody = state.t<=0? 'Nothing has been lost yet. Drag the clock.' : rb.recoverable==='no'? `${Math.round(state.t)} months of observations can't be re-collected. ${rb.note||''}` : rb.recoverable==='partial' ? `Products can be restarted; the observations missed in ${Math.round(state.t)} months cannot.` : `This can be restarted. ${rb.note||''}`;
+  const br=s.bridge;
+  const rs = s.rstar? (0.40*s.rstar.D+0.30*s.rstar.P+0.20*(1-s.rstar.RRS)+0.10*s.rstar.DIRS).toFixed(2):null;
+  side.innerHTML = `<h2>What this link costs, and what it protects</h2>
+    <div class="big"><div><div class="k">Annual cost to keep <em>${cut.short_name||cut.name}</em> running</div><div class="v ${cost.small?'small':''}">${cost.v}</div><div class="src">${cost.note||''}</div></div>
+    <div><div class="k">${lead?lead.label:'Exposure'}</div><div class="v red ${exV.length>14?'small':''}">${exV}</div><div class="src">${lead?lead.basis:''}${lead&&lead.value_usd?conf(lead.value_usd.confidence):''}</div></div></div>
+    <div class="ratio">${ratioHTML}</div>
+    <div class="rec"><span class="dot" style="background:${recCol}"></span><span><b>Recoverable? ${recTxt}</b>${recBody}</span></div>
+    ${rest.slice(0,3).map(e=>`<div class="src">${e.label}: ${e.value_usd&&money(e.value_usd)?money(e.value_usd):e.value_text||''}${e.value_usd?conf(e.value_usd.confidence):''}. ${e.basis}</div>`).join('')}
+    ${br?`<div class="bridge"><b>Philanthropic bridge${br.confidence==='concept'?' (concept)':br.confidence==='estimate'?' (estimate)':''}</b>${br.summary}${br.cannot_do?`<div class="src">Cannot do: ${br.cannot_do}</div>`:''}</div>`:''}
+    ${(DISP.show_rstar&&rs)||DISP.show_risk_vector?`<div class="rstar">${DISP.show_rstar&&rs?`<span>R* priority: ${rs}</span>`:''}${DISP.show_risk_vector?`<span>Risk vector: ${(s.risk_vector||[]).join(', ')}</span>`:''}</div>`:''}`;
+}
+
+function renderClocks(L){
+  const s=sys(), sc=scen(); const c=$('#clocks');
+  if(s.status==='stub'||s.layout!=='radial'){ c.innerHTML=''; return; }
+  const lanes=s.branches.filter(b=>b.headline||['htf','rsl','lake-erie','gulf','xbt','goship'].includes(b.id)).slice(0,4);
+  c.innerHTML = lanes.map(b=>{ const last=b.path.filter(id=>NODES[id].type!=='impact').slice(-1)[0]; const lv=L.lv[last]||0; const n=NODES[last]; return `<div class="clock"><div class="q">${b.name}</div><div class="a"><i style="background:${COL[lv]}"></i>${L.label[last]||n.states.labels[lv]}</div></div>`; }).join('');
+}
+
+function renderTimeline(){
+  const s=sys(), sc=scen(); const tr=$('#track');
+  const nowD=dateOf(state.t); const todayP=pct(TODAY);
+  const evs=[...(s.dated_events||[])]; for(const b of s.branches) for(const id of b.path) for(const e of (NODES[id].dated_events||[])) if(!evs.some(x=>x.label===e.label)) evs.push({...e,node:id});
+  // funding cliffs for the cut node
+  const cut=NODES[sc.cut_node]; (((cut.funding||{}).funding_instruments)||[]).forEach(fi=>{ if(fi.award_end) evs.push({date:fi.award_end,label:`${fi.program} ends`,status:'proposed',kind:'funding',cliff:true}); });
+  const sorted=evs.map(e=>({...e,d:parseDate(e.date)})).filter(e=>e.d>=t0&&e.d.getFullYear()<=TL1).sort((a,b)=>a.d-b.d);
+  const W=tr.clientWidth||1200; const rows=[-1e9,-1e9,-1e9]; const evHTML=sorted.map(e=>{ const p=pct(e.d); const px=p/100*W; const w=Math.min(150,e.label.length*5.6)+10; let row=rows.findIndex(r=>px-w/2>r); const short=e.label.length>26?e.label.slice(0,24)+'…':e.label; if(row<0) return `<div class="ev ${e.status} ${e.cliff?'cliff':''} dot" style="left:${p}%" title="${e.label} (${e.status})"></div>`; rows[row]=px+w/2; return `<div class="ev ${e.status} ${e.cliff?'cliff':''} r${row}" style="left:${p}%" title="${e.label} (${e.status})">${short}</div>`; }).join('');
+  const ticks=[]; for(let y=TL0;y<=TL1;y++){ const p=pct(new Date(y,0,1)); if(Math.abs(p-todayP)<5) continue; ticks.push(`<div class="tick" style="left:${p}%">${y}</div>`); }
+  const futEnd = pct(nowD);
+  const grad = `linear-gradient(90deg, var(--ok) 0%, var(--warn) 35%, var(--bad) 65%, var(--lost) 100%)`;
+  tr.innerHTML = `<div class="rail"><div class="past" style="width:${todayP}%"></div><div class="fut" style="left:${todayP}%;width:${Math.max(0,futEnd-todayP)}%;background:${state.restored?'var(--ok)':grad}"></div></div>
+    ${evHTML}${ticks.join('')}<div class="tick today" style="left:${todayP}%">Today, ${fmt(TODAY)}</div>
+    <input class="knob" type="range" min="0" max="${Math.round(monthsBetween(TODAY,new Date(TL1,11,31)))}" step="0.5" value="${state.t}" aria-label="Months after the cut">`;
+  tr.querySelector('.knob').addEventListener('input',e=>{ state.t=parseFloat(e.target.value); renderAll(false); });
+  $('#now').innerHTML = `Showing: <b>${fmt(nowD)}</b>, ${state.t<1?'the week of the cut':`${Math.round(state.t)} months after the cut`}${state.restored?` · funding restored at month ${Math.round(state.restoreAt)}`:''}`;
+  // record bar
+  const rb=sc.record_bar; const r=$('#recbar');
+  if(rb && s.status!=='stub'){ const y0=rb.start_year, span=(TL1+1-y0); const gapStart=(monthsBetween(new Date(y0,0,1),TODAY)/12)/span*100; const gapEnd=((monthsBetween(new Date(y0,0,1),TODAY)+ (state.restored? state.restoreAt: state.t))/12)/span*100; const fut=100-((monthsBetween(new Date(y0,0,1),nowD)/12)/span*100);
+    r.innerHTML=`<div class="lab"><span>The observational record, ${y0} onward</span><span>${state.restored?'Restored, with the gap that stays':'What the record will show'}</span></div><div class="bar"><div class="gap" style="left:${gapStart}%;width:${Math.max(0.4,gapEnd-gapStart)}%"></div><div class="fut" style="width:${Math.max(0,fut)}%"></div></div>${state.t>0?`<div class="gaplab">${rb.gap_label||'Never observed'}: ${fmt(TODAY)} to ${fmt(dateOf(state.restored?state.restoreAt:state.t))}${rb.recoverable==='no'?' · never recoverable':''}</div>`:''}`; }
+  else r.innerHTML='';
+}
+
+function renderChrome(){
+  const s=sys(), sc=scen();
+  $('#sub').textContent = DISP.certainty_sentence||'';
+  $('#asof').textContent = `Figures as of ${fmt(parseDate(sysDoc.updated||'2026-10-06'))}`;
+  const sysRow=$('#systems'); sysRow.querySelectorAll('.chip').forEach(c=>c.remove());
+  for(const x of SYS){ const b=document.createElement('button'); b.className=`chip ${x.id===s.id?'on':''} ${x.status==='stub'?'stub':''}`; const worst=Math.max(0,...x.scenarios.flatMap(sc=>sc.timeline.map(t=>t.level)).slice(0,1)); b.innerHTML=`<i style="background:${x.status==='stub'?'var(--line)':x.scenarios.some(z=>z.already_happened)?'var(--lost)':'var(--warn)'}"></i>${x.name}${x.status==='stub'?' (under development)':x.status==='partial'?' (partial)':''}`; b.addEventListener('click',()=>{ state.system=x.id; state.scenario=null; state.restored=false; state.t=null; render(); }); sysRow.appendChild(b); }
+  const scRow=$('#scenarios'); scRow.querySelectorAll('.chip').forEach(c=>c.remove());
+  for(const x of s.scenarios){ const b=document.createElement('button'); b.className=`chip ${x.id===sc.id?'on':''}`; b.innerHTML=`<i style="background:${x.already_happened?'var(--lost)':'var(--bad)'}"></i>${x.name}${x.already_happened?' · already happened':''}`; b.addEventListener('click',()=>{ state.scenario=x.id; state.restored=false; state.t=x.start_clock_months??6; render(); }); scRow.appendChild(b); }
+  $('#headline').textContent = s.headline||s.name; $('#hint').textContent = s.status==='stub'?'':'Click any link to pull its plug'; $('#frame').textContent = s.frame||'';
+  $('#legend').innerHTML = LEVELS.map(l=>`<span><i style="background:${COL[l.level]}"></i>${l.level} ${l.name}</span>`).join('')+`<span style="margin-left:auto">${s.status==='complete'?'Sources in data/systems.json':s.status==='partial'?'Funding layer unresolved':'Research pending'}</span>`;
+  const cutN=NODES[sc.cut_node]; const sc_basis = sc.timeline.filter(t=>(fireAt(t,sc)||1e9)<=state.t).map(t=>t.basis); const documented=sc_basis.filter(b=>b==='documented'||b==='analog').length;
+  $('#callout').innerHTML = s.status==='stub'?'':`<b>What broke first</b>${sc.what_broke_first||sc.lesson}<div class="src" style="margin-top:6px">${sc.what_broke_first?'Lesson: '+sc.lesson+' ':''}${sc_basis.length?`· ${documented} of ${sc_basis.length} steps shown so far rest on a documented source or a documented analog; the rest follow from operational cadence or engineering judgment.`:''}</div>`;
+}
+
+function renderAll(chrome=true){ if(chrome) renderChrome(); const L=renderGraph(); renderSide(L); renderClocks(L); renderTimeline(); pushURL(); postHeight(); }
+function render(){ if(state.t==null) state.t = scen().start_clock_months ?? 6; renderAll(true); }
+$('#restore').addEventListener('click',()=>{ if(state.restored){ state.restored=false; } else { state.restored=true; state.restoreAt=state.t; } $('#restore').textContent = state.restored?'Undo restore':'Restore funding'; renderAll(false); });
+$('#reset').addEventListener('click',()=>{ state.restored=false; state.t=0; $('#restore').textContent='Restore funding'; renderAll(false); });
+function postHeight(){ try{ parent.postMessage({type:'pull-the-plug:height', height:document.documentElement.scrollHeight}, '*'); }catch(e){} }
+window.addEventListener('resize',postHeight);
+render();
+})();
+</script>
+</body>
+</html>

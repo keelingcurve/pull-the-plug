@@ -1,0 +1,396 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://keelingcurve.github.io/pull-the-plug/data/schema.json",
+  "title": "Pull the Plug data model, v0.1",
+  "description": "Two files share this schema. nodes.json holds the federal observing dependency graph (one entry per node, shared across systems). systems.json holds the public-facing views rendered from that graph. Validate both with tools/validate.py, which also checks that every node id a system references exists.",
+  "$defs": {
+
+    "source": {
+      "type": "object",
+      "required": ["id", "cite"],
+      "properties": {
+        "id": {"type": "string", "description": "Short handle referenced elsewhere in the same file, e.g. 'doi-fy27-greenbook'."},
+        "cite": {"type": "string", "description": "Human-readable citation: document, agency, date."},
+        "url": {"type": "string", "format": "uri"},
+        "accessed": {"type": "string", "format": "date"}
+      },
+      "additionalProperties": false
+    },
+
+    "money": {
+      "type": "object",
+      "description": "A dollar figure that is always a range with a confidence class. A single verified number is low == high.",
+      "required": ["low", "confidence"],
+      "properties": {
+        "low": {"type": ["number", "null"]},
+        "high": {"type": ["number", "null"]},
+        "fiscal_year": {"type": "string", "pattern": "^FY[0-9]{2}$"},
+        "confidence": {
+          "type": "string",
+          "enum": ["enacted", "requested", "authorized", "awarded", "estimate", "embedded_unresolved"],
+          "description": "enacted: appropriated by law. requested: in a budget request. authorized: statutory ceiling, never shown as spending. awarded: a grant or contract amount. estimate: derived or secondary. embedded_unresolved: inside a larger line, no figure; the UI shows 'funding not resolved' and never a number."
+        },
+        "source_ids": {"type": "array", "items": {"type": "string"}}
+      },
+      "additionalProperties": false
+    },
+
+    "funding_instrument": {
+      "type": "object",
+      "required": ["funder", "program", "confidence"],
+      "properties": {
+        "funder": {"type": "string"},
+        "program": {"type": "string"},
+        "purpose": {"type": "string"},
+        "type": {"type": "string", "enum": ["appropriation", "cooperative_agreement", "grant", "contract", "IRA", "BIL", "spectrum_sale", "cost_share", "other"]},
+        "award_start": {"type": ["string", "null"], "format": "date"},
+        "award_end": {"type": ["string", "null"], "format": "date", "description": "Drives the funding-cliff marks on the timeline."},
+        "amount_usd": {"$ref": "#/$defs/money"},
+        "subject_to_annual_appropriation": {"type": "boolean"},
+        "confidence": {"type": "string", "enum": ["verified_award", "verified_program_not_award", "estimate"]},
+        "source_ids": {"type": "array", "items": {"type": "string"}}
+      },
+      "additionalProperties": false
+    },
+
+    "funding_parent": {
+      "type": "object",
+      "description": "Used when a node has no line item of its own. The UI shows the parent activity's figures, labeled as the parent, never as the node's cost.",
+      "required": ["name"],
+      "properties": {
+        "name": {"type": "string"},
+        "figures": {"type": "array", "items": {"$ref": "#/$defs/money"}},
+        "note": {"type": "string"}
+      },
+      "additionalProperties": false
+    },
+
+    "dependency": {
+      "type": "object",
+      "required": ["node", "kind", "strength"],
+      "properties": {
+        "node": {"type": "string", "description": "A node id in nodes.json."},
+        "kind": {"type": "string", "enum": ["feeds", "calibrates"], "description": "feeds: data or product flows downstream. calibrates: the upstream node underwrites the quality claim of this node without flowing into it (GO-SHIP to Deep Argo)."},
+        "strength": {"type": "string", "enum": ["direct", "supporting", "research"], "description": "direct: formal model or product input. supporting: indicator or context. research: mechanism understood but not operational."},
+        "note": {"type": "string"}
+      },
+      "additionalProperties": false
+    },
+
+    "substitute": {
+      "type": "object",
+      "required": ["node", "degree"],
+      "properties": {
+        "node": {"type": "string"},
+        "degree": {"type": "string", "enum": ["full", "partial", "nominal"]},
+        "cannot_replace": {"type": "array", "items": {"type": "string"}},
+        "stated_by": {"type": "string", "description": "Who named this substitute, e.g. 'NOAA FY27 CJ'. Mandatory when an agency itself proposed the substitute."},
+        "source_ids": {"type": "array", "items": {"type": "string"}}
+      },
+      "additionalProperties": false
+    },
+
+    "sampling_role": {
+      "type": "object",
+      "properties": {
+        "horizontal": {"type": "string", "enum": ["global", "regional", "transect", "station", "network"]},
+        "vertical_m": {"type": "object", "properties": {"min": {"type": "number"}, "max": {"type": ["number", "string"]}}},
+        "repeat": {"type": "string", "description": "ISO 8601 duration or plain text ('twice daily 00Z/12Z', 'about decadal')."},
+        "variables": {"type": "array", "items": {"type": "string"}},
+        "unique_capability": {"type": "array", "items": {"type": "string"}}
+      },
+      "additionalProperties": false
+    },
+
+    "asset_population": {
+      "type": "object",
+      "description": "For networks that thin by attrition rather than switching off: floats, buoys, gauges.",
+      "properties": {
+        "active_count": {"type": "integer"},
+        "annual_failure_rate": {"type": "number", "minimum": 0, "maximum": 1},
+        "planned_replacements_per_year": {"type": "integer"},
+        "typical_lifetime_years": {"type": "number"},
+        "confidence": {"type": "string", "enum": ["documented", "estimate"]},
+        "source_ids": {"type": "array", "items": {"type": "string"}}
+      },
+      "additionalProperties": false
+    },
+
+    "state_vocabulary": {
+      "type": "object",
+      "description": "Five human-readable labels mapped to levels 0 through 4. The engine runs on the level; the public sees the label.",
+      "required": ["kind", "labels"],
+      "properties": {
+        "kind": {"type": "string", "enum": ["node", "decision", "constraint"]},
+        "labels": {"type": "array", "minItems": 5, "maxItems": 5, "items": {"type": "string"}}
+      },
+      "additionalProperties": false
+    },
+
+    "person": {
+      "type": "object",
+      "required": ["name", "role"],
+      "properties": {
+        "name": {"type": "string"},
+        "role": {"type": "string"},
+        "org": {"type": "string"},
+        "contact": {"type": "string"},
+        "as_of": {"type": "string", "format": "date"},
+        "source_ids": {"type": "array", "items": {"type": "string"}}
+      },
+      "additionalProperties": false
+    },
+
+    "dated_event": {
+      "type": "object",
+      "required": ["date", "label", "status", "kind"],
+      "properties": {
+        "date": {"type": "string", "description": "YYYY, YYYY-MM, or YYYY-MM-DD."},
+        "label": {"type": "string"},
+        "status": {"type": "string", "enum": ["realized", "enacted", "proposed", "operational"], "description": "realized: it happened. enacted: law. proposed: in a request, not law. operational: a routine change (upgrade, migration), not a threat."},
+        "kind": {"type": "string", "enum": ["funding", "staffing", "asset", "service", "policy", "upgrade", "event"]},
+        "node": {"type": "string", "description": "Optional node id this event belongs to, when the event sits on a system rather than a node."},
+        "source_ids": {"type": "array", "items": {"type": "string"}}
+      },
+      "additionalProperties": false
+    },
+
+    "trigger": {
+      "type": "object",
+      "required": ["type"],
+      "oneOf": [
+        {"properties": {"type": {"const": "elapsed"}, "months": {"type": "number"}}, "required": ["type", "months"]},
+        {"properties": {"type": {"const": "calendar"}, "month_from": {"type": "integer", "minimum": 1, "maximum": 12}, "month_to": {"type": "integer", "minimum": 1, "maximum": 12}, "label": {"type": "string"}}, "required": ["type", "month_from", "month_to"]},
+        {"properties": {"type": {"const": "event"}, "event": {"type": "string"}, "expected_per_year": {"type": "number"}}, "required": ["type", "event"]},
+        {"properties": {"type": {"const": "attrition"}, "fraction_lost": {"type": "number", "minimum": 0, "maximum": 1}}, "required": ["type", "fraction_lost"]},
+        {"properties": {"type": {"const": "funding_cliff"}, "instrument_index": {"type": "integer"}}, "required": ["type"]}
+      ]
+    },
+
+    "timeline_entry": {
+      "type": "object",
+      "required": ["trigger", "level", "affects", "basis"],
+      "properties": {
+        "trigger": {"$ref": "#/$defs/trigger"},
+        "level": {"type": "integer", "minimum": 0, "maximum": 4},
+        "level_high": {"type": "integer", "minimum": 0, "maximum": 4, "description": "Optional upper bound when the research gave a range."},
+        "affects": {"type": "string", "description": "Node id whose state changes at this point."},
+        "state_label": {"type": "string", "description": "Overrides the node's vocabulary label for this scenario if set."},
+        "basis": {"type": "string", "enum": ["documented", "analog", "inferred_from_operational_cadence", "inferred"], "description": "documented: a source states this consequence. analog: a documented case elsewhere (ECMWF 2015). inferred_from_operational_cadence: follows from a stated update cycle. inferred: engineering judgment."},
+        "note": {"type": "string"},
+        "source_ids": {"type": "array", "items": {"type": "string"}}
+      },
+      "additionalProperties": false
+    },
+
+    "scenario": {
+      "type": "object",
+      "required": ["id", "name", "cut_node", "lesson", "timeline"],
+      "properties": {
+        "id": {"type": "string"},
+        "name": {"type": "string"},
+        "cut_node": {"type": "string"},
+        "lesson": {"type": "string", "description": "One sentence the visitor should leave with."},
+        "what_broke_first": {"type": "string"},
+        "start_clock_months": {"type": "number", "description": "Where the slider sits when the scenario opens."},
+        "already_happened": {"type": "boolean", "description": "True when this scenario describes a realized cut (balloons 2025, SEDAC)."},
+        "timeline": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/timeline_entry"}},
+        "record_bar": {
+          "type": "object",
+          "description": "The strip that shows the observational record with the never-observed gap after Restore.",
+          "required": ["start_year", "recoverable"],
+          "properties": {
+            "start_year": {"type": "integer"},
+            "recoverable": {"type": "string", "enum": ["yes", "partial", "no"]},
+            "gap_label": {"type": "string"},
+            "note": {"type": "string"}
+          },
+          "additionalProperties": false
+        },
+        "hypothetical_counts": {
+          "type": "array",
+          "description": "Counters the UI generates from a rate and the elapsed time. Always labeled as generated.",
+          "items": {"type": "object", "required": ["label", "per_year"], "properties": {"label": {"type": "string"}, "per_year": {"type": "number"}, "source_ids": {"type": "array", "items": {"type": "string"}}}, "additionalProperties": false}
+        }
+      },
+      "additionalProperties": false
+    },
+
+    "exposure_item": {
+      "type": "object",
+      "required": ["label", "basis", "source_ids"],
+      "properties": {
+        "label": {"type": "string"},
+        "value_usd": {"$ref": "#/$defs/money"},
+        "value_text": {"type": "string", "description": "For non-dollar exposure: '500,000 people told not to drink tap water for three days'."},
+        "basis": {"type": "string", "description": "The documented event or study."},
+        "causal_link": {"type": "string", "enum": ["direct", "shared_chain", "context"], "description": "direct: this system's output prevented or would prevent this loss. shared_chain: the loss depends on a warning system this node is one input to. context: scale comparison only."},
+        "source_ids": {"type": "array", "items": {"type": "string"}}
+      },
+      "additionalProperties": false
+    },
+
+    "leverage": {
+      "type": "object",
+      "required": ["mode", "text"],
+      "properties": {
+        "mode": {"type": "string", "enum": ["scale", "ratio", "avoided_loss"], "description": "The UI computes and displays a ratio ONLY when mode is 'ratio'. 'scale' juxtaposes cost and exposure without division. 'avoided_loss' cites a documented reduction attributable to the intervention."},
+        "text": {"type": "string", "description": "The sentence shown under the two numbers."},
+        "ratio_note": {"type": "string", "description": "Required when mode is 'ratio': what the ratio does and does not claim."}
+      },
+      "if": {"properties": {"mode": {"const": "ratio"}}},
+      "then": {"required": ["mode", "text", "ratio_note"]},
+      "additionalProperties": false
+    },
+
+    "bridge": {
+      "type": "object",
+      "required": ["summary"],
+      "properties": {
+        "summary": {"type": "string", "description": "Written as a commitment: amount, duration, what it keeps, through whom, step-down trigger."},
+        "amount_annual_usd": {"$ref": "#/$defs/money"},
+        "duration_months": {"type": "integer"},
+        "vehicle": {"type": "string", "description": "The non-federal body that can receive and spend the money."},
+        "keeps": {"type": "array", "items": {"type": "string"}},
+        "step_down_trigger": {"type": "string"},
+        "cannot_do": {"type": "string", "description": "What philanthropy cannot substitute for here (federal operational authority, spacecraft, forecasters)."},
+        "confidence": {"type": "string", "enum": ["costed", "estimate", "concept"]}
+      },
+      "additionalProperties": false
+    },
+
+    "rstar": {
+      "type": "object",
+      "description": "Inputs to R* = 0.40·D + 0.30·P + 0.20·(1−RRS) + 0.10·DIRS. Computed by the UI, shown only when the public flag is on.",
+      "required": ["D", "P", "RRS", "DIRS"],
+      "properties": {
+        "D": {"type": "number", "minimum": 0, "maximum": 1},
+        "P": {"type": "number", "minimum": 0, "maximum": 1},
+        "RRS": {"type": "number", "minimum": 0, "maximum": 1},
+        "DIRS": {"type": "number", "minimum": 0, "maximum": 1},
+        "note": {"type": "string"}
+      },
+      "additionalProperties": false
+    },
+
+    "node": {
+      "type": "object",
+      "required": ["id", "name", "type", "operator", "status", "states", "sources"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$"},
+        "name": {"type": "string"},
+        "short_name": {"type": "string", "description": "What fits in a box in the chain view."},
+        "type": {"type": "string", "enum": ["observe", "process", "transform", "model", "product", "decide", "archive", "impact"]},
+        "description": {"type": "string"},
+        "operator": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+        "funders": {"type": "array", "items": {"type": "string"}},
+        "funding": {
+          "type": "object",
+          "properties": {
+            "cost_annual_usd": {"oneOf": [{"$ref": "#/$defs/money"}, {"type": "null"}]},
+            "funding_parent": {"$ref": "#/$defs/funding_parent"},
+            "funding_instruments": {"type": "array", "items": {"$ref": "#/$defs/funding_instrument"}},
+            "note": {"type": "string"}
+          },
+          "additionalProperties": false
+        },
+        "status": {"type": "string", "enum": ["operating", "degraded", "lost", "retired"]},
+        "risk_vector": {"type": "array", "items": {"type": "string", "enum": ["appropriation", "attrition", "grant_lapse", "contract_expiry", "asset_age", "satellite_end_of_life", "ship_time", "consumables", "funding_priority_review", "none_identified"]}},
+        "convergence_point": {"type": "boolean", "description": "True where many inputs become one answer and there is no redundancy (TWL-CC, the radiosonde launch, the toxin lab)."},
+        "pattern": {"type": "string", "enum": ["portal_survives_feeders_die", "human_transformation_layer", "slow_burn_irreversible", "immediate_cliff", "delayed_seasonal", "grant_lapse_cascade", "asset_attrition"], "description": "Named failure pattern, for the UI to badge and for cross-system comparison."},
+        "sampling_role": {"$ref": "#/$defs/sampling_role"},
+        "asset_population": {"$ref": "#/$defs/asset_population"},
+        "depends_on": {"type": "array", "items": {"$ref": "#/$defs/dependency"}},
+        "substitutes": {"type": "array", "items": {"$ref": "#/$defs/substitute"}},
+        "states": {"$ref": "#/$defs/state_vocabulary"},
+        "cadence": {"type": "string"},
+        "people": {"type": "array", "items": {"$ref": "#/$defs/person"}},
+        "users": {"type": "array", "items": {"type": "string"}},
+        "dated_events": {"type": "array", "items": {"$ref": "#/$defs/dated_event"}},
+        "sources": {"type": "array", "items": {"$ref": "#/$defs/source"}, "minItems": 1}
+      },
+      "additionalProperties": false
+    },
+
+    "branch": {
+      "type": "object",
+      "required": ["id", "name", "path"],
+      "properties": {
+        "id": {"type": "string"},
+        "name": {"type": "string"},
+        "path": {"type": "array", "items": {"type": "string"}, "minItems": 2, "description": "Ordered node ids, observation to impact."},
+        "headline": {"type": "boolean"}
+      },
+      "additionalProperties": false
+    },
+
+    "system": {
+      "type": "object",
+      "required": ["id", "name", "category", "layout", "status", "central_question", "branches", "scenarios", "leverage", "sources"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$"},
+        "name": {"type": "string"},
+        "category": {"type": "string"},
+        "layout": {"type": "string", "enum": ["chain", "radial"]},
+        "status": {"type": "string", "enum": ["complete", "partial", "stub"], "description": "stub systems render with an 'under development' badge and no numbers."},
+        "central_question": {"type": "string"},
+        "headline": {"type": "string"},
+        "frame": {"type": "string", "description": "One sentence on what the visitor should discover, used as the system intro."},
+        "branches": {"type": "array", "items": {"$ref": "#/$defs/branch"}, "minItems": 1},
+        "shared_with": {"type": "array", "items": {"type": "string"}, "description": "Other system ids that reference nodes in this system's branches."},
+        "scenarios": {"type": "array", "items": {"$ref": "#/$defs/scenario"}, "minItems": 1},
+        "exposure": {"type": "array", "items": {"$ref": "#/$defs/exposure_item"}},
+        "leverage": {"$ref": "#/$defs/leverage"},
+        "bridge": {"$ref": "#/$defs/bridge"},
+        "rstar": {"$ref": "#/$defs/rstar"},
+        "risk_vector": {"type": "array", "items": {"type": "string"}},
+        "dated_events": {"type": "array", "items": {"$ref": "#/$defs/dated_event"}},
+        "research_track": {"type": "string", "description": "File name of the research document this system was seeded from."},
+        "open_items": {"type": "array", "items": {"type": "string"}},
+        "sources": {"type": "array", "items": {"$ref": "#/$defs/source"}, "minItems": 1}
+      },
+      "additionalProperties": false
+    }
+  },
+
+  "oneOf": [
+    {
+      "type": "object",
+      "required": ["schema_version", "file", "nodes"],
+      "properties": {
+        "schema_version": {"const": "0.1"},
+        "file": {"const": "nodes"},
+        "updated": {"type": "string", "format": "date"},
+        "nodes": {"type": "array", "items": {"$ref": "#/$defs/node"}}
+      },
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "required": ["schema_version", "file", "systems"],
+      "properties": {
+        "schema_version": {"const": "0.1"},
+        "file": {"const": "systems"},
+        "updated": {"type": "string", "format": "date"},
+        "display": {
+          "type": "object",
+          "properties": {
+            "show_rstar": {"type": "boolean"},
+            "show_risk_vector": {"type": "boolean"},
+            "tagline": {"type": "string"},
+            "certainty_sentence": {"type": "string"},
+            "timeline_start_year": {"type": "integer"},
+            "timeline_end_year": {"type": "integer"}
+          },
+          "additionalProperties": false
+        },
+        "levels": {
+          "type": "array", "minItems": 5, "maxItems": 5,
+          "items": {"type": "object", "required": ["level", "name", "meaning", "color_token"], "properties": {"level": {"type": "integer"}, "name": {"type": "string"}, "meaning": {"type": "string"}, "color_token": {"type": "string"}}, "additionalProperties": false}
+        },
+        "systems": {"type": "array", "items": {"$ref": "#/$defs/system"}}
+      },
+      "additionalProperties": false
+    }
+  ]
+}
